@@ -1,0 +1,53 @@
+{
+  "name": "@plugin-autopilot",
+  "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Assistant",
+  "version": "0.0.0",
+  "author": "Steve Tingiris",
+  "bin": {
+    "twilio": "./bin/run"
+  },
+  "bugs": "https://github.com/tingiris/twilio-cli-autopilot-plugin/issues",
+  "dependencies": {
+    "@oclif/command": "^1.5.18",
+    "@oclif/config": "^1.13.3",
+    "@oclif/plugin-help": "^2.2.1"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.22.2",
+    "@oclif/test": "^1.2.5",
+    "chai": "^4.2.0",
+    "globby": "^10.0.1",
+    "mocha": "^5.2.0",
+    "nyc": "^13.3.0",
+    "rimraf": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
+    "/src"
+  ],
+  "homepage": "https://github.com/tingiris/twilio-cli-autopilot-plugin",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "src/index.js",
+  "oclif": {
+    "commands": "./src/commands",
+    "bin": "twilio",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "tingiris/twilio-cli-autopilot-plugin",
+  "scripts": {
+    "postpack": "rimraf oclif.manifest.json",
+    "prepack": "oclif-dev manifest && oclif-dev readme",
+    "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
+    "version": "oclif-dev readme && git add README.md"
+  }
+}

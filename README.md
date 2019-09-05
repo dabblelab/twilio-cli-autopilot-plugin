@@ -1,3 +1,215 @@
-# Twilio Autopilot Plugin for the Twilio CLI
+Twilio Autopilot Plugin for the Twilio CLI
+================
 
-A plugin for the [Twilio CLI](https://github.com/twilio/twilio-cli) that merges and extends functionality from the [Autopilot CLI](https://github.com/twilio/autopilot-cli).  
+A plugin for the [Twilio CLI](https://github.com/twilio/twilio-cli) that merges and extends functionality from the [Autopilot CLI](https://github.com/tingiris/twilio-cli-autopilot-plugin).  
+
+[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
+[![Version](https://img.shields.io/npm/v/plugin-autopilot.svg)](https://npmjs.org/package/plugin-autopilot)
+[![Downloads/week](https://img.shields.io/npm/dw/plugin-autopilot.svg)](https://npmjs.org/package/plugin-autopilot)
+[![License](https://img.shields.io/npm/l/plugin-autopilot.svg)](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/package.json)
+
+<!-- toc -->
+
+- [Requirements](#requirements)
+  - [Install the Twilio CLI](#install-the-twilio-cli)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`twilio autopilot:create`](#twilio-autopilotcreate)
+  - [`twilio autopilot:list`](#twilio-autopilotlist)
+  - [`twilio autopilot:update`](#twilio-autopilotupdate)
+  - [`twilio autopilot:delete`](#twilio-autopilotdelete)
+  - [`twilio autopilot:export`](#twilio-autopilotexport)
+  - [`twilio autopilot:simulate]`](#twilio-autopilotsimulate)
+  - [`twilio autopilot:field]`](#twilio-autopilotfield)
+  - [`twilio autopilot:import [TYPE]`](#twilio-autopilotimport-type)
+  <!-- tocstop -->
+
+# Requirements
+
+## Install the Twilio CLI
+
+Via `npm` or `yarn`:
+
+```sh-session
+$ npm install -g twilio-cli
+$ yarn global add twilio-cli
+```
+
+Via `homebrew`:
+
+```sh-session
+$ brew tap twilio/brew && brew install twilio
+```
+
+# Usage
+
+```sh-session
+$ twilio plugins:install @plugin-autopilot
+$ twilio --help autopilot
+USAGE
+  $ twilio autopilot
+...
+```
+
+# Commands
+
+<!-- commands -->
+
+- [Requirements](#requirements)
+  - [Install the Twilio CLI](#install-the-twilio-cli)
+- [Usage](#usage)
+- [Commands](#commands)
+  - [`twilio autopilot:create`](#twilio-autopilotcreate)
+  - [`twilio autopilot:list`](#twilio-autopilotlist)
+  - [`twilio autopilot:update`](#twilio-autopilotupdate)
+  - [`twilio autopilot:delete`](#twilio-autopilotdelete)
+  - [`twilio autopilot:export`](#twilio-autopilotexport)
+  - [`twilio autopilot:simulate]`](#twilio-autopilotsimulate)
+  - [`twilio autopilot:field]`](#twilio-autopilotfield)
+  - [`twilio autopilot:import [TYPE]`](#twilio-autopilotimport-type)
+
+## `twilio autopilot:create`
+
+Create an assistant
+```
+USAGE
+  $ twilio autopilot:create
+
+OPTIONS
+  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
+
+  -o=(columns|json|tsv)            [default: columns] Format of command output.
+
+  -p, --profile=profile            Shorthand identifier for your profile.
+
+  -s, --schema=schema              (required) [default: templates] schema path
+
+  --account-sid=account-sid        Access resources for the specified account.
+ ```
+
+ ## `twilio autopilot:list`
+
+List all autopilot assistant
+```
+USAGE
+  $ twilio autopilot:list
+
+OPTIONS
+  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
+
+  -o=(columns|json|tsv)            [default: columns] Format of command output.
+
+  -p, --profile=profile            Shorthand identifier for your profile.
+
+  --account-sid=account-sid        Access resources for the specified account.
+
+  --properties=properties          [default: sid, uniqueName, friendlyName] The Autopilot Assistant List.
+ ```
+
+ ## `twilio autopilot:update`
+
+Update an assistant
+```
+USAGE
+  $ twilio autopilot:update
+
+OPTIONS
+  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
+
+  -o=(columns|json|tsv)            [default: columns] Format of command output.
+
+  -p, --profile=profile            Shorthand identifier for your profile.
+
+  -s, --schema=schema              (required) schema path
+
+  --account-sid=account-sid        Access resources for the specified account.
+ ```
+
+ ## `twilio autopilot:delete`
+
+Delete an assistant
+```
+USAGE
+  $ twilio autopilot:delete
+
+OPTIONS
+  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
+
+  -o=(columns|json|tsv)            [default: columns] Format of command output.
+
+  -p, --profile=profile            Shorthand identifier for your profile.
+
+  -s, --assistantSid=assistantSid  (required) assistant sid
+
+  --account-sid=account-sid        Access resources for the specified account.
+ ```
+
+## `twilio autopilot:export`
+
+Export an assistant
+```
+USAGE
+  $ twilio autopilot:export
+
+OPTIONS
+  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
+
+  -o=(columns|json|tsv)            [default: columns] Format of command output.
+
+  -p, --profile=profile            Shorthand identifier for your profile.
+
+  --account-sid=account-sid        Access resources for the specified account.
+ ```
+
+ ## `twilio autopilot:simulate`
+
+Simulate an assistant
+```
+USAGE
+  $ twilio autopilot:simulate
+
+OPTIONS
+  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
+
+  -o=(columns|json|tsv)            [default: columns] Format of command output.
+
+  -p, --profile=profile            Shorthand identifier for your profile.
+
+  -s, --assistantSid=assistantSid  (required) assistant sid
+
+  -t, --text=text                  (required) User text input
+
+  --account-sid=account-sid        Access resources for the specified account.
+ ```
+
+ ## `twilio autopilot:import [TYPE]`
+
+Import a DialogFlow Agent/Alexa Interaction Model
+```
+USAGE
+  $ twilio autopilot:import [TYPE]
+
+ARGUMENTS
+  TYPE  (dialogflow|alexa) [default: dialogflow] Type of import DialogFlow/Alexa
+
+OPTIONS
+  -a, --dfagent=dfagent            Dialogflow Agent Name
+
+  -b, --dfbackup=dfbackup          Dialogflow Agent Backup Zip File Local Path
+
+  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
+
+  -m, --model=model                Alexa Interaction Model File Path
+
+  -o=(columns|json|tsv)            [default: columns] Format of command output.
+
+  -p, --profile=profile            Shorthand identifier for your profile.
+
+  -r, --redirectURL=redirectURL    [default: https://inquisitive-stretch-2083.twil.io/generic] Alexa Back-End Hanlder URL                                     to send back the response
+
+  --account-sid=account-sid        Access resources for the specified account.
+
+DESCRIPTION
+  - twilio autopilot:import dialogflow --dfbackup <dialogflow-backup-zip-file> --dfagent <dialogflow-agent-name>
+  - twilio autopilot:import alexa --model <alexa-interaction-model-file> [--redirectURL <alexa-back-end-hanlder-url>]
+ ```
