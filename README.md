@@ -19,8 +19,8 @@ A plugin for the [Twilio CLI](https://github.com/twilio/twilio-cli) that merges 
   - [`twilio autopilot:update`](#twilio-autopilotupdate)
   - [`twilio autopilot:delete`](#twilio-autopilotdelete)
   - [`twilio autopilot:export`](#twilio-autopilotexport)
-  - [`twilio autopilot:simulate`](#twilio-autopilotsimulate)
-  - [`twilio autopilot:field`](#twilio-autopilotfield)
+  - [`twilio autopilot:simulate]`](#twilio-autopilotsimulate)
+  - [`twilio autopilot:field]`](#twilio-autopilotfield)
   - [`twilio autopilot:import [TYPE]`](#twilio-autopilotimport-type)
   <!-- tocstop -->
 
@@ -64,8 +64,8 @@ USAGE
   - [`twilio autopilot:update`](#twilio-autopilotupdate)
   - [`twilio autopilot:delete`](#twilio-autopilotdelete)
   - [`twilio autopilot:export`](#twilio-autopilotexport)
-  - [`twilio autopilot:simulate`](#twilio-autopilotsimulate)
-  - [`twilio autopilot:field`](#twilio-autopilotfield)
+  - [`twilio autopilot:simulate]`](#twilio-autopilotsimulate)
+  - [`twilio autopilot:field]`](#twilio-autopilotfield)
   - [`twilio autopilot:import [TYPE]`](#twilio-autopilotimport-type)
 
 ## `twilio autopilot:create`
@@ -87,6 +87,8 @@ OPTIONS
   --account-sid=account-sid        Access resources for the specified account.
  ```
 
+_See code: [src/commands/autopilot/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/create.js)_
+
  ## `twilio autopilot:list`
 
 List all autopilot assistant
@@ -105,6 +107,8 @@ OPTIONS
 
   --properties=properties          [default: sid, uniqueName, friendlyName] The Autopilot Assistant List.
  ```
+
+_See code: [src/commands/autopilot/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/list.js)_
 
  ## `twilio autopilot:update`
 
@@ -125,6 +129,8 @@ OPTIONS
   --account-sid=account-sid        Access resources for the specified account.
  ```
 
+_See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/update.js)_
+
  ## `twilio autopilot:delete`
 
 Delete an assistant
@@ -144,6 +150,8 @@ OPTIONS
   --account-sid=account-sid        Access resources for the specified account.
  ```
 
+_See code: [src/commands/autopilot/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/delete.js)_
+
 ## `twilio autopilot:export`
 
 Export an assistant
@@ -160,6 +168,8 @@ OPTIONS
 
   --account-sid=account-sid        Access resources for the specified account.
  ```
+
+_See code: [src/commands/autopilot/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/export.js)_
 
  ## `twilio autopilot:simulate`
 
@@ -181,6 +191,8 @@ OPTIONS
 
   --account-sid=account-sid        Access resources for the specified account.
  ```
+
+_See code: [src/commands/autopilot/simulate.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/simulate.js)_
 
  ## `twilio autopilot:import [TYPE]`
 
@@ -213,3 +225,5 @@ DESCRIPTION
   - twilio autopilot:import dialogflow --dfbackup <dialogflow-backup-zip-file> --dfagent <dialogflow-agent-name>
   - twilio autopilot:import alexa --model <alexa-interaction-model-file> [--redirectURL <alexa-back-end-hanlder-url>]
  ```
+
+_See code: [src/commands/autopilot/import.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/import.js)_

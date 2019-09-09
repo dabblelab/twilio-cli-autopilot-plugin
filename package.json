@@ -3,21 +3,29 @@
   "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Assistant",
   "version": "0.0.0",
   "author": "Steve Tingiris",
-  "bin": {
-    "twilio": "./bin/run"
-  },
   "bugs": "https://github.com/tingiris/twilio-cli-autopilot-plugin/issues",
   "dependencies": {
     "@oclif/command": "^1.5.18",
     "@oclif/config": "^1.13.3",
-    "@oclif/plugin-help": "^2.2.1"
+    "@oclif/plugin-help": "^2.2.1",
+    "@twilio/cli-core": "^3.0.3",
+    "csv-parse": "^4.4.5",
+    "extract-zip": "^1.6.7",
+    "ora": "^3.4.0",
+    "pretty-json-stringify": "0.0.2",
+    "request-promise": "^4.2.4",
+    "simple-git": "^1.124.0",
+    "underscore": "^1.9.1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
     "@oclif/test": "^1.2.5",
     "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-oclif": "^3.1.0",
     "globby": "^10.0.1",
     "mocha": "^5.2.0",
+    "keytar": "^4.13.0",
     "nyc": "^13.3.0",
     "rimraf": "^3.0.0"
   },
@@ -32,20 +40,55 @@
   ],
   "homepage": "https://github.com/tingiris/twilio-cli-autopilot-plugin",
   "keywords": [
-    "oclif"
+    "oclif-plugin",
+    "twilio-cli-plugin",
+    "twilio-ci",
+    "twilio",
+    "autopilot",
+    "autopilot-cli"
   ],
   "license": "MIT",
-  "main": "src/index.js",
   "oclif": {
+    "name": "autopilot",
     "commands": "./src/commands",
     "bin": "twilio",
     "plugins": [
       "@oclif/plugin-help"
-    ]
+    ],
+    "topics": {
+      "autopilot": {
+        "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Assistant"
+      },
+      "autopilot:create": {
+        "description": "Create an assistant"
+      },
+      "autopilot:list": {
+        "description": "List all autopilot assistant"
+      },
+      "autopilot:update": {
+        "description": "Update an assistant"
+      },
+      "autopilot:delete": {
+        "description": "Delete an assistant"
+      },
+      "autopilot:export": {
+        "description": "Export an assistant"
+      },
+      "autopilot:simulate": {
+        "description": "Simulate an assistant"
+      },
+      "autopilot:field": {
+        "description": "Bulk upload field values"
+      },
+      "autopilot:import": {
+        "description": "Import a DialogFlow Agent/Alexa Interaction Model"
+      }
+    }
   },
   "repository": "tingiris/twilio-cli-autopilot-plugin",
   "scripts": {
     "postpack": "rimraf oclif.manifest.json",
+    "posttest": "eslint .",
     "prepack": "oclif-dev manifest && oclif-dev readme",
     "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
     "version": "oclif-dev readme && git add README.md"
