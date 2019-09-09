@@ -4,9 +4,9 @@ Twilio Autopilot Plugin for the Twilio CLI
 A plugin for the [Twilio CLI](https://github.com/twilio/twilio-cli) that merges and extends functionality from the [Autopilot CLI](https://github.com/dabblelab/twilio-cli-autopilot-plugin).  
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/plugin-autopilot.svg)](https://npmjs.org/package/@dabblelab/plugin-autopilot)
-[![Downloads/week](https://img.shields.io/npm/dw/plugin-autopilot.svg)](https://npmjs.org/package/@dabblelab/plugin-autopilot)
-[![License](https://img.shields.io/npm/l/plugin-autopilot.svg)](https://github.com/dabblelab/twilio-cli-autopilot-plugin/blob/master/package.json)
+[![Version](https://img.shields.io/npm/v/@dabblelab/plugin-autopilot.svg)](https://npmjs.org/package/@dabblelab/plugin-autopilot)
+[![Downloads/week](https://img.shields.io/npm/dw/@dabblelab/plugin-autopilot.svg)](https://npmjs.org/package/@dabblelab/plugin-autopilot)
+[![License](https://img.shields.io/npm/l/@dabblelab/plugin-autopilot.svg)](https://img.shields.io/github/license/dabblelab/twilio-cli-autopilot-plugin)
 
 <!-- toc -->
 
