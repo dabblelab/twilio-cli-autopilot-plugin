@@ -1,5 +1,5 @@
 {
-  "name": "@plugin-autopilot",
+  "name": "@dabblelab/plugin-autopilot",
   "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Assistant",
   "version": "0.0.0",
   "author": "Steve Tingiris",
