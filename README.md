@@ -87,7 +87,7 @@ OPTIONS
   --account-sid=account-sid        Access resources for the specified account.
  ```
 
-_See code: [src/commands/autopilot/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/create.js)_
+_See code: [src/commands/autopilot/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/src/commands/autopilot/create.js)_
 
  ## `twilio autopilot:list`
 
@@ -108,7 +108,7 @@ OPTIONS
   --properties=properties          [default: sid, uniqueName, friendlyName] The Autopilot Assistant List.
  ```
 
-_See code: [src/commands/autopilot/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/list.js)_
+_See code: [src/commands/autopilot/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/src/commands/autopilot/list.js)_
 
  ## `twilio autopilot:update`
 
@@ -129,7 +129,7 @@ OPTIONS
   --account-sid=account-sid        Access resources for the specified account.
  ```
 
-_See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/update.js)_
+_See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/src/commands/autopilot/update.js)_
 
  ## `twilio autopilot:delete`
 
@@ -150,7 +150,7 @@ OPTIONS
   --account-sid=account-sid        Access resources for the specified account.
  ```
 
-_See code: [src/commands/autopilot/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/delete.js)_
+_See code: [src/commands/autopilot/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/src/commands/autopilot/delete.js)_
 
 ## `twilio autopilot:export`
 
@@ -169,7 +169,7 @@ OPTIONS
   --account-sid=account-sid        Access resources for the specified account.
  ```
 
-_See code: [src/commands/autopilot/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/export.js)_
+_See code: [src/commands/autopilot/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/src/commands/autopilot/export.js)_
 
  ## `twilio autopilot:simulate`
 
@@ -192,7 +192,7 @@ OPTIONS
   --account-sid=account-sid        Access resources for the specified account.
  ```
 
-_See code: [src/commands/autopilot/simulate.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/simulate.js)_
+_See code: [src/commands/autopilot/simulate.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/src/commands/autopilot/simulate.js)_
 
  ## `twilio autopilot:import [TYPE]`
 
@@ -226,4 +226,4 @@ DESCRIPTION
   - twilio autopilot:import alexa --model <alexa-interaction-model-file> [--redirectURL <alexa-back-end-hanlder-url>]
  ```
 
-_See code: [src/commands/autopilot/import.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v0.0.0/src/commands/autopilot/import.js)_
+_See code: [src/commands/autopilot/import.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/src/commands/autopilot/import.js)_
