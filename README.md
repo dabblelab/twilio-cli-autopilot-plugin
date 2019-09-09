@@ -44,7 +44,7 @@ $ brew tap twilio/brew && brew install twilio
 # Usage
 
 ```sh-session
-$ twilio plugins:install @plugin-autopilot
+$ twilio plugins:install @dabblelab/plugin-autopilot
 $ twilio --help autopilot
 USAGE
   $ twilio autopilot
