@@ -1,6 +1,6 @@
 const {flags} = require('@oclif/command'),
       { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
-      autopilot = require('../../lib/twilio-assistant'),
+      AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora'),
       path = require('path');
 
@@ -20,8 +20,8 @@ class DeleteAssistant extends TwilioClientCommand {
 
       const sid = flags.assistantSid;
 
-      //const recovery_schema = await autopilot.exportAssistant(sid, this.twilioClient, true);
-      const result = await autopilot.deleteAssistantFully(sid,this.twilioClient)
+      //const recovery_schema = await AutopilotCore.exportAssistant(sid, this.twilioClient, true);
+      const result = await AutopilotCore.deleteAssistant(sid,this.twilioClient);
 
       spinner.stop()
       console.log(`\nRemoved assistant with UniqueName: ${flags.assistantSid}`)
@@ -44,8 +44,7 @@ DeleteAssistant.flags = Object.assign(
       required : true
     })
   },
-  TwilioClientCommand.flags,
-  TwilioClientCommand.accountSidFlag
+  TwilioClientCommand.flags
 )
 
 module.exports = DeleteAssistant

@@ -1,6 +1,6 @@
 const {flags} = require('@oclif/command'),
       { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
-      autopilot = require('../../lib/twilio-assistant'),
+      AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora'),
       path = require('path');
 
@@ -23,7 +23,7 @@ class UpdateAssistant extends TwilioClientCommand {
       spinner.start('Updating assistant...');
       let fullPath = `${path.resolve()}/${schema}`
   
-      const assistant = await autopilot.updateAssistant(fullPath,this.twilioClient)
+      const assistant = await AutopilotCore.updateAssistant(fullPath,this.twilioClient);
   
       spinner.stop()   
   
@@ -48,8 +48,7 @@ UpdateAssistant.flags = Object.assign(
       required : true
     })
   },
-  TwilioClientCommand.flags,
-  TwilioClientCommand.accountSidFlag
+  TwilioClientCommand.flags
 )
 
 module.exports = UpdateAssistant

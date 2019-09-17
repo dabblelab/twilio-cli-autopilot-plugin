@@ -1,6 +1,6 @@
 const {flags} = require('@oclif/command'),
       { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
-      autopilot = require('../../lib/twilio-assistant'),
+      AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora'),
       path = require('path');
 
@@ -31,8 +31,7 @@ class FieldAssistant extends TwilioClientCommand {
             fieldUniqueName = flags.field,
             csvPath = flags.csv;
 
-      //const recovery_schema = await autopilot.exportAssistant(sid, this.twilioClient, true);
-      const assistant = await autopilot.bulkUploadFieldValues(sid, fieldUniqueName, csvPath, this.twilioClient);
+      const assistant = await AutopilotCore.bulkUploadFieldValues(sid, fieldUniqueName, csvPath, this.twilioClient);
 
       spinner.stop();   
 
@@ -70,8 +69,7 @@ FieldAssistant.flags = Object.assign(
       required : true
     })
   },
-  TwilioClientCommand.flags,
-  TwilioClientCommand.accountSidFlag
+  TwilioClientCommand.flags
 )
 
 module.exports = FieldAssistant

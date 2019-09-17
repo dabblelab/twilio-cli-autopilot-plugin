@@ -1,6 +1,6 @@
 const {flags} = require('@oclif/command'),
       { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
-      autopilot = require('../../lib/twilio-assistant'),
+      AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora');
 
 class ExportAssistants extends TwilioClientCommand {
@@ -10,7 +10,7 @@ class ExportAssistants extends TwilioClientCommand {
 
     try{
 
-      const fullData = await autopilot.listAssistants(this.twilioClient);
+      const fullData = await AutopilotCore.listAssistant(this.twilioClient);
       if(fullData.length){
 
         const choices = await fullData.map(x => {return x.uniqueName});
@@ -28,7 +28,7 @@ class ExportAssistants extends TwilioClientCommand {
           let seletedAssistant = answer.assistantName;
 
           spinner = ora().start(`Exporting assistant...`);
-          const assistant = await autopilot.exportAssistant(seletedAssistant,this.twilioClient);
+          const assistant = await AutopilotCore.exportAssistant(seletedAssistant,this.twilioClient);
           await spinner.stop();
           console.log(`\nFile exported in ${assistant.filename}`);
             
@@ -50,8 +50,7 @@ class ExportAssistants extends TwilioClientCommand {
 ExportAssistants.description = `Export an assistant`;
 
 ExportAssistants.flags = Object.assign(
-  TwilioClientCommand.flags,
-  TwilioClientCommand.accountSidFlag
+  TwilioClientCommand.flags
 )
 
 module.exports = ExportAssistants

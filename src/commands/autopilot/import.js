@@ -1,6 +1,6 @@
 const {flags} = require('@oclif/command'),
       { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
-      autopilot = require('../../lib/twilio-assistant'),
+      AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora'),
       path = require('path');
 
@@ -29,7 +29,7 @@ class ImportAssistant extends TwilioClientCommand {
 
         spinner.start('Importing assistant...');
 
-        filename = await autopilot.importAlexaAssistant(modelFullPath, redirectURL);
+        filename = await AutopilotCore.importAlexaModel(modelFullPath, redirectURL);
       }
       else{
 
@@ -48,17 +48,17 @@ class ImportAssistant extends TwilioClientCommand {
 
         spinner.start('Importing assistant...');
 
-        filename = await autopilot.importAssistant(dfFullPath, name);
+        filename = await AutopilotCore.importDialogFlowAgent(dfFullPath, name);
       }
 
       const fullPath = path.resolve(process.cwd(),filename);
 
-      if(await autopilot.existAssistantCheck(fullPath, this.twilioClient)){
+      if(await AutopilotCore.existAssistant(fullPath, this.twilioClient)){
 
-        assistant = await autopilot.updateAssistant(fullPath, this.twilioClient);
+        assistant = await AutopilotCore.updateAssistant(fullPath, this.twilioClient);
       }else{
 
-        assistant = await autopilot.createAssistantFully(fullPath, this.twilioClient);
+        assistant = await AutopilotCore.createAssistant(fullPath, this.twilioClient);
       }
 
       spinner.stop()
@@ -120,8 +120,7 @@ ImportAssistant.flags = Object.assign(
       default : 'https://inquisitive-stretch-2083.twil.io/generic'
     })
   },
-  TwilioClientCommand.flags,
-  TwilioClientCommand.accountSidFlag
+  TwilioClientCommand.flags
 )
 
 module.exports = ImportAssistant

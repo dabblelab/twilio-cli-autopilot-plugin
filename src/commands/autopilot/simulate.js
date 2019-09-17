@@ -1,6 +1,6 @@
 const {flags} = require('@oclif/command'),
       { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
-      autopilot = require('../../lib/twilio-assistant'),
+      AutopilotCore = require('@dabblelab/autopilot-core'),
       prettyJSONStringify = require('pretty-json-stringify'),
       ora = require('ora'),
       path = require('path');
@@ -27,8 +27,7 @@ class SimulateAssistant extends TwilioClientCommand {
             text = flags.text,
             channel = 'cli';
 
-      //const recovery_schema = await autopilot.exportAssistant(sid, this.twilioClient, true);
-      const channelResponse = await autopilot.customChannel(sid, channel, text, this.twilioClient);
+      const channelResponse = await AutopilotCore.customChannel(sid, channel, text, this.twilioClient);
 
       spinner.stop();   
 
@@ -60,8 +59,7 @@ SimulateAssistant.flags = Object.assign(
       required : true
     })
   },
-  TwilioClientCommand.flags,
-  TwilioClientCommand.accountSidFlag
+  TwilioClientCommand.flags
 )
 
 module.exports = SimulateAssistant

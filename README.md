@@ -83,8 +83,6 @@ OPTIONS
   -p, --profile=profile            Shorthand identifier for your profile.
 
   -s, --schema=schema              (required) [default: templates] schema path
-
-  --account-sid=account-sid        Access resources for the specified account.
  ```
 
 _See code: [src/commands/autopilot/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/src/commands/autopilot/create.js)_
@@ -102,8 +100,6 @@ OPTIONS
   -o=(columns|json|tsv)            [default: columns] Format of command output.
 
   -p, --profile=profile            Shorthand identifier for your profile.
-
-  --account-sid=account-sid        Access resources for the specified account.
 
   --properties=properties          [default: sid, uniqueName, friendlyName] The Autopilot Assistant List.
  ```
@@ -125,8 +121,6 @@ OPTIONS
   -p, --profile=profile            Shorthand identifier for your profile.
 
   -s, --schema=schema              (required) schema path
-
-  --account-sid=account-sid        Access resources for the specified account.
  ```
 
 _See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/src/commands/autopilot/update.js)_
@@ -146,8 +140,6 @@ OPTIONS
   -p, --profile=profile            Shorthand identifier for your profile.
 
   -s, --assistantSid=assistantSid  (required) assistant sid
-
-  --account-sid=account-sid        Access resources for the specified account.
  ```
 
 _See code: [src/commands/autopilot/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/src/commands/autopilot/delete.js)_
@@ -165,8 +157,6 @@ OPTIONS
   -o=(columns|json|tsv)            [default: columns] Format of command output.
 
   -p, --profile=profile            Shorthand identifier for your profile.
-
-  --account-sid=account-sid        Access resources for the specified account.
  ```
 
 _See code: [src/commands/autopilot/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/src/commands/autopilot/export.js)_
@@ -188,8 +178,6 @@ OPTIONS
   -s, --assistantSid=assistantSid  (required) assistant sid
 
   -t, --text=text                  (required) User text input
-
-  --account-sid=account-sid        Access resources for the specified account.
  ```
 
 _See code: [src/commands/autopilot/simulate.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/master/src/commands/autopilot/simulate.js)_
@@ -218,8 +206,6 @@ OPTIONS
   -p, --profile=profile            Shorthand identifier for your profile.
 
   -r, --redirectURL=redirectURL    [default: https://inquisitive-stretch-2083.twil.io/generic] Alexa Back-End Hanlder URL                                     to send back the response
-
-  --account-sid=account-sid        Access resources for the specified account.
 
 DESCRIPTION
   - twilio autopilot:import dialogflow --dfbackup <dialogflow-backup-zip-file> --dfagent <dialogflow-agent-name>

@@ -1,6 +1,6 @@
 const {flags} = require('@oclif/command'),
       { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
-      autopilot = require('../../lib/twilio-assistant'),
+      AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora'),
       path = require('path');
 
@@ -19,8 +19,7 @@ class CreateAssistant extends TwilioClientCommand {
 
         let url = 'https://raw.githubusercontent.com/twilio/autopilot-templates/master/Assistants/templates.json';
         
-  
-        clonedAssistant = await autopilot.clone(url, false, this.inquirer);
+        clonedAssistant = await AutopilotCore.cloneTemplate(url, false);
   
         schema = path.join(clonedAssistant, 'schema.json');
   
@@ -28,7 +27,7 @@ class CreateAssistant extends TwilioClientCommand {
       spinner.start('Creating assistant...');
       let fullPath = `${path.resolve()}/${schema}`
   
-      const assistant = await autopilot.createAssistantFully(fullPath,this.twilioClient)
+      const assistant = await AutopilotCore.createAssistant(fullPath,this.twilioClient);
   
       spinner.stop()   
   
@@ -53,8 +52,7 @@ CreateAssistant.flags = Object.assign(
       required : true
     })
   },
-  TwilioClientCommand.flags,
-  TwilioClientCommand.accountSidFlag
+  TwilioClientCommand.flags
 )
 
 module.exports = CreateAssistant
