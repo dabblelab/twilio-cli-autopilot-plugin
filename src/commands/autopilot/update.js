@@ -21,9 +21,10 @@ class UpdateAssistant extends TwilioClientCommand {
       let schema = flags.schema;
 
       spinner.start('Updating assistant...');
-      let fullPath = `${path.resolve()}/${schema}`
+      let fullPath = `${path.resolve()}/${schema}`,
+          assistantUniqueName = flags.uniqueName || false;
   
-      const assistant = await AutopilotCore.updateAssistant(fullPath,this.twilioClient);
+      const assistant = await AutopilotCore.updateAssistant(fullPath, this.twilioClient, assistantUniqueName);
   
       spinner.stop()   
   
@@ -46,6 +47,9 @@ UpdateAssistant.flags = Object.assign(
       char : 's',
       description : 'schema path',
       required : true
+    }),
+    uniqueName : flags.string({
+      description : 'assistant uniqueName'
     })
   },
   TwilioClientCommand.flags

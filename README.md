@@ -19,8 +19,8 @@ A plugin for the [Twilio CLI](https://github.com/twilio/twilio-cli) that merges 
   - [`twilio autopilot:update`](#twilio-autopilotupdate)
   - [`twilio autopilot:delete`](#twilio-autopilotdelete)
   - [`twilio autopilot:export`](#twilio-autopilotexport)
-  - [`twilio autopilot:simulate]`](#twilio-autopilotsimulate)
-  - [`twilio autopilot:field]`](#twilio-autopilotfield)
+  - [`twilio autopilot:simulate`](#twilio-autopilotsimulate)
+  - [`twilio autopilot:field`](#twilio-autopilotfield)
   - [`twilio autopilot:import [TYPE]`](#twilio-autopilotimport-type)
   <!-- tocstop -->
 
@@ -64,8 +64,8 @@ USAGE
   - [`twilio autopilot:update`](#twilio-autopilotupdate)
   - [`twilio autopilot:delete`](#twilio-autopilotdelete)
   - [`twilio autopilot:export`](#twilio-autopilotexport)
-  - [`twilio autopilot:simulate]`](#twilio-autopilotsimulate)
-  - [`twilio autopilot:field]`](#twilio-autopilotfield)
+  - [`twilio autopilot:simulate`](#twilio-autopilotsimulate)
+  - [`twilio autopilot:field`](#twilio-autopilotfield)
   - [`twilio autopilot:import [TYPE]`](#twilio-autopilotimport-type)
 
 ## `twilio autopilot:create`

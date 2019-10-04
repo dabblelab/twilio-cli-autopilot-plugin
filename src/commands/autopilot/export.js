@@ -6,43 +6,50 @@ const {flags} = require('@oclif/command'),
 class ExportAssistants extends TwilioClientCommand {
 
   async runCommand() {
-    let spinner = await ora().start(`Getting assistant List...\n`);
+    let spinner = await ora();
 
     try{
 
-      const fullData = await AutopilotCore.listAssistant(this.twilioClient);
-      if(fullData.length){
+      let { flags } = this.parse(ExportAssistants);
+      let assistantSid = flags.uniqueName || flags.assistantSid || '',
+          seletedAssistant = assistantSid;
 
-        const choices = await fullData.map(x => {return x.uniqueName});
+      if(!assistantSid){
+
+        spinner.start(`Getting assistant List...\n`);
+        const fullData = await AutopilotCore.listAssistant(this.twilioClient);
         spinner.stop();
 
-        this.inquirer.prompt([
-          {
-            type: 'list',
-            name: 'assistantName',
-            message: 'Choose your assistant: ',
-            choices: choices
-          }
-        ]).then(async (answer) => {
+        if(fullData.length){
+
+          const choices = await fullData.map(x => {return x.uniqueName});
+
+          const answer = await this.inquirer.prompt([
+              {
+                type: 'list',
+                name: 'assistantName',
+                message: 'Choose your assistant: ',
+                choices: choices
+              }
+            ]);
           
-          let seletedAssistant = answer.assistantName;
+          seletedAssistant = answer.assistantName;
+        }
+        else{
 
-          spinner = ora().start(`Exporting assistant...`);
-          const assistant = await AutopilotCore.exportAssistant(seletedAssistant,this.twilioClient);
-          await spinner.stop();
-          console.log(`\nFile exported in ${assistant.filename}`);
-            
-        })
-      }else{
-
-        spinner.stop()
-        console.log('no assistants.');
+          console.log('no assistants.');
+          return;
+        }
       }
+
+      spinner.start(`Exporting assistant...`);
+      const assistant = await AutopilotCore.exportAssistant(seletedAssistant, this.twilioClient);
+      spinner.stop();
+      console.log(`\nFile exported in ${assistant.filename}`);
     }catch(err){
 
-      spinner.stop()
-    
-      console.error(`ERROR: ${err}`)
+      spinner.stop();
+      console.error(`ERROR: ${err}`);
     }
   }
 }
@@ -50,6 +57,14 @@ class ExportAssistants extends TwilioClientCommand {
 ExportAssistants.description = `Export an assistant`;
 
 ExportAssistants.flags = Object.assign(
+  {
+    assistantSid : flags.string({
+      description : 'assistant sid'
+    }),
+    uniqueName : flags.string({
+      description : 'assistant uniqueName'
+    })
+  },
   TwilioClientCommand.flags
 )
 

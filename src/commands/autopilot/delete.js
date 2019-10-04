@@ -1,35 +1,34 @@
 const {flags} = require('@oclif/command'),
       { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora'),
-      path = require('path');
+      ora = require('ora');
 
 class DeleteAssistant extends TwilioClientCommand {
 
   async runCommand() {
 
-    let { flags, args } = this.parse(DeleteAssistant);
+    let { flags } = this.parse(DeleteAssistant);
 
     if (!flags.hasOwnProperty('assistantSid')) {
-      console.log(`The '--assistantSid' argument is required`)
-      return
+      console.log(`The '--assistantSid' argument is required`);
+      return;
     }
-    let spinner = ora().start('Deleting assistant...')
+    let spinner = ora().start('Deleting assistant...');
 
     try{
 
-      const sid = flags.assistantSid;
+      const sid = flags.uniqueName || flags.assistantSid;
 
       //const recovery_schema = await AutopilotCore.exportAssistant(sid, this.twilioClient, true);
-      const result = await AutopilotCore.deleteAssistant(sid,this.twilioClient);
+      const result = await AutopilotCore.deleteAssistant(sid, this.twilioClient);
 
-      spinner.stop()
-      console.log(`\nRemoved assistant with UniqueName: ${flags.assistantSid}`)
+      spinner.stop();
+      console.log(`\nRemoved assistant with UniqueName: ${sid}`);
     }catch(err){
 
-      spinner.stop()
+      spinner.stop();
     
-      console.error(`ERROR: ${err}`)
+      console.error(`ERROR: ${err}`);
     }
   }
 }
@@ -42,6 +41,9 @@ DeleteAssistant.flags = Object.assign(
       char : 's',
       description : 'assistant sid',
       required : true
+    }),
+    uniqueName : flags.string({
+      description : 'assistant uniqueName'
     })
   },
   TwilioClientCommand.flags
