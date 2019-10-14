@@ -1,16 +1,16 @@
 {
   "name": "@dabblelab/plugin-autopilot",
   "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Assistant",
-  "version": "1.0.0-beta.6",
+  "version": "1.0.0-beta.7",
   "author": "Steve Tingiris",
   "bugs": "https://github.com/tingiris/twilio-cli-autopilot-plugin/issues",
   "dependencies": {
-    "@dabblelab/autopilot-core": "^1.0.0-beta.7",
+    "@dabblelab/autopilot-core": "^1.0.0-beta.8",
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.13.3",
     "@oclif/plugin-help": "^2.2.1",
     "@twilio/cli-core": "^3.0.3",
-    "csv-parse": "^4.5.0",
+    "csv-parse": "^4.6.3",
     "extract-zip": "^1.6.7",
     "ora": "^3.4.0",
     "pretty-json-stringify": "0.0.2",
@@ -83,6 +83,57 @@
       },
       "autopilot:import": {
         "description": "Import a DialogFlow Agent/Alexa Interaction Model"
+      },
+      "autopilot:tasks": {
+        "description": "Create, Update, Delete, and List Twilio Autopilot Assistant Tasks"
+      },
+      "autopilot:tasks:list": {
+        "description": "List all tasks of an assistant"
+      },
+      "autopilot:tasks:create": {
+        "description": "Create a task of an assistant"
+      },
+      "autopilot:tasks:update": {
+        "description": "Update a task of an assistant"
+      },
+      "autopilot:tasks:delete": {
+        "description": "Delete a task of an assistant"
+      },
+      "autopilot:samples:upload": {
+        "description": "Upload task samples"
+      },
+      "autopilot:fields": {
+        "description": "Create, Update, Delete, and List Fields of a Task"
+      },
+      "autopilot:fields:create": {
+        "description": "Create task field"
+      },
+      "autopilot:fields:list": {
+        "description": "List task fields"
+      },
+      "autopilot:fields:delete": {
+        "description": "Delete task field"
+      },
+      "autopilot:fieldtypes": {
+        "description": "Create, Update, and List fieldTypes of an assistant"
+      },
+      "autopilot:fieldtypes:create": {
+        "description": "Create assistant fieldType"
+      },
+      "autopilot:fieldtypes:list": {
+        "description": "List Assistant fieldTypes"
+      },
+      "autopilot:fieldtypes:update": {
+        "description": "Update Assistant fieldType"
+      },
+      "autopilot:fieldvalues:upload": {
+        "description": "Upload FieldValues"
+      },
+      "autopilot:queries:export": {
+        "description": "Export Assistant Queries"
+      },
+      "autopilot:modelbuilds:create": {
+        "description": "Create Model Builds"
       }
     }
   },

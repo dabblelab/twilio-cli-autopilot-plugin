@@ -3,31 +3,30 @@ const {flags} = require('@oclif/command'),
       AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora');
       
-class DeleteAssistantTask extends TwilioClientCommand {
+class ExportAssistantQueries extends TwilioClientCommand {
   
     async runCommand() {
 
-        let { flags } = this.parse(DeleteAssistantTask);
+        let { flags } = this.parse(ExportAssistantQueries);
 
         if (!flags.hasOwnProperty('assistantSid')) {
             console.log(`The '--assistantSid' is required`);
             return;
         }
 
-        if(!flags.taskSid){
-            console.log(`The '--taskSid' is required`);
+        if(!flags.quantity){
+            console.log(`The '--quantity' is required`);
             return;
         }
 
-        const spinner = ora().start('Deleting assistant task...\n');
+        const spinner = ora().start('Exporting assistant queries...\n');
         try{
 
-            const taskSid = flags.taskSid,
-                  assistantSid = flags.assistantSid;
+            const {assistantSid, quantity} = flags;
 
-            const task = await AutopilotCore.tasks.remove(this.twilioClient, assistantSid, taskSid);
+            await AutopilotCore.exportAssistantQueries(this.twilioClient, assistantSid, quantity);
             spinner.stop();
-            console.log(`Removed task with UniqueName: ${task.uniqueName}`);
+            console.log(`File exported in ${assistantSid}`);
         }catch(err){
 
             spinner.stop();
@@ -38,21 +37,22 @@ class DeleteAssistantTask extends TwilioClientCommand {
   
 }
 
-DeleteAssistantTask.description = `Delete a Task of an assistant`;
+ExportAssistantQueries.description = `Export queries of an assistant`;
 
-DeleteAssistantTask.flags = Object.assign(
+ExportAssistantQueries.flags = Object.assign(
   {
     assistantSid : flags.string({
         char : 's',
         description : 'assistant that owns the task',
         required : true
     }),
-    taskSid : flags.string({
-        description : 'task sid',
+    quantity : flags.string({
+        char : 'q',
+        description : 'number of queries to retrieve',
         required : true
     })
   },
   TwilioClientCommand.flags
 )
 
-module.exports = DeleteAssistantTask;
+module.exports = ExportAssistantQueries;

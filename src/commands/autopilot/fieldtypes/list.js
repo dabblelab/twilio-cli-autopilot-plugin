@@ -3,19 +3,22 @@ const {flags} = require('@oclif/command'),
       AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora');
       
-class ListAssistantTasks extends TwilioClientCommand {
+class ListAssistantFieldTypes extends TwilioClientCommand {
   
     async runCommand() {
 
-        let { flags } = this.parse(ListAssistantTasks);
+        let { flags } = this.parse(ListAssistantFieldTypes);
+
         if (!flags.hasOwnProperty('assistantSid')) {
             console.log(`The '--assistantSid' is required`);
             return;
         }
-        const spinner = ora().start('Getting assistant tasks...\n');
+
+        const spinner = ora().start('Getting Assistant FieldTypes...\n');
         try{
 
-            const fullData = await AutopilotCore.tasks.list(this.twilioClient, flags.assistantSid);
+            const {assistantSid} = flags;
+            const fullData = await AutopilotCore.fieldTypes.list(this.twilioClient, assistantSid);
             spinner.stop();
             this.output(fullData, this.flags.properties);
         }catch(err){
@@ -28,14 +31,14 @@ class ListAssistantTasks extends TwilioClientCommand {
   
 }
 
-ListAssistantTasks.description = `List all tasks of an assistant`;
+ListAssistantFieldTypes.description = `List all FieldTypes of an assistant`;
 
-ListAssistantTasks.flags = Object.assign(
+ListAssistantFieldTypes.flags = Object.assign(
   {
     properties: flags.string({
-      default: 'sid, uniqueName, friendlyName',
+      default: 'sid, uniqueName',
       description:
-        'The Autopilot Assistant Task List.'
+        'The Autopilot Assistant FieldType List.'
     }),
     assistantSid : flags.string({
         char : 's',
@@ -46,4 +49,4 @@ ListAssistantTasks.flags = Object.assign(
   TwilioClientCommand.flags
 )
 
-module.exports = ListAssistantTasks
+module.exports = ListAssistantFieldTypes

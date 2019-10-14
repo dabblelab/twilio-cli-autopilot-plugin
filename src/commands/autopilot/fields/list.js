@@ -3,19 +3,26 @@ const {flags} = require('@oclif/command'),
       AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora');
       
-class ListAssistantTasks extends TwilioClientCommand {
+class ListAssistantTaskFields extends TwilioClientCommand {
   
     async runCommand() {
 
-        let { flags } = this.parse(ListAssistantTasks);
+        let { flags } = this.parse(ListAssistantTaskFields);
+
         if (!flags.hasOwnProperty('assistantSid')) {
             console.log(`The '--assistantSid' is required`);
             return;
         }
-        const spinner = ora().start('Getting assistant tasks...\n');
+
+        if (!flags.hasOwnProperty('taskSid')) {
+            console.log(`The '--taskSid' is required`);
+            return;
+        }
+        const spinner = ora().start('Getting task fields...\n');
         try{
 
-            const fullData = await AutopilotCore.tasks.list(this.twilioClient, flags.assistantSid);
+            const {assistantSid, taskSid} = flags;
+            const fullData = await AutopilotCore.fields.list(this.twilioClient, assistantSid, taskSid);
             spinner.stop();
             this.output(fullData, this.flags.properties);
         }catch(err){
@@ -28,22 +35,26 @@ class ListAssistantTasks extends TwilioClientCommand {
   
 }
 
-ListAssistantTasks.description = `List all tasks of an assistant`;
+ListAssistantTaskFields.description = `List all fields of a task`;
 
-ListAssistantTasks.flags = Object.assign(
+ListAssistantTaskFields.flags = Object.assign(
   {
     properties: flags.string({
-      default: 'sid, uniqueName, friendlyName',
+      default: 'sid, uniqueName, fieldType',
       description:
         'The Autopilot Assistant Task List.'
     }),
     assistantSid : flags.string({
         char : 's',
-        description : 'assistant sid',
+        description : 'assistant that owns the task',
+        required : true
+    }),
+    taskSid : flags.string({
+        description : 'task sid',
         required : true
     })
   },
   TwilioClientCommand.flags
 )
 
-module.exports = ListAssistantTasks
+module.exports = ListAssistantTaskFields
