@@ -48,7 +48,7 @@ CreateModelBuilds.flags = Object.assign(
     }),
     callbackURL : flags.string({
         char : 'u',
-        description : 'URL to get notified of model'
+        description : 'URL to get notified of model build status'
     })
   },
   TwilioClientCommand.flags
