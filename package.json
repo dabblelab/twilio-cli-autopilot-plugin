@@ -1,11 +1,11 @@
 {
   "name": "@dabblelab/plugin-autopilot",
   "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Assistant",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0-beta.9",
   "author": "Steve Tingiris",
   "bugs": "https://github.com/tingiris/twilio-cli-autopilot-plugin/issues",
   "dependencies": {
-    "@dabblelab/autopilot-core": "^1.0.0-beta.9",
+    "@dabblelab/autopilot-core": "^1.0.0-beta.10",
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.13.3",
     "@oclif/plugin-help": "^2.2.1",
@@ -76,9 +76,6 @@
       },
       "autopilot:simulate": {
         "description": "Simulate an assistant"
-      },
-      "autopilot:field": {
-        "description": "Bulk upload field values"
       },
       "autopilot:import": {
         "description": "Import a DialogFlow Agent/Alexa Interaction Model"
@@ -158,7 +155,6 @@
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint --ignore-path .gitignore . && npm audit",
-    "prepack": "oclif-dev manifest && oclif-dev readme",
     "test": "nyc mocha --forbid-only \"test/**/*.test.js\"",
     "version": "oclif-dev readme && git add README.md"
   }

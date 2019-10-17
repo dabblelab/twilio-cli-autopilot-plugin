@@ -14,22 +14,46 @@ class ListAssistantTaskFields extends TwilioClientCommand {
             return;
         }
 
-        if (!flags.hasOwnProperty('taskSid')) {
-            console.log(`The '--taskSid' is required`);
-            return;
-        }
-        const spinner = ora().start('Getting task fields...\n');
+        const spinner = ora()
         try{
 
             const {assistantSid, taskSid} = flags;
-            const fullData = await AutopilotCore.fields.list(this.twilioClient, assistantSid, taskSid);
+            let tSid = taskSid;
+
+            if(!taskSid){
+
+                spinner.start(`Getting task list...`)
+                const taskList = await AutopilotCore.tasks.list(this.twilioClient, assistantSid),
+                        taskChoice = taskList.map(t => t.uniqueName);
+
+                spinner.stop();
+                if(!taskList.length){
+                    console.log(`\n No Task in which to list fields \n Use "twilio autopilot:tasks:create" if you need to create a new task.`);
+                    return;
+                }
+                const answer = await this.inquirer.prompt(
+                            [
+                                {
+                                    type: 'list',
+                                    name: 'taskUniqueName',
+                                    message: 'Choose your task in which to list: ',
+                                    choices: taskChoice
+                                }
+                            ]
+                        );
+
+                tSid = answer.taskUniqueName;
+            }
+
+            spinner.start('Getting task fields...\n');
+            const fullData = await AutopilotCore.fields.list(this.twilioClient, assistantSid, tSid);
             spinner.stop();
             this.output(fullData, this.flags.properties);
         }catch(err){
 
             spinner.stop()
             
-            console.error(`ERROR: ${err}`)
+            console.error(`ERROR: ${err.message}`)
         }
     }
   
@@ -50,8 +74,7 @@ ListAssistantTaskFields.flags = Object.assign(
         required : true
     }),
     taskSid : flags.string({
-        description : 'task sid',
-        required : true
+        description : 'task sid'
     })
   },
   TwilioClientCommand.flags

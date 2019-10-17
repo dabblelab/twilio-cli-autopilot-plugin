@@ -21,36 +21,58 @@ class UpdateAssistantWebhook extends TwilioClientCommand {
             console.log(`The '--assistantSid' is required`);
             return;
         }
-        if (!flags.hasOwnProperty('webhookSid')) {
-            console.log(`The '--webhookSid' is required`);
-            return;
-        }
 
-        let mEvents = [];
-        if(events){
-
-            const eventList = [... new Set(events.toLowerCase().trim().split(" "))];
-            if(eventList.length){
-
-                mEvents = eventList.filter(l => eventTypes.hasOwnProperty(l.toLowerCase()));
-                if(!mEvents.length){
-                    console.log(`The '--events' paramater can contain one or all of the following values (space separtated).
-                    onDialogueStart
-                    onDialogueEnd
-                    onDialogueTaskStart
-                    onActionsFetch
-                    onCollectAttempt`);
-                    return;
-                }
-            }
-            
-        }
-        
-
-        const spinner = ora().start('Updating assistant webhooks...\n');
+        const spinner = ora();
         try{
 
+            let mEvents = [], wSid = webhookSid;
+
+            if(!webhookSid){
+
+                spinner.start(`Getting webhook list...`);
+                const webhookList = await AutopilotCore.webhooks.list(this.twilioClient, assistantSid),
+                        webhookChoice = webhookList.map(t => t.uniqueName);
+
+                spinner.stop();
+
+                if(!webhookList.length){
+                    console.log(`\n No webhook found to update \n Use "twilio autopilot:webhooks:create" if you need to create a new webhook.`);
+                    return;
+                }
+                const answer = await this.inquirer.prompt(
+                            [
+                                {
+                                    type: 'list',
+                                    name: 'webhookUniqueName',
+                                    message: 'Choose your webhook in which to create: ',
+                                    choices: webhookChoice
+                                }
+                            ]
+                        );
+
+                wSid = answer.webhookUniqueName;
+
+            }
+            if(events){
+
+                const eventList = [... new Set(events.toLowerCase().trim().split(" "))];
+                if(eventList.length){
+
+                    mEvents = eventList.filter(l => eventTypes.hasOwnProperty(l.toLowerCase()));
+                    if(!mEvents.length){
+                        console.log(`The '--events' paramater can contain one or all of the following values (space separtated).
+                        onDialogueStart
+                        onDialogueEnd
+                        onDialogueTaskStart
+                        onActionsFetch
+                        onCollectAttempt`);
+                        return;
+                    }
+                }
+                
+            }
             
+            spinner.start('Updating assistant webhooks...\n');
             let params = {
             };
 
@@ -66,10 +88,13 @@ class UpdateAssistantWebhook extends TwilioClientCommand {
             if(method)
                 params['webhookMethod'] = method;
 
-            const webhook = await AutopilotCore.webhooks.update(this.twilioClient, assistantSid, webhookSid, params);
+            let webhook = {};
+
+            if(Object.keys(params).length)
+                webhook = await AutopilotCore.webhooks.update(this.twilioClient, assistantSid, wSid, params);
 
             spinner.stop();
-            console.log(`Webhooks "${webhook.uniqueName}" was updated.`);
+            console.log(`Webhooks "${wSid}" was updated.`);
         }catch(err){
 
             spinner.stop();
@@ -90,8 +115,7 @@ UpdateAssistantWebhook.flags = Object.assign(
         required : true
     }),
     webhookSid : flags.string({
-        description : 'SID of the webhook to update',
-        required : true
+        description : 'SID of the webhook to update'
     }),
     webhookUniqueName : flags.string({
         char : 'w',
@@ -103,8 +127,7 @@ UpdateAssistantWebhook.flags = Object.assign(
     }),
     webhookURL : flags.string({
         char : 'u',
-        description : 'the URL to send events to update',
-        required : true
+        description : 'the URL to send events to update'
     }),
     method : flags.string({
         char : 'm',

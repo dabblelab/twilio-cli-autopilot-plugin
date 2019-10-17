@@ -14,8 +14,8 @@ class CreateAssistantTask extends TwilioClientCommand {
             return;
         }
 
-        if(!flags.taskSid){
-            console.log(`The '--taskSid' is required`);
+        if(!flags.uniqueName){
+            console.log(`The '--uniqueName' is required`);
             return;
         }
 
@@ -35,7 +35,7 @@ class CreateAssistantTask extends TwilioClientCommand {
 
             spinner.stop();
             
-            console.error(`ERROR: ${err}`);
+            console.error(`ERROR: ${err.message}`);
         }
     }
   

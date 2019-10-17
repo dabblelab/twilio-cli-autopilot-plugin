@@ -14,29 +14,71 @@ class DeleteAssistantTaskField extends TwilioClientCommand {
             return;
         }
 
-        if(!flags.taskSid){
-            console.log(`The '--taskSid' is required`);
-            return;
-        }
-
-        if(!flags.fieldTypeSid){
-            console.log(`The '--fieldTypeSid' is required`);
-            return;
-        }
-
-        const spinner = ora().start('Deleting task field...\n');
+        const spinner = ora();
         try{
 
-            const {assistantSid, taskSid, fieldTypeSid} = flags;
+            const {assistantSid, taskSid, fieldSid} = flags;
+            let tSid = taskSid, fSid = fieldSid;
 
-            const field = await AutopilotCore.fields.remove(this.twilioClient, assistantSid, taskSid, fieldTypeSid);
+            if(!taskSid){
+
+                spinner.start(`Getting task list...`)
+                const taskList = await AutopilotCore.tasks.list(this.twilioClient, assistantSid),
+                        taskChoice = taskList.map(t => t.uniqueName);
+
+                spinner.stop();
+                if(!taskList.length){
+                    console.log(`\n No Task in which to delete fields \n Use "twilio autopilot:tasks:create" if you need to create a new task.`);
+                    return;
+                }
+                const answer = await this.inquirer.prompt(
+                            [
+                                {
+                                    type: 'list',
+                                    name: 'taskUniqueName',
+                                    message: 'Choose your task in which to delete: ',
+                                    choices: taskChoice
+                                }
+                            ]
+                        );
+
+                tSid = answer.taskUniqueName;
+            }
+
+            if(!fieldSid){
+
+                spinner.start(`Getting task fields list...`)
+                const fieldList = await AutopilotCore.fields.list(this.twilioClient, assistantSid, tSid),
+                      fieldChoice = fieldList.map(f => f.uniqueName);
+
+                spinner.stop();
+                if(!fieldList.length){
+                    console.log(`\n No Task Fields to delete \n Use "twilio autopilot:fields:create" if you need to create a new task field.`);
+                    return;
+                }
+                const answer = await this.inquirer.prompt(
+                            [
+                                {
+                                    type: 'list',
+                                    name: 'fieldUniqueName',
+                                    message: 'Choose your Field to delete: ',
+                                    choices: fieldChoice
+                                }
+                            ]
+                        );
+
+                fSid = answer.fieldUniqueName;
+            }
+
+            spinner.start('Deleting task field...\n');
+            const field = await AutopilotCore.fields.remove(this.twilioClient, assistantSid, tSid, fSid);
             spinner.stop();
-            console.log(`Task field with Sid: ${fieldTypeSid} was deleted.`);
+            console.log(`Task field '${fSid}' was deleted.`);
         }catch(err){
 
             spinner.stop();
             
-            console.error(`ERROR: ${err}`);
+            console.error(`ERROR: ${err.message}`);
         }
     }
   
@@ -52,12 +94,10 @@ DeleteAssistantTaskField.flags = Object.assign(
         required : true
     }),
     taskSid : flags.string({
-        description : 'task sid',
-        required : true
+        description : 'task sid'
     }),
-    fieldTypeSid : flags.string({
-        description : 'The Field Type of the new field. Can be: a [Built-in FieldType](https://www.twilio.com/docs/assistant/api/built-in-field-types ), the `unique_name`, or the `sid` of a custom Field Type.',
-        required : true
+    fieldSid : flags.string({
+        description : 'The Field Type of the new field. Can be: a [Built-in FieldType](https://www.twilio.com/docs/assistant/api/built-in-field-types ), the `unique_name`, or the `sid` of a custom Field Type.'
     })
   },
   TwilioClientCommand.flags

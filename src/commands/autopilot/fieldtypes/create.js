@@ -37,7 +37,7 @@ class CreateAssistantFieldType extends TwilioClientCommand {
 
             spinner.stop();
             
-            console.error(`ERROR: ${err}`);
+            console.error(`ERROR: ${err.message}`);
         }
     }
   

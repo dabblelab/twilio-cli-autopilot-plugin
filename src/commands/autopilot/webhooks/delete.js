@@ -14,25 +14,50 @@ class DeleteAssistantWebhook extends TwilioClientCommand {
             console.log(`The '--assistantSid' is required`);
             return;
         }
-        if (!flags.hasOwnProperty('webhookSid')) {
-            console.log(`The '--webhookSid' is required`);
-            return;
-        }
         
-        const spinner = ora().start('Deleting assistant webhooks...\n');
+        const spinner = ora();
         try{
 
             const {assistantSid, webhookSid} = flags;
+            let wSid = webhookSid;
 
-            const webhook = await AutopilotCore.webhooks.remove(this.twilioClient, assistantSid, webhookSid);
+            if(!webhookSid){
+
+                spinner.start(`Getting webhook list...`);
+                const webhookList = await AutopilotCore.webhooks.list(this.twilioClient, assistantSid),
+                        webhookChoice = webhookList.map(t => t.uniqueName);
+
+                spinner.stop();
+
+                if(!webhookList.length){
+                    console.log(`\n No webhook found to delete \n Use "twilio autopilot:webhooks:create" if you need to create a new webhook.`);
+                    return;
+                }
+                const answer = await this.inquirer.prompt(
+                            [
+                                {
+                                    type: 'list',
+                                    name: 'webhookUniqueName',
+                                    message: 'Choose your webhook in which to create: ',
+                                    choices: webhookChoice
+                                }
+                            ]
+                        );
+
+                wSid = answer.webhookUniqueName;
+
+            }
+
+            spinner.start('Deleting assistant webhooks...\n');
+            const webhook = await AutopilotCore.webhooks.remove(this.twilioClient, assistantSid, wSid);
 
             spinner.stop();
-            console.log(`Webhooks "${webhookSid}" was deleted.`);
+            console.log(`Webhooks "${wSid}" was deleted.`);
         }catch(err){
 
             spinner.stop();
             
-            console.error(`ERROR: ${err}`);
+            console.error(`ERROR: ${err.message}`);
         }
     }
   
@@ -48,8 +73,7 @@ DeleteAssistantWebhook.flags = Object.assign(
         required : true
     }),
     webhookSid : flags.string({
-        description : 'SID of the webhook to delete',
-        required : true
+        description : 'SID of the webhook to delete'
     })
   },
   TwilioClientCommand.flags

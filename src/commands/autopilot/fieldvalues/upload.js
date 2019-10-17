@@ -14,10 +14,6 @@ class FieldValuesUpload extends TwilioClientCommand {
       console.log(`The '--assistantSid' argument is required`)
       return;
     }
-    if (!flags.hasOwnProperty('fieldTypeSid')) {
-        console.log(`The '--fieldTypeSid' argument is required`)
-        return;
-    }
     if (!flags.hasOwnProperty('fileName')) {
         console.log(`The '--fileName' argument is required`)
         return;
@@ -27,22 +23,49 @@ class FieldValuesUpload extends TwilioClientCommand {
     try{
 
       const {assistantSid, fieldTypeSid, fileName} = flags;
+      let fSid = fieldTypeSid;
+
+      if(!fieldTypeSid){
+
+        spinner.start(`Getting field type list...`)
+        const fieldTypeList = await AutopilotCore.fieldTypes.list(this.twilioClient, assistantSid),
+                fieldTypeChoice = fieldTypeList.map(f => f.uniqueName);
+
+        spinner.stop();
+
+        if(!fieldTypeList.length){
+          console.log(`\nNo FieldTypes found!\nUse "twilio autopilot:fieldtypes:create" if you need to create a new field type.`);
+          return;
+        }
+        const answer = await this.inquirer.prompt(
+                    [
+                        {
+                          type: 'list',
+                          name: 'fieldTypeUniqueName',
+                          message: 'Choose your Field Type in which to upload: ',
+                          choices: fieldTypeChoice
+                        }
+                    ]
+                );
+
+        fSid = answer.fieldTypeUniqueName;
+    }
 
       spinner.start('Uploading FieldValues...');
 
       let fullPath = `${path.resolve()}/${fileName}`;
   
-      await AutopilotCore.uploadFieldValues(this.twilioClient, assistantSid, fieldTypeSid, fullPath);
+      await AutopilotCore.uploadFieldValues(this.twilioClient, assistantSid, fSid, fullPath);
   
       spinner.stop()   
   
-      console.log(`FieldValues was uploaded in ${fieldTypeSid}`);
+      console.log(`FieldValues was uploaded in ${fSid}`);
 
     }catch(err){
 
       spinner.stop()
     
-      console.error(`ERROR: ${err}`)
+      console.error(`ERROR: ${err.message}`)
     }
   }
 }
@@ -57,8 +80,7 @@ FieldValuesUpload.flags = Object.assign(
         required : true
     }),
     fieldTypeSid : flags.string({
-        description : 'field type SID',
-        required : true
+        description : 'field type SID'
     }),
     fileName : flags.string({
         description : 'a CSV file of field values (one on each row with synonyms in columns)',

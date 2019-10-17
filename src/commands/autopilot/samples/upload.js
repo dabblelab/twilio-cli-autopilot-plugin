@@ -14,10 +14,7 @@ class TaskSamplesUpload extends TwilioClientCommand {
       console.log(`The '--assistantSid' argument is required`)
       return;
     }
-    if (!flags.hasOwnProperty('taskSid')) {
-        console.log(`The '--taskSid' argument is required`)
-        return;
-    }
+
     if (!flags.hasOwnProperty('fileName')) {
         console.log(`The '--fileName' argument is required`)
         return;
@@ -26,15 +23,40 @@ class TaskSamplesUpload extends TwilioClientCommand {
 
     try{
 
-      let assistantSid = flags.assistantSid,
-          taskSid = flags.taskSid,
-          fileName = flags.fileName;
+      const {assistantSid, taskSid, fileName} = flags;
+      let tSid = taskSid;
+
+      if(!taskSid){
+
+        spinner.start(`Getting task list...`)
+        const taskList = await AutopilotCore.tasks.list(this.twilioClient, assistantSid),
+                taskChoice = taskList.map(t => t.uniqueName);
+
+        spinner.stop();
+        if(!taskList.length){
+          console.log(`\n No Task in which to upload samples \n Use "twilio autopilot:tasks:create" if you need to create a new task.`);
+          return;
+      }
+        const answer = await this.inquirer.prompt(
+                    [
+                        {
+                            type: 'list',
+                            name: 'taskUniqueName',
+                            message: 'Choose your task in which to create: ',
+                            choices: taskChoice
+                        }
+                    ]
+                );
+
+        tSid = answer.taskUniqueName;
+
+    }
 
       spinner.start('Uploading task samples...');
 
       let fullPath = `${path.resolve()}/${fileName}`;
   
-      const task = await AutopilotCore.uploadTaskSamples(this.twilioClient, assistantSid, taskSid, fullPath);
+      const task = await AutopilotCore.uploadTaskSamples(this.twilioClient, assistantSid, tSid, fullPath);
   
       spinner.stop()   
   
@@ -44,7 +66,7 @@ class TaskSamplesUpload extends TwilioClientCommand {
 
       spinner.stop()
     
-      console.error(`ERROR: ${err}`)
+      console.error(`ERROR: ${err.message}`)
     }
   }
 }
@@ -59,8 +81,7 @@ TaskSamplesUpload.flags = Object.assign(
         required : true
     }),
     taskSid : flags.string({
-        description : 'task sid',
-        required : true
+        description : 'task sid'
     }),
     fileName : flags.string({
         description : 'a CSV file of samples',

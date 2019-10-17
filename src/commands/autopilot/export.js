@@ -59,6 +59,7 @@ ExportAssistants.description = `Export an assistant`;
 ExportAssistants.flags = Object.assign(
   {
     assistantSid : flags.string({
+      char : 's',
       description : 'assistant sid'
     }),
     uniqueName : flags.string({

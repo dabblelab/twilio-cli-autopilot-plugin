@@ -14,25 +14,47 @@ class DeleteAssistantTask extends TwilioClientCommand {
             return;
         }
 
-        if(!flags.taskSid){
-            console.log(`The '--taskSid' is required`);
-            return;
-        }
-
-        const spinner = ora().start('Deleting assistant task...\n');
+        const spinner = ora();
         try{
 
-            const taskSid = flags.taskSid,
-                  assistantSid = flags.assistantSid;
+            const {assistantSid, taskSid} = flags;
+            let tSid = taskSid;
 
-            const task = await AutopilotCore.tasks.remove(this.twilioClient, assistantSid, taskSid);
+            if(!taskSid){
+
+                spinner.start(`Getting task list...`)
+                const taskList = await AutopilotCore.tasks.list(this.twilioClient, assistantSid),
+                        taskChoice = taskList.map(t => t.uniqueName);
+
+                spinner.stop();
+                if(!taskList.length){
+                    console.log(`\n No Task found to delete \n Use "twilio autopilot:tasks:create" if you need to create a new task.`);
+                    return;
+                }
+                const answer = await this.inquirer.prompt(
+                            [
+                                {
+                                    type: 'list',
+                                    name: 'taskUniqueName',
+                                    message: 'Choose your task in which to create: ',
+                                    choices: taskChoice
+                                }
+                            ]
+                        );
+
+                tSid = answer.taskUniqueName;
+
+            }
+
+            spinner.start('Deleting assistant task...\n');
+            const task = await AutopilotCore.tasks.remove(this.twilioClient, assistantSid, tSid);
             spinner.stop();
             console.log(`Removed task with UniqueName: ${task.uniqueName}`);
         }catch(err){
 
             spinner.stop();
             
-            console.error(`ERROR: ${err}`);
+            console.error(`ERROR: ${err.message}`);
         }
     }
   
@@ -48,8 +70,7 @@ DeleteAssistantTask.flags = Object.assign(
         required : true
     }),
     taskSid : flags.string({
-        description : 'task sid',
-        required : true
+        description : 'task sid'
     })
   },
   TwilioClientCommand.flags
