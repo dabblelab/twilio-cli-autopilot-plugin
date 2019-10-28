@@ -1,7 +1,7 @@
 {
   "name": "@dabblelab/plugin-autopilot",
   "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Assistant",
-  "version": "1.0.0-beta.11",
+  "version": "1.0.0-beta.12",
   "author": "Steve Tingiris",
   "bugs": "https://github.com/tingiris/twilio-cli-autopilot-plugin/issues",
   "dependencies": {
@@ -146,6 +146,9 @@
       },
       "autopilot:modelbuilds:create": {
         "description": "Create Model Builds"
+      },
+      "autopilot:deploy": {
+        "description": "deploy function, model or all of them. Options can only be 'all', 'function' or 'model'."
       }
     }
   },
