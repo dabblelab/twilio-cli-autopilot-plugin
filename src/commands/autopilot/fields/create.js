@@ -45,7 +45,7 @@ class CreateAssistantTaskField extends TwilioClientCommand {
                                 {
                                     type: 'list',
                                     name: 'taskUniqueName',
-                                    message: 'Choose your task in which to create: ',
+                                    message: 'Select task in which to create: ',
                                     choices: taskChoice
                                 }
                             ]
@@ -74,7 +74,7 @@ class CreateAssistantTaskField extends TwilioClientCommand {
                                 {
                                     type: 'list',
                                     name: 'fieldTypeUniqueName',
-                                    message: 'Choose your Field Type to create: ',
+                                    message: 'Select Field Type in which to create: ',
                                     choices: f_choices
                                 }
                             ]

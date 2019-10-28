@@ -42,7 +42,7 @@ class TaskSamplesUpload extends TwilioClientCommand {
                         {
                             type: 'list',
                             name: 'taskUniqueName',
-                            message: 'Choose your task in which to create: ',
+                            message: 'Select task to upload samples: ',
                             choices: taskChoice
                         }
                     ]

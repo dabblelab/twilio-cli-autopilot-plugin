@@ -6,6 +6,7 @@ const {flags} = require('@oclif/command'),
 class ListAssistants extends TwilioClientCommand {
   
     async runCommand() {
+      
       const spinner = ora().start('Getting assistants...\n');
       try{
         
@@ -15,7 +16,6 @@ class ListAssistants extends TwilioClientCommand {
       }catch(err){
 
         spinner.stop()
-        
         console.error(`ERROR: ${err}`)
       }
     }

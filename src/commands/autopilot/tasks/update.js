@@ -36,7 +36,7 @@ class UpdateAssistantTask extends TwilioClientCommand {
                                 {
                                     type: 'list',
                                     name: 'taskUniqueName',
-                                    message: 'Choose your task in which to create: ',
+                                    message: 'Select task to update: ',
                                     choices: taskChoice
                                 }
                             ]
@@ -59,7 +59,7 @@ class UpdateAssistantTask extends TwilioClientCommand {
                 await AutopilotCore.tasks.update(this.twilioClient, assistantSid, tSid, params);
 
             spinner.stop();
-            console.log(`Task with UniqueName: ${taskSid} was updated.`);
+            console.log(`Task '${tSid}' was updated.`);
         }catch(err){
 
             spinner.stop();

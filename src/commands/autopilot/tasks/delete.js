@@ -36,7 +36,7 @@ class DeleteAssistantTask extends TwilioClientCommand {
                                 {
                                     type: 'list',
                                     name: 'taskUniqueName',
-                                    message: 'Choose your task in which to create: ',
+                                    message: 'Select task to delete: ',
                                     choices: taskChoice
                                 }
                             ]

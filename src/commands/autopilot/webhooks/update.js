@@ -44,7 +44,7 @@ class UpdateAssistantWebhook extends TwilioClientCommand {
                                 {
                                     type: 'list',
                                     name: 'webhookUniqueName',
-                                    message: 'Choose your webhook in which to create: ',
+                                    message: 'Select the webhook you want to update: ',
                                     choices: webhookChoice
                                 }
                             ]

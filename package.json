@@ -16,6 +16,7 @@
     "pretty-json-stringify": "0.0.2",
     "request-promise": "^4.2.4",
     "simple-git": "^1.124.0",
+    "twilio-run": "^2.1.1",
     "underscore": "^1.9.1"
   },
   "devDependencies": {

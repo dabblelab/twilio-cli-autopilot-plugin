@@ -42,7 +42,7 @@ class FieldValuesUpload extends TwilioClientCommand {
                         {
                           type: 'list',
                           name: 'fieldTypeUniqueName',
-                          message: 'Choose your Field Type in which to upload: ',
+                          message: 'Select Field Type in which to upload: ',
                           choices: fieldTypeChoice
                         }
                     ]
