@@ -36,7 +36,7 @@ class ListAssistantTaskFields extends TwilioClientCommand {
                                 {
                                     type: 'list',
                                     name: 'taskUniqueName',
-                                    message: 'Select task in which to list: ',
+                                    message: 'Choose the Task your Fields belong to: ',
                                     choices: taskChoice
                                 }
                             ]

@@ -39,7 +39,7 @@ class AssistantsDeploy extends TwilioClientCommand {
         hanlder_response = await handler(opts, externalOptions);
       }
 
-      const fullPath = path.resolve(process.cwd(), 'model', 'model.json');
+      const fullPath = path.resolve(process.cwd(), 'model', 'schema.json');
       if(flags.target === 'all'){
         await updateTaskURL(fullPath, hanlder_response.url);
       }

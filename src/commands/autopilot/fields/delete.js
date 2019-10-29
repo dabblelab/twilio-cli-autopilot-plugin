@@ -36,7 +36,7 @@ class DeleteAssistantTaskField extends TwilioClientCommand {
                                 {
                                     type: 'list',
                                     name: 'taskUniqueName',
-                                    message: 'Select task in which to delete: ',
+                                    message: 'Choose the Task your Field belongs to: ',
                                     choices: taskChoice
                                 }
                             ]
@@ -61,7 +61,7 @@ class DeleteAssistantTaskField extends TwilioClientCommand {
                                 {
                                     type: 'list',
                                     name: 'fieldUniqueName',
-                                    message: 'Select Field to delete: ',
+                                    message: 'Choose the Field to delete: ',
                                     choices: fieldChoice
                                 }
                             ]

@@ -45,7 +45,7 @@ class CreateAssistantTaskField extends TwilioClientCommand {
                                 {
                                     type: 'list',
                                     name: 'taskUniqueName',
-                                    message: 'Select task in which to create: ',
+                                    message: 'Choose a Task for the new Field: ',
                                     choices: taskChoice
                                 }
                             ]
@@ -74,7 +74,7 @@ class CreateAssistantTaskField extends TwilioClientCommand {
                                 {
                                     type: 'list',
                                     name: 'fieldTypeUniqueName',
-                                    message: 'Select Field Type in which to create: ',
+                                    message: 'Choose a Field Type for the new Field: ',
                                     choices: f_choices
                                 }
                             ]
@@ -89,7 +89,7 @@ class CreateAssistantTaskField extends TwilioClientCommand {
             const field = await AutopilotCore.fields.create(this.twilioClient, assistantSid, tSid, params);
 
             spinner.stop();
-            console.log(`Task field with UniqueName: ${uniqueName} was created.`);
+            console.log(`Task field '${uniqueName}' was created.`);
         }catch(err){
 
             spinner.stop();

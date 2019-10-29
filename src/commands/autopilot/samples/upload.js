@@ -42,7 +42,7 @@ class TaskSamplesUpload extends TwilioClientCommand {
                         {
                             type: 'list',
                             name: 'taskUniqueName',
-                            message: 'Select task to upload samples: ',
+                            message: 'Select the Task you want to train with these Samples: ',
                             choices: taskChoice
                         }
                     ]
@@ -60,7 +60,7 @@ class TaskSamplesUpload extends TwilioClientCommand {
   
       spinner.stop()   
   
-      console.log(`Samples was uploaded in ${taskSid}`);
+      console.log(`Samples was uploaded in '${tSid}'`);
 
     }catch(err){
 

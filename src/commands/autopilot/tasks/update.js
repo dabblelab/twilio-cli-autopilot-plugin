@@ -36,7 +36,7 @@ class UpdateAssistantTask extends TwilioClientCommand {
                                 {
                                     type: 'list',
                                     name: 'taskUniqueName',
-                                    message: 'Select task to update: ',
+                                    message: 'Choose the Task to update: ',
                                     choices: taskChoice
                                 }
                             ]
