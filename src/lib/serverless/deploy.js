@@ -32,20 +32,10 @@ function handleError(err, spinner, flags, config) {
     if (err.name === 'conflicting-servicename') {
         const fullCommand = utils_2.getFullCommand(flags);
         const messageBody = common_tags_1.stripIndent `
-      Here are a few ways to solve this problem:
-      
-      - Rename your project in the package.json "name" property
-      - Pass an explicit name to your deployment
-        > ${utils_2.constructCommandName(fullCommand, 'deploy', [
-            '-n',
-            'my-new-service-name',
-        ])}
       - Deploy to the existing service with the name "${err['serviceName'] || config.serviceName}"
         > ${utils_2.constructCommandName(fullCommand, 'deploy', [
             '--override-existing-project',
         ])}
-      - Run deployment in force mode
-        > ${utils_2.constructCommandName(fullCommand, 'deploy', ['--force'])} 
     `;
         logger_1.logger.error(messageBody, err.message);
     }
@@ -145,8 +135,29 @@ exports.cliInfo = {
             describe: 'Upload assets. Can be turned off with --no-assets',
             default: true,
             hidden : true
+        },
+        'override-existing-project': {
+            type: 'boolean',
+            describe: 'Deploys Serverless project to existing service if a naming conflict has been found.',
+            default: false,
         }
      }),
+};
+
+exports.initCliInfo = {
+    options: Object.assign({}, 
+        { 
+            'account-sid': {
+                type: 'string',
+                alias: 'u',
+                describe: 'A specific account SID to be used for deployment. Uses fields in .env otherwise'
+            }, 
+            'auth-token': {
+                type: 'string',
+                describe: 'Use a specific auth token for deployment. Uses fields from .env otherwise',
+            }
+        }
+    ),
 };
 function optionBuilder(yargs) {
     yargs = yargs

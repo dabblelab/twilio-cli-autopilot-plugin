@@ -6,6 +6,13 @@ const {flags} = require('@oclif/command'),
       ora = require('ora'),
       path = require('path');
 
+const { initCliInfo } = require('../../lib/serverless/deploy');
+const {
+        convertYargsOptionsToOclifFlags,
+        normalizeFlags,
+        createExternalCliOptions,
+      } = require('../../utils');
+
 class InitAssistant extends TwilioClientCommand {
 
   async runCommand() {
@@ -16,6 +23,7 @@ class InitAssistant extends TwilioClientCommand {
       let { flags, args } = this.parse(InitAssistant),
           clonedAssistant = '';
 
+      flags = normalizeFlags(flags);
 
       let url = 'https://raw.githubusercontent.com/Mohammad-Khalid/autopilot-templates/master/Templates/templates.json';
         
@@ -47,15 +55,7 @@ class InitAssistant extends TwilioClientCommand {
 InitAssistant.description = `Init autopilot bot template`;
 
 InitAssistant.flags = Object.assign(
-  {
-    "accountSid" : flags.string({
-      char : 'u',
-      description : 'A specific account SID to be used for deployment'
-    }),
-    "authToken" : flags.string({
-      description : 'Use a specific auth token for deployment'
-    })
-  },
+  convertYargsOptionsToOclifFlags(initCliInfo.options),
   TwilioClientCommand.flags
 )
 
