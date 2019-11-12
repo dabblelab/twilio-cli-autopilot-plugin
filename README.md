@@ -103,7 +103,7 @@ OPTIONS
   -o=(columns|json|tsv)            [default: columns] Format of command output.
   -p, --profile=profile            Shorthand identifier for your profile.
   -s, --assistantSid=assistantSid  (required) assistant sid
-  --uniqueName=uniqueName          assistant uniqueName
+  --uniqueName=uniqueName          assistant unique name
 ```
 
 _See code: [src/commands/autopilot/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/delete.js)_
@@ -149,7 +149,7 @@ OPTIONS
   -o=(columns|json|tsv)            [default: columns] Format of command output.
   -p, --profile=profile            Shorthand identifier for your profile.
   -s, --assistantSid=assistantSid  assistant sid
-  --uniqueName=uniqueName          assistant uniqueName
+  --uniqueName=uniqueName          assistant unique name
 ```
 
 _See code: [src/commands/autopilot/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/export.js)_
@@ -522,7 +522,7 @@ OPTIONS
   -o=(columns|json|tsv)            [default: columns] Format of command output.
   -p, --profile=profile            Shorthand identifier for your profile.
   -s, --schema=schema              (required) schema path
-  --uniqueName=uniqueName          assistant uniqueName
+  --uniqueName=uniqueName          assistant unique name
 ```
 
 _See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/update.js)_
