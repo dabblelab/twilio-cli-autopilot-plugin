@@ -1,18 +1,19 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
       prettyJSONStringify = require('pretty-json-stringify'),
       ora = require('ora'),
-      path = require('path');
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../utils'),
+      { options, describe } = require('../../lib/options/simulate');
 
 class SimulateAssistant extends TwilioClientCommand {
 
   async runCommand() {
 
-    let { flags, args } = this.parse(SimulateAssistant);
+    let { flags } = this.parse(SimulateAssistant);
+    flags = normalizeFlags(flags);
 
     if (!flags.hasOwnProperty('assistantSid')) {
-      console.log(`The '--assistantSid' argument is required`)
+      console.log(`The '--assistant-sid' argument is required`)
       return
     }
     if (!flags.hasOwnProperty('text')) {
@@ -42,24 +43,11 @@ class SimulateAssistant extends TwilioClientCommand {
   }
 }
 
-SimulateAssistant.description = `Simulate an assistant`;
+SimulateAssistant.description = describe;
 
 SimulateAssistant.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-      char : 's',
-      description : 'assistant sid',
-      required : true
-    })
-  },
-  {
-    text : flags.string({
-      char : 't',
-      description : 'User text input',
-      required : true
-    })
-  },
-  TwilioClientCommand.flags
+  convertYargsOptionsToOclifFlags(options),
+  { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = SimulateAssistant

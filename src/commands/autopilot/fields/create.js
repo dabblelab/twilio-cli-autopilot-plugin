@@ -1,21 +1,23 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/fields/create');
       
 class CreateAssistantTaskField extends TwilioClientCommand {
   
     async runCommand() {
 
         let { flags } = this.parse(CreateAssistantTaskField);
+        flags = normalizeFlags(flags);
 
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
 
         if(!flags.uniqueName){
-            console.log(`The '--uniqueName' is required`);
+            console.log(`The '--unique-name' is required`);
             return;
         }
 
@@ -89,7 +91,7 @@ class CreateAssistantTaskField extends TwilioClientCommand {
             const field = await AutopilotCore.fields.create(this.twilioClient, assistantSid, tSid, params);
 
             spinner.stop();
-            console.log(`Task field '${uniqueName}' was created.`);
+            console.log(`Task field "${uniqueName}" was created`);
         }catch(err){
 
             spinner.stop();
@@ -99,27 +101,11 @@ class CreateAssistantTaskField extends TwilioClientCommand {
   
 }
 
-CreateAssistantTaskField.description = `Create field of a task`;
+CreateAssistantTaskField.description = describe;
 
 CreateAssistantTaskField.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant that owns the task',
-        required : true
-    }),
-    taskSid : flags.string({
-        description : 'task sid'
-    }),
-    uniqueName : flags.string({
-        description : 'field unique name',
-        required : true
-    }),
-    fieldTypeSid : flags.string({
-        description : 'The Field Type of the new field. Can be: a [Built-in FieldType](https://www.twilio.com/docs/assistant/api/built-in-field-types ), the `unique_name`, or the `sid` of a custom Field Type.'
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = CreateAssistantTaskField;

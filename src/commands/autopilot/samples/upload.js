@@ -1,22 +1,24 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora'),
-      path = require('path');
+      path = require('path'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/samples/upload');
 
 class TaskSamplesUpload extends TwilioClientCommand {
 
   async runCommand() {
 
     let { flags } = this.parse(TaskSamplesUpload);
+    flags = normalizeFlags(flags);
 
     if (!flags.hasOwnProperty('assistantSid')) {
-      console.log(`The '--assistantSid' argument is required`)
+      console.log(`The '--assistant-sid' argument is required`)
       return;
     }
 
     if (!flags.hasOwnProperty('fileName')) {
-        console.log(`The '--fileName' argument is required`)
+        console.log(`The '--file-name' argument is required`)
         return;
     }
     let spinner = await ora();
@@ -60,7 +62,7 @@ class TaskSamplesUpload extends TwilioClientCommand {
   
       spinner.stop()   
   
-      console.log(`Samples was uploaded in '${tSid}'`);
+      console.log(`Samples was uploaded in "${tSid}"`);
 
     }catch(err){
 
@@ -71,24 +73,11 @@ class TaskSamplesUpload extends TwilioClientCommand {
   }
 }
 
-TaskSamplesUpload.description = `Upload task samples`;
+TaskSamplesUpload.description = describe;
 
 TaskSamplesUpload.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant that owns the task',
-        required : true
-    }),
-    taskSid : flags.string({
-        description : 'task sid'
-    }),
-    fileName : flags.string({
-        description : 'a CSV file of samples',
-        required : true
-    })
-  },
-  TwilioClientCommand.flags
+  convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = TaskSamplesUpload

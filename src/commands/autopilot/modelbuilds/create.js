@@ -1,16 +1,18 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/modelbuilds/create');
       
 class CreateModelBuilds extends TwilioClientCommand {
   
     async runCommand() {
 
         let { flags } = this.parse(CreateModelBuilds);
+        flags = normalizeFlags(flags);
 
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
 
@@ -37,21 +39,11 @@ class CreateModelBuilds extends TwilioClientCommand {
   
 }
 
-CreateModelBuilds.description = `Create Model Builds`;
+CreateModelBuilds.description = describe;
 
 CreateModelBuilds.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant that owns the task',
-        required : true
-    }),
-    callbackURL : flags.string({
-        char : 'u',
-        description : 'URL to get notified of model build status'
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = CreateModelBuilds;

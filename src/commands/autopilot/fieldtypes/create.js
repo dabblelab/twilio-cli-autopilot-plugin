@@ -1,21 +1,23 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/fieldtypes/create');
       
 class CreateAssistantFieldType extends TwilioClientCommand {
   
     async runCommand() {
 
         let { flags } = this.parse(CreateAssistantFieldType);
+        flags = normalizeFlags(flags);
 
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
 
         if(!flags.uniqueName){
-            console.log(`The '--uniqueName' is required`);
+            console.log(`The '--unique-name' is required`);
             return;
         }
 
@@ -32,7 +34,7 @@ class CreateAssistantFieldType extends TwilioClientCommand {
 
             const fieldType = await AutopilotCore.fieldTypes.create(this.twilioClient, assistantSid, params);
             spinner.stop();
-            console.log(`Field Type with UniqueName: ${uniqueName} was created.`);
+            console.log(`Field Type "${uniqueName}" was created`);
         }catch(err){
 
             spinner.stop();
@@ -43,24 +45,11 @@ class CreateAssistantFieldType extends TwilioClientCommand {
   
 }
 
-CreateAssistantFieldType.description = `Create a field type of an assistant`;
+CreateAssistantFieldType.description = describe;
 
 CreateAssistantFieldType.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant in which to create',
-        required : true
-    }),
-    uniqueName : flags.string({
-        description : 'unique name for the field type',
-        required : true
-    }),
-    friendlyName : flags.string({
-        description : 'friendly name for field type.'
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = CreateAssistantFieldType;

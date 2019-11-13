@@ -1,13 +1,16 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/webhooks/update');
       
 class UpdateAssistantWebhook extends TwilioClientCommand {
   
     async runCommand() {
 
         let { flags } = this.parse(UpdateAssistantWebhook);
+        flags = normalizeFlags(flags);
+
         const eventTypes = {
             ondialoguestart : "onDialogueStart", 
             ondialogueend : "onDialogueEnd", 
@@ -94,7 +97,7 @@ class UpdateAssistantWebhook extends TwilioClientCommand {
                 webhook = await AutopilotCore.webhooks.update(this.twilioClient, assistantSid, wSid, params);
 
             spinner.stop();
-            console.log(`Webhooks "${wSid}" was updated.`);
+            console.log(`Webhooks "${wSid}" was updated`);
         }catch(err){
 
             spinner.stop();
@@ -105,36 +108,11 @@ class UpdateAssistantWebhook extends TwilioClientCommand {
   
 }
 
-UpdateAssistantWebhook.description = `Update Assistant Webhooks`;
+UpdateAssistantWebhook.description = describe;
 
 UpdateAssistantWebhook.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant that owns the task',
-        required : true
-    }),
-    webhookSid : flags.string({
-        description : 'SID of the webhook to update'
-    }),
-    webhookUniqueName : flags.string({
-        char : 'w',
-        description : 'unique name for webhook to update'
-    }),
-    events : flags.string({
-        char : 'e',
-        description : 'list of space-separated webhook events to update'
-    }),
-    webhookURL : flags.string({
-        char : 'u',
-        description : 'the URL to send events to update'
-    }),
-    method : flags.string({
-        char : 'm',
-        description : 'which HTTP method to use to update'
-    })
-  },
-  TwilioClientCommand.flags
+  convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = UpdateAssistantWebhook;

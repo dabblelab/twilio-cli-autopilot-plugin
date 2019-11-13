@@ -1,8 +1,9 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora'),
-      path = require('path');
+      path = require('path'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../utils'),
+      { options, describe } = require('../../lib/options/import');
 
 class ImportAssistant extends TwilioClientCommand {
 
@@ -12,8 +13,10 @@ class ImportAssistant extends TwilioClientCommand {
 
     try{
 
-      let { flags, args } = this.parse(ImportAssistant),
-          filename = ``,
+      let { flags, args } = this.parse(ImportAssistant);
+      flags = normalizeFlags(flags);
+
+      let filename = ``,
           assistant = {};
 
       if(args.type === 'alexa'){
@@ -72,9 +75,7 @@ class ImportAssistant extends TwilioClientCommand {
   }
 }
 
-ImportAssistant.description = `Import a DialogFlow Agent/Alexa Interaction Model
--> twilio autopilot:import dialogflow --dfbackup <dialogflow-backup-zip-file> --dfagent <dialogflow-agent-name>
--> twilio autopilot:import alexa --model <alexa-interaction-model-file> [--redirectURL <alexa-back-end-hanlder-url>]`;
+ImportAssistant.description = describe;
 
 ImportAssistant.args = [
   {
@@ -87,40 +88,8 @@ ImportAssistant.args = [
 ];
 
 ImportAssistant.flags = Object.assign(
-  {
-    dfbackup : flags.string({
-      char : 'b',
-      description : 'Dialogflow Agent Backup Zip File Local Path',
-      multiple: false,
-      exclusive: ['model', 'redirectURL']
-    })
-  },
-  {
-    dfagent : flags.string({
-      char : 'a',
-      description : 'Dialogflow Agent Name',
-      multiple: false,
-      exclusive: ['model', 'redirectURL']
-    })
-  },
-  {
-    model : flags.string({
-      char : 'm',
-      description : 'Alexa Interaction Model File Path',
-      multiple: false,
-      exclusive: ['dfbackup', 'dfagent']
-    })
-  },
-  {
-    redirectURL : flags.string({
-      char : 'r',
-      description : 'Alexa Back-End Hanlder URL to send back the response',
-      multiple: false,
-      exclusive: ['dfbackup', 'dfagent'],
-      default : 'https://inquisitive-stretch-2083.twil.io/generic'
-    })
-  },
-  TwilioClientCommand.flags
+  convertYargsOptionsToOclifFlags(options),
+  { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = ImportAssistant

@@ -1,7 +1,8 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../utils'),
+      { options, describe } = require('../../lib/options/delete');
 
 class DeleteAssistant extends TwilioClientCommand {
 
@@ -9,8 +10,10 @@ class DeleteAssistant extends TwilioClientCommand {
 
     let { flags } = this.parse(DeleteAssistant);
 
+    flags = normalizeFlags(flags);
+
     if (!flags.hasOwnProperty('assistantSid')) {
-      console.log(`The '--assistantSid' argument is required`);
+      console.log(`The '--assistant-sid' argument is required`);
       return;
     }
     let spinner = ora().start('Deleting assistant...');
@@ -23,7 +26,7 @@ class DeleteAssistant extends TwilioClientCommand {
       const result = await AutopilotCore.deleteAssistant(sid, this.twilioClient);
 
       spinner.stop();
-      console.log(`\nRemoved assistant with UniqueName: ${sid}`);
+      console.log(`Assistant "${sid}" was deleted`);
     }catch(err){
 
       spinner.stop();
@@ -33,20 +36,11 @@ class DeleteAssistant extends TwilioClientCommand {
   }
 }
 
-DeleteAssistant.description = `Delete an assistant`;
+DeleteAssistant.description = describe;
 
 DeleteAssistant.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-      char : 's',
-      description : 'assistant sid',
-      required : true
-    }),
-    uniqueName : flags.string({
-      description : 'assistant uniqueName'
-    })
-  },
-  TwilioClientCommand.flags
+  convertYargsOptionsToOclifFlags(options),
+  { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = DeleteAssistant

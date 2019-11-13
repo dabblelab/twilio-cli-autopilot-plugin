@@ -1,13 +1,15 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/webhooks/list');
       
 class ListAssistantWebhooks extends TwilioClientCommand {
   
     async runCommand() {
 
         let { flags } = this.parse(ListAssistantWebhooks);
+        flags = normalizeFlags(flags);
 
         if (!flags.hasOwnProperty('assistantSid')) {
             console.log(`The '--assistantSid' is required`);
@@ -30,22 +32,11 @@ class ListAssistantWebhooks extends TwilioClientCommand {
   
 }
 
-ListAssistantWebhooks.description = `List all webhooks of an assistant`;
+ListAssistantWebhooks.description = describe;
 
 ListAssistantWebhooks.flags = Object.assign(
-  {
-    properties: flags.string({
-      default: 'sid, uniqueName, webhookUrl, events, dateCreated, dateUpdated, webhookMethod',
-      description:
-        'The Autopilot Assistant Webhooks List.'
-    }),
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant that owns the task',
-        required : true
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = ListAssistantWebhooks;

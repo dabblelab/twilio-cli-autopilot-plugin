@@ -1,21 +1,23 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/fieldtypes/update');
       
 class UpdateAssistantFieldType extends TwilioClientCommand {
   
     async runCommand() {
 
         let { flags } = this.parse(UpdateAssistantFieldType);
+        flags = normalizeFlags(flags);
 
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
 
         if(!(flags.fieldTypeSid || flags.uniqueName)){
-            console.log(`The '--fieldTypeSid/uniqueName' is required`);
+            console.log(`The '--field-type-sid/unique-name' is required`);
             return;
         }
 
@@ -33,7 +35,7 @@ class UpdateAssistantFieldType extends TwilioClientCommand {
                 await AutopilotCore.fieldTypes.update(this.twilioClient, assistantSid, sid, params);
 
             spinner.stop();
-            console.log(`FieldType with UniqueName/Sid: ${uniqueName || sid} was updated.`);
+            console.log(`FieldType "${uniqueName || sid}" was updated`);
         }catch(err){
 
             spinner.stop();
@@ -44,27 +46,11 @@ class UpdateAssistantFieldType extends TwilioClientCommand {
   
 }
 
-UpdateAssistantFieldType.description = `Update a fieldtype of an assistant`;
+UpdateAssistantFieldType.description = describe;
 
 UpdateAssistantFieldType.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant sid',
-        required : true
-    }),
-    fieldTypeSid : flags.string({
-        description : 'field type sid',
-        required : true
-    }),
-    uniqueName : flags.string({
-        description : 'field type unique name to update'
-    }),
-    friendlyName : flags.string({
-        description : 'field type friendly name to update'
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = UpdateAssistantFieldType;

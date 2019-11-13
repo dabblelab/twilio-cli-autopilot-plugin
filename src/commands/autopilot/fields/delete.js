@@ -1,16 +1,18 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/fields/delete');
       
 class DeleteAssistantTaskField extends TwilioClientCommand {
   
     async runCommand() {
 
         let { flags } = this.parse(DeleteAssistantTaskField);
+        flags = normalizeFlags(flags);
 
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
 
@@ -73,7 +75,7 @@ class DeleteAssistantTaskField extends TwilioClientCommand {
             spinner.start('Deleting task field...\n');
             const field = await AutopilotCore.fields.remove(this.twilioClient, assistantSid, tSid, fSid);
             spinner.stop();
-            console.log(`Task field '${fSid}' was deleted.`);
+            console.log(`Task field "${fSid}" was deleted`);
         }catch(err){
 
             spinner.stop();
@@ -84,23 +86,11 @@ class DeleteAssistantTaskField extends TwilioClientCommand {
   
 }
 
-DeleteAssistantTaskField.description = `Delete a field of a task`;
+DeleteAssistantTaskField.description = describe;
 
 DeleteAssistantTaskField.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant that owns the task',
-        required : true
-    }),
-    taskSid : flags.string({
-        description : 'task sid'
-    }),
-    fieldSid : flags.string({
-        description : 'The Field Type of the new field. Can be: a [Built-in FieldType](https://www.twilio.com/docs/assistant/api/built-in-field-types ), the `unique_name`, or the `sid` of a custom Field Type.'
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = DeleteAssistantTaskField;

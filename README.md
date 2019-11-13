@@ -82,13 +82,11 @@ USAGE
   $ twilio autopilot:create
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --schema=schema              (required) [default: templates] schema path
+  -p, --profile=profile  Shorthand identifier for your profile.
+  -s, --schema=schema    (required) [default: templates] schema path
 ```
 
-_See code: [src/commands/autopilot/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/create.js)_
+_See code: [src/commands/autopilot/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/create.js)_
 
 ## `twilio autopilot:delete`
 
@@ -99,14 +97,12 @@ USAGE
   $ twilio autopilot:delete
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant sid
-  --uniqueName=uniqueName          assistant uniqueName
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
+  --unique-name=unique-name          assistant unique name
 ```
 
-_See code: [src/commands/autopilot/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/delete.js)_
+_See code: [src/commands/autopilot/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/delete.js)_
 
 ## `twilio autopilot:deploy`
 
@@ -134,7 +130,7 @@ OPTIONS
   --override-existing-project      Deploys Serverless project to existing service if a naming conflict has been found.
 ```
 
-_See code: [src/commands/autopilot/deploy.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/deploy.js)_
+_See code: [src/commands/autopilot/deploy.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/deploy.js)_
 
 ## `twilio autopilot:export`
 
@@ -145,14 +141,12 @@ USAGE
   $ twilio autopilot:export
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  assistant sid
-  --uniqueName=uniqueName          assistant uniqueName
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  assistant sid
+  --unique-name=unique-name          assistant unique name
 ```
 
-_See code: [src/commands/autopilot/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/export.js)_
+_See code: [src/commands/autopilot/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/export.js)_
 
 ## `twilio autopilot:fields:create`
 
@@ -163,21 +157,19 @@ USAGE
   $ twilio autopilot:fields:create
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant that owns the task
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
 
-  --fieldTypeSid=fieldTypeSid      The Field Type of the new field. Can be: a [Built-in
-                                   FieldType](https://www.twilio.com/docs/assistant/api/built-in-field-types ), the
-                                   `unique_name`, or the `sid` of a custom Field Type.
+  --field-type-sid=field-type-sid    The Field Type of the new field. Can be: a [Built-in
+                                     FieldType](https://www.twilio.com/docs/assistant/api/built-in-field-types ), the
+                                     `unique_name`, or the `sid` of a custom Field Type.
 
-  --taskSid=taskSid                task sid
+  --task-sid=task-sid                task sid
 
-  --uniqueName=uniqueName          (required) field unique name
+  --unique-name=unique-name          (required) field unique name
 ```
 
-_See code: [src/commands/autopilot/fields/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/fields/create.js)_
+_See code: [src/commands/autopilot/fields/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fields/create.js)_
 
 ## `twilio autopilot:fields:delete`
 
@@ -188,19 +180,17 @@ USAGE
   $ twilio autopilot:fields:delete
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant that owns the task
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
 
-  --fieldSid=fieldSid              The Field Type of the new field. Can be: a [Built-in
-                                   FieldType](https://www.twilio.com/docs/assistant/api/built-in-field-types ), the
-                                   `unique_name`, or the `sid` of a custom Field Type.
+  --field-sid=field-sid              The Field Type of the new field. Can be: a [Built-in
+                                     FieldType](https://www.twilio.com/docs/assistant/api/built-in-field-types ), the
+                                     `unique_name`, or the `sid` of a custom Field Type.
 
-  --taskSid=taskSid                task sid
+  --task-sid=task-sid                task sid
 ```
 
-_See code: [src/commands/autopilot/fields/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/fields/delete.js)_
+_See code: [src/commands/autopilot/fields/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fields/delete.js)_
 
 ## `twilio autopilot:fields:list`
 
@@ -211,15 +201,13 @@ USAGE
   $ twilio autopilot:fields:list
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant that owns the task
-  --properties=properties          [default: sid, uniqueName, fieldType] The Autopilot Assistant Task List.
-  --taskSid=taskSid                task sid
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  --properties=properties            [default: sid, uniqueName, fieldType] The Autopilot Assistant Task List
+  --task-sid=task-sid                task sid
 ```
 
-_See code: [src/commands/autopilot/fields/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/fields/list.js)_
+_See code: [src/commands/autopilot/fields/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fields/list.js)_
 
 ## `twilio autopilot:fieldtypes:create`
 
@@ -230,15 +218,13 @@ USAGE
   $ twilio autopilot:fieldtypes:create
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant in which to create
-  --friendlyName=friendlyName      friendly name for field type.
-  --uniqueName=uniqueName          (required) unique name for the field type
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant in which to create
+  --friendly-name=friendly-name      friendly name for field type
+  --unique-name=unique-name          (required) unique name for the field type
 ```
 
-_See code: [src/commands/autopilot/fieldtypes/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/fieldtypes/create.js)_
+_See code: [src/commands/autopilot/fieldtypes/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fieldtypes/create.js)_
 
 ## `twilio autopilot:fieldtypes:list`
 
@@ -249,14 +235,12 @@ USAGE
   $ twilio autopilot:fieldtypes:list
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant sid
-  --properties=properties          [default: sid, uniqueName] The Autopilot Assistant FieldType List.
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  --properties=properties            [default: sid, uniqueName] The Autopilot Assistant FieldType List
 ```
 
-_See code: [src/commands/autopilot/fieldtypes/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/fieldtypes/list.js)_
+_See code: [src/commands/autopilot/fieldtypes/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fieldtypes/list.js)_
 
 ## `twilio autopilot:fieldtypes:update`
 
@@ -267,16 +251,14 @@ USAGE
   $ twilio autopilot:fieldtypes:update
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant sid
-  --fieldTypeSid=fieldTypeSid      (required) field type sid
-  --friendlyName=friendlyName      field type friendly name to update
-  --uniqueName=uniqueName          field type unique name to update
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  --field-type-sid=field-type-sid    (required) field type sid
+  --friendly-name=friendly-name      field type friendly name to update
+  --unique-name=unique-name          field unique name
 ```
 
-_See code: [src/commands/autopilot/fieldtypes/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/fieldtypes/update.js)_
+_See code: [src/commands/autopilot/fieldtypes/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fieldtypes/update.js)_
 
 ## `twilio autopilot:fieldvalues:upload`
 
@@ -287,15 +269,13 @@ USAGE
   $ twilio autopilot:fieldvalues:upload
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant that owns the task
-  --fieldTypeSid=fieldTypeSid      field type SID
-  --fileName=fileName              (required) a CSV file of field values (one on each row with synonyms in columns)
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  --field-type-sid=field-type-sid    field type SID
+  --file-name=file-name              (required) a CSV file of field values (one on each row with synonyms in columns)
 ```
 
-_See code: [src/commands/autopilot/fieldvalues/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/fieldvalues/upload.js)_
+_See code: [src/commands/autopilot/fieldvalues/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fieldvalues/upload.js)_
 
 ## `twilio autopilot:import [TYPE]`
 
@@ -309,22 +289,20 @@ ARGUMENTS
   TYPE  (dialogflow|alexa) [default: dialogflow] Type of import DialogFlow/Alexa
 
 OPTIONS
-  -a, --dfagent=dfagent            Dialogflow Agent Name
-  -b, --dfbackup=dfbackup          Dialogflow Agent Backup Zip File Local Path
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -m, --model=model                Alexa Interaction Model File Path
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
+  -a, --dfagent=dfagent          Dialogflow Agent Name
+  -b, --dfbackup=dfbackup        Dialogflow Agent Backup Zip File Local Path
+  -m, --model=model              Alexa Interaction Model File Path
+  -p, --profile=profile          Shorthand identifier for your profile.
 
-  -r, --redirectURL=redirectURL    [default: https://inquisitive-stretch-2083.twil.io/generic] Alexa Back-End Hanlder
-                                   URL to send back the response
+  -r, --redirectURL=redirectURL  [default: https://inquisitive-stretch-2083.twil.io/generic] Alexa Back-End Hanlder URL
+                                 to send back the response
 
 DESCRIPTION
   -> twilio autopilot:import dialogflow --dfbackup <dialogflow-backup-zip-file> --dfagent <dialogflow-agent-name>
   -> twilio autopilot:import alexa --model <alexa-interaction-model-file> [--redirectURL <alexa-back-end-hanlder-url>]
 ```
 
-_See code: [src/commands/autopilot/import.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/import.js)_
+_See code: [src/commands/autopilot/import.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/import.js)_
 
 ## `twilio autopilot:init`
 
@@ -335,14 +313,13 @@ USAGE
   $ twilio autopilot:init
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -u, --account-sid=account-sid    A specific account SID to be used for deployment. Uses fields in .env otherwise
-  --auth-token=auth-token          Use a specific auth token for deployment. Uses fields from .env otherwise
+  -n, --bot-name=bot-name        create new bot project with bot name
+  -p, --profile=profile          Shorthand identifier for your profile.
+  -u, --account-sid=account-sid  A specific account SID to be used for deployment. Uses fields in .env otherwise
+  --auth-token=auth-token        Use a specific auth token for deployment. Uses fields from .env otherwise
 ```
 
-_See code: [src/commands/autopilot/init.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/init.js)_
+_See code: [src/commands/autopilot/init.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/init.js)_
 
 ## `twilio autopilot:list`
 
@@ -353,13 +330,11 @@ USAGE
   $ twilio autopilot:list
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  --properties=properties          [default: sid, uniqueName, friendlyName] The Autopilot Assistant List.
+  -p, --profile=profile    Shorthand identifier for your profile.
+  --properties=properties  [default: sid, uniqueName, friendlyName] The Autopilot Assistant List
 ```
 
-_See code: [src/commands/autopilot/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/list.js)_
+_See code: [src/commands/autopilot/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/list.js)_
 
 ## `twilio autopilot:modelbuilds:create`
 
@@ -370,14 +345,12 @@ USAGE
   $ twilio autopilot:modelbuilds:create
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant that owns the task
-  -u, --callbackURL=callbackURL    URL to get notified of model build status
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -u, --callbackURL=callbackURL      URL to get notified of model build status
 ```
 
-_See code: [src/commands/autopilot/modelbuilds/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/modelbuilds/create.js)_
+_See code: [src/commands/autopilot/modelbuilds/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/modelbuilds/create.js)_
 
 ## `twilio autopilot:queries:export`
 
@@ -388,14 +361,12 @@ USAGE
   $ twilio autopilot:queries:export
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -q, --quantity=quantity          (required) number of queries to retrieve
-  -s, --assistantSid=assistantSid  (required) assistant that owns the task
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -q, --quantity=quantity            (required) number of queries to retrieve
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
 ```
 
-_See code: [src/commands/autopilot/queries/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/queries/export.js)_
+_See code: [src/commands/autopilot/queries/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/queries/export.js)_
 
 ## `twilio autopilot:samples:upload`
 
@@ -406,15 +377,13 @@ USAGE
   $ twilio autopilot:samples:upload
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant that owns the task
-  --fileName=fileName              (required) a CSV file of samples
-  --taskSid=taskSid                task sid
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  --file-name=file-name              (required) a CSV file of samples
+  --task-sid=task-sid                task sid
 ```
 
-_See code: [src/commands/autopilot/samples/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/samples/upload.js)_
+_See code: [src/commands/autopilot/samples/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/samples/upload.js)_
 
 ## `twilio autopilot:simulate`
 
@@ -425,14 +394,12 @@ USAGE
   $ twilio autopilot:simulate
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant sid
-  -t, --text=text                  (required) User text input
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
+  -t, --text=text                    (required) User text input
 ```
 
-_See code: [src/commands/autopilot/simulate.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/simulate.js)_
+_See code: [src/commands/autopilot/simulate.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/simulate.js)_
 
 ## `twilio autopilot:tasks:create`
 
@@ -443,15 +410,13 @@ USAGE
   $ twilio autopilot:tasks:create
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant that owns the task
-  --friendlyName=friendlyName      friendly name
-  --uniqueName=uniqueName          (required) unique name for task
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  --friendly-name=friendly-name      friendly name for task
+  --unique-name=unique-name          (required) unique name for task
 ```
 
-_See code: [src/commands/autopilot/tasks/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/tasks/create.js)_
+_See code: [src/commands/autopilot/tasks/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/tasks/create.js)_
 
 ## `twilio autopilot:tasks:delete`
 
@@ -462,14 +427,12 @@ USAGE
   $ twilio autopilot:tasks:delete
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant that owns the task
-  --taskSid=taskSid                task sid
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  --task-sid=task-sid                task sid
 ```
 
-_See code: [src/commands/autopilot/tasks/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/tasks/delete.js)_
+_See code: [src/commands/autopilot/tasks/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/tasks/delete.js)_
 
 ## `twilio autopilot:tasks:list`
 
@@ -480,14 +443,12 @@ USAGE
   $ twilio autopilot:tasks:list
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant sid
-  --properties=properties          [default: sid, uniqueName, friendlyName] The Autopilot Assistant Task List.
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  --properties=properties            [default: sid, uniqueName, friendlyName] The Autopilot Assistant Task List
 ```
 
-_See code: [src/commands/autopilot/tasks/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/tasks/list.js)_
+_See code: [src/commands/autopilot/tasks/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/tasks/list.js)_
 
 ## `twilio autopilot:tasks:update`
 
@@ -498,16 +459,14 @@ USAGE
   $ twilio autopilot:tasks:update
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant that owns the task
-  --friendlyName=friendlyName      task friendly name to update
-  --taskSid=taskSid                task sid
-  --uniqueName=uniqueName          task unique name to update
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  --friendly-name=friendly-name      task friendly name to update
+  --task-sid=task-sid                task sid
+  --unique-name=unique-name          task unique name to update
 ```
 
-_See code: [src/commands/autopilot/tasks/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/tasks/update.js)_
+_See code: [src/commands/autopilot/tasks/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/tasks/update.js)_
 
 ## `twilio autopilot:update`
 
@@ -518,14 +477,12 @@ USAGE
   $ twilio autopilot:update
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --schema=schema              (required) schema path
-  --uniqueName=uniqueName          assistant uniqueName
+  -p, --profile=profile      Shorthand identifier for your profile.
+  -s, --schema=schema        (required) schema path
+  --unique-name=unique-name  assistant unique name
 ```
 
-_See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/update.js)_
+_See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/update.js)_
 
 ## `twilio autopilot:webhooks:create`
 
@@ -536,17 +493,15 @@ USAGE
   $ twilio autopilot:webhooks:create
 
 OPTIONS
-  -e, --events=events                        (required) list of space-separated webhook events
-  -l=(debug|info|warn|error|none)            [default: info] Level of logging messages.
-  -m, --method=method                        which HTTP method to use
-  -o=(columns|json|tsv)                      [default: columns] Format of command output.
-  -p, --profile=profile                      Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid            (required) assistant that owns the task
-  -u, --webhookURL=webhookURL                (required) the URL to send events to
-  -w, --webhookUniqueName=webhookUniqueName  (required) unique name for webhook
+  -e, --events=events                            (required) list of space-separated webhook events
+  -m, --method=method                            which HTTP method to use
+  -p, --profile=profile                          Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid              (required) assistant that owns the task
+  -u, --webhookURL=webhookURL                    (required) the URL to send events to
+  -w, --webhook-unique-name=webhook-unique-name  (required) unique name for webhook
 ```
 
-_See code: [src/commands/autopilot/webhooks/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/webhooks/create.js)_
+_See code: [src/commands/autopilot/webhooks/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/webhooks/create.js)_
 
 ## `twilio autopilot:webhooks:delete`
 
@@ -557,14 +512,12 @@ USAGE
   $ twilio autopilot:webhooks:delete
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant that owns the task
-  --webhookSid=webhookSid          SID of the webhook to delete
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  --webhook-sid=webhook-sid          SID of the webhook to delete
 ```
 
-_See code: [src/commands/autopilot/webhooks/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/webhooks/delete.js)_
+_See code: [src/commands/autopilot/webhooks/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/webhooks/delete.js)_
 
 ## `twilio autopilot:webhooks:list`
 
@@ -575,16 +528,14 @@ USAGE
   $ twilio autopilot:webhooks:list
 
 OPTIONS
-  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
-  -o=(columns|json|tsv)            [default: columns] Format of command output.
-  -p, --profile=profile            Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid  (required) assistant that owns the task
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
 
-  --properties=properties          [default: sid, uniqueName, webhookUrl, events, dateCreated, dateUpdated,
-                                   webhookMethod] The Autopilot Assistant Webhooks List.
+  --properties=properties            [default: sid, uniqueName, webhookUrl, events, dateCreated, dateUpdated,
+                                     webhookMethod] The Autopilot Assistant Webhooks List
 ```
 
-_See code: [src/commands/autopilot/webhooks/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/webhooks/list.js)_
+_See code: [src/commands/autopilot/webhooks/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/webhooks/list.js)_
 
 ## `twilio autopilot:webhooks:update`
 
@@ -595,18 +546,16 @@ USAGE
   $ twilio autopilot:webhooks:update
 
 OPTIONS
-  -e, --events=events                        list of space-separated webhook events to update
-  -l=(debug|info|warn|error|none)            [default: info] Level of logging messages.
-  -m, --method=method                        which HTTP method to use to update
-  -o=(columns|json|tsv)                      [default: columns] Format of command output.
-  -p, --profile=profile                      Shorthand identifier for your profile.
-  -s, --assistantSid=assistantSid            (required) assistant that owns the task
-  -u, --webhookURL=webhookURL                the URL to send events to update
-  -w, --webhookUniqueName=webhookUniqueName  unique name for webhook to update
-  --webhookSid=webhookSid                    SID of the webhook to update
+  -e, --events=events                            list of space-separated webhook events to update
+  -m, --method=method                            which HTTP method to use to update
+  -p, --profile=profile                          Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid              (required) assistant that owns the task
+  -u, --webhookURL=webhookURL                    the URL to send events to update
+  -w, --webhook-unique-name=webhook-unique-name  unique name for webhook to update
+  --webhook-sid=webhook-sid                      SID of the webhook to update
 ```
 
-_See code: [src/commands/autopilot/webhooks/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.17/src/commands/autopilot/webhooks/update.js)_
+_See code: [src/commands/autopilot/webhooks/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/webhooks/update.js)_
 
 ## `twilio help [COMMAND]`
 

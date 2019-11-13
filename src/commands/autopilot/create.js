@@ -1,8 +1,9 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora'),
-      path = require('path');
+      path = require('path'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../utils'),
+      { options, describe } = require('../../lib/options/create');
 
 class CreateAssistant extends TwilioClientCommand {
 
@@ -11,9 +12,12 @@ class CreateAssistant extends TwilioClientCommand {
 
     try{
 
-      let { flags, args } = this.parse(CreateAssistant),
-            schema = flags.schema,
-            clonedAssistant = '';
+      let { flags } = this.parse(CreateAssistant);
+
+      flags = normalizeFlags(flags);
+
+      let schema = flags.schema,
+          clonedAssistant = '';
 
       if(schema == 'templates'){
 
@@ -27,7 +31,7 @@ class CreateAssistant extends TwilioClientCommand {
       spinner.start('Creating assistant...');
       let fullPath = `${path.resolve()}/${schema}`
   
-      const assistant = await AutopilotCore.createAssistant(fullPath,this.twilioClient);
+      const assistant = await AutopilotCore.createAssistant(fullPath, this.twilioClient);
   
       spinner.stop()   
   
@@ -41,18 +45,11 @@ class CreateAssistant extends TwilioClientCommand {
   }
 }
 
-CreateAssistant.description = `Create an assistant`;
+CreateAssistant.description = describe;
 
 CreateAssistant.flags = Object.assign(
-  {
-    schema : flags.string({
-      char : 's',
-      description : 'schema path',
-      default : "templates",
-      required : true
-    })
-  },
-  TwilioClientCommand.flags
+  convertYargsOptionsToOclifFlags(options),
+  { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = CreateAssistant

@@ -11,21 +11,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const serverless_api_1 = require("@twilio-labs/serverless-api");
-const common_tags_1 = require("common-tags");
-const path_1 = __importDefault(require("path"));
-const check_credentials_1 = require("twilio-run/dist/checks/check-credentials");
-const project_structure_1 = __importDefault(require("twilio-run/dist/checks/project-structure"));
-const deploy_1 = require("twilio-run/dist/config/deploy");
-const deploy_2 = require("twilio-run/dist/printers/deploy");
-const utils_1 = require("twilio-run/dist/serverless-api/utils");
-const logger_1 = require("twilio-run/dist/utils/logger");
-const shared_1 = require("twilio-run/dist/commands/shared");
-const utils_2 = require("twilio-run/dist/commands/utils");
-const debug = logger_1.getDebugFunction('twilio-run:deploy');
+
+const serverless_api_1 = require("@twilio-labs/serverless-api"),
+      common_tags_1 = require("common-tags"),
+      path_1 = __importDefault(require("path")),
+      check_credentials_1 = require("twilio-run/dist/checks/check-credentials"),
+      project_structure_1 = __importDefault(require("twilio-run/dist/checks/project-structure")),
+      deploy_1 = require("twilio-run/dist/config/deploy"),
+      utils_1 = require("twilio-run/dist/serverless-api/utils"),
+      logger_1 = require("twilio-run/dist/utils/logger"),
+      utils_2 = require("twilio-run/dist/commands/utils"),
+      debug = logger_1.getDebugFunction('twilio-run:deploy');
+
 function logError(msg) {
     logger_1.logger.error(msg);
 }
+
 function handleError(err, spinner, flags, config) {
     debug('%O', err);
     spinner.fail('Failed Deployment');
@@ -53,6 +54,7 @@ function handleError(err, spinner, flags, config) {
     }
     process.exit(1);
 }
+
 function handler(flags, externalCliOptions) {
     return __awaiter(this, void 0, void 0, function* () {
         logger_1.setLogLevelByName(flags.logLevel);
@@ -77,7 +79,6 @@ function handler(flags, externalCliOptions) {
         }
         debug('Deploy Config %P', config);
         check_credentials_1.checkConfigForCredentials(config);
-        //deploy_2.printConfigInfo(config);
         const spinner = logger_1.getOraSpinner('Deploying Function').start();
         try {
             const client = new serverless_api_1.TwilioServerlessApiClient(config);
@@ -87,8 +88,6 @@ function handler(flags, externalCliOptions) {
             const result = yield client.deployLocalProject(config);
             spinner.text = 'Serverless function successfully deployed\n';
             spinner.succeed();
-            //console.log(result);
-            //deploy_2.printDeployedResources(config, result);
             const { serviceSid, buildSid } = result;
             yield utils_1.saveLatestDeploymentData(config.cwd, serviceSid, buildSid, config.accountSid.startsWith('AC')
                 ? config.accountSid
@@ -103,62 +102,9 @@ function handler(flags, externalCliOptions) {
         }
     });
 }
-exports.handler = handler;
-exports.cliInfo = {
-    options: Object.assign({}, shared_1.sharedCliOptions, { cwd: {
-            type: 'string',
-            describe: 'Sets the directory from which to deploy',
-            hidden : true
-        }, 'functions-env': {
-            type: 'string',
-            describe: 'DEPRECATED: Use --environment instead',
-            hidden: true,
-        }, environment: {
-            type: 'string',
-            describe: 'The environment name (domain suffix) you want to use for your deployment',
-            default: 'dev',
-            hidden : true
-        }, 'account-sid': {
-            type: 'string',
-            alias: 'u',
-            describe: 'A specific account SID to be used for deployment. Uses fields in .env otherwise',
-        }, 'auth-token': {
-            type: 'string',
-            describe: 'Use a specific auth token for deployment. Uses fields from .env otherwise',
-        }, functions: {
-            type: 'boolean',
-            describe: 'Upload functions. Can be turned off with --no-functions',
-            default: true,
-            hidden : true
-        }, assets: {
-            type: 'boolean',
-            describe: 'Upload assets. Can be turned off with --no-assets',
-            default: true,
-            hidden : true
-        },
-        'override-existing-project': {
-            type: 'boolean',
-            describe: 'Deploys Serverless project to existing service if a naming conflict has been found.',
-            default: false,
-        }
-     }),
-};
 
-exports.initCliInfo = {
-    options: Object.assign({}, 
-        { 
-            'account-sid': {
-                type: 'string',
-                alias: 'u',
-                describe: 'A specific account SID to be used for deployment. Uses fields in .env otherwise'
-            }, 
-            'auth-token': {
-                type: 'string',
-                describe: 'Use a specific auth token for deployment. Uses fields from .env otherwise',
-            }
-        }
-    ),
-};
+exports.handler = handler;
+
 function optionBuilder(yargs) {
     yargs = yargs
         .example('$0 deploy', 'Deploys all functions and assets in the current working directory')
@@ -168,6 +114,6 @@ function optionBuilder(yargs) {
     }, yargs);
     return yargs;
 }
+
 exports.command = ['deploy'];
-exports.describe = 'Deploys existing functions and assets to Twilio';
 exports.builder = optionBuilder;

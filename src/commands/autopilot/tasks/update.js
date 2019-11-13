@@ -1,16 +1,18 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/tasks/update');
       
 class UpdateAssistantTask extends TwilioClientCommand {
   
     async runCommand() {
 
         let { flags } = this.parse(UpdateAssistantTask);
+        flags = normalizeFlags(flags);
 
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
 
@@ -59,7 +61,7 @@ class UpdateAssistantTask extends TwilioClientCommand {
                 await AutopilotCore.tasks.update(this.twilioClient, assistantSid, tSid, params);
 
             spinner.stop();
-            console.log(`Task '${tSid}' was updated.`);
+            console.log(`Task "${tSid}" was updated`);
         }catch(err){
 
             spinner.stop();
@@ -70,26 +72,11 @@ class UpdateAssistantTask extends TwilioClientCommand {
   
 }
 
-UpdateAssistantTask.description = `Update a Task of an assistant`;
+UpdateAssistantTask.description = describe;
 
 UpdateAssistantTask.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant that owns the task',
-        required : true
-    }),
-    taskSid : flags.string({
-        description : 'task sid'
-    }),
-    uniqueName : flags.string({
-        description : 'task unique name to update'
-    }),
-    friendlyName : flags.string({
-        description : 'task friendly name to update'
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = UpdateAssistantTask;
