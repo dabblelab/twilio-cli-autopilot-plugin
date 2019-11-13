@@ -44,10 +44,17 @@ USAGE
 # Commands
 
 <!-- commands -->
+
+_Assistants_
+
 * [`twilio autopilot:create`](#twilio-autopilotcreate)
 * [`twilio autopilot:delete`](#twilio-autopilotdelete)
-* [`twilio autopilot:deploy`](#twilio-autopilotdeploy)
 * [`twilio autopilot:export`](#twilio-autopilotexport)
+* [`twilio autopilot:list`](#twilio-autopilotlist)
+* [`twilio autopilot:update`](#twilio-autopilotupdate)
+
+_Fields and Field Types
+
 * [`twilio autopilot:fields:create`](#twilio-autopilotfieldscreate)
 * [`twilio autopilot:fields:delete`](#twilio-autopilotfieldsdelete)
 * [`twilio autopilot:fields:list`](#twilio-autopilotfieldslist)
@@ -55,23 +62,36 @@ USAGE
 * [`twilio autopilot:fieldtypes:list`](#twilio-autopilotfieldtypeslist)
 * [`twilio autopilot:fieldtypes:update`](#twilio-autopilotfieldtypesupdate)
 * [`twilio autopilot:fieldvalues:upload`](#twilio-autopilotfieldvaluesupload)
-* [`twilio autopilot:import [TYPE]`](#twilio-autopilotimport-type)
-* [`twilio autopilot:init`](#twilio-autopilotinit)
-* [`twilio autopilot:list`](#twilio-autopilotlist)
-* [`twilio autopilot:modelbuilds:create`](#twilio-autopilotmodelbuildscreate)
-* [`twilio autopilot:queries:export`](#twilio-autopilotqueriesexport)
-* [`twilio autopilot:samples:upload`](#twilio-autopilotsamplesupload)
-* [`twilio autopilot:simulate`](#twilio-autopilotsimulate)
+
+
+_Tasks and Samples_
+
 * [`twilio autopilot:tasks:create`](#twilio-autopilottaskscreate)
 * [`twilio autopilot:tasks:delete`](#twilio-autopilottasksdelete)
 * [`twilio autopilot:tasks:list`](#twilio-autopilottaskslist)
 * [`twilio autopilot:tasks:update`](#twilio-autopilottasksupdate)
-* [`twilio autopilot:update`](#twilio-autopilotupdate)
+* [`twilio autopilot:samples:upload`](#twilio-autopilotsamplesupload)
+
+
+_Import bots from other platforms_
+
+* [`twilio autopilot:import [TYPE]`](#twilio-autopilotimport-type)
+
+_Webhooks
+
 * [`twilio autopilot:webhooks:create`](#twilio-autopilotwebhookscreate)
 * [`twilio autopilot:webhooks:delete`](#twilio-autopilotwebhooksdelete)
 * [`twilio autopilot:webhooks:list`](#twilio-autopilotwebhookslist)
 * [`twilio autopilot:webhooks:update`](#twilio-autopilotwebhooksupdate)
+
+_Other commands_
+
+* [`twilio autopilot:modelbuilds:create`](#twilio-autopilotmodelbuildscreate)
+* [`twilio autopilot:simulate`](#twilio-autopilotsimulate)
+* [`twilio autopilot:queries:export`](#twilio-autopilotqueriesexport)
 * [`twilio help [COMMAND]`](#twilio-help-command)
+
+# Usage
 
 ## `twilio autopilot:create`
 
@@ -104,34 +124,6 @@ OPTIONS
 
 _See code: [src/commands/autopilot/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/delete.js)_
 
-## `twilio autopilot:deploy`
-
-Deploys existing functions and assets to Twilio
-
-```
-USAGE
-  $ twilio autopilot:deploy
-
-OPTIONS
-  -c, --config=config              [default: .twilio-functions] Location of the config file. Absolute path or relative
-                                   to current working directory (cwd)
-
-  -l, --logLevel=logLevel          [default: info] Level of logging messages.
-
-  -p, --profile=profile            Shorthand identifier for your profile.
-
-  -t, --target=all|function|model  [default: all] deploy function, model or all of them. Options can only be "all",
-                                   "function" or "model".
-
-  -u, --account-sid=account-sid    A specific account SID to be used for deployment. Uses fields in .env otherwise
-
-  --auth-token=auth-token          Use a specific auth token for deployment. Uses fields from .env otherwise
-
-  --override-existing-project      Deploys Serverless project to existing service if a naming conflict has been found.
-```
-
-_See code: [src/commands/autopilot/deploy.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/deploy.js)_
-
 ## `twilio autopilot:export`
 
 Export an assistant
@@ -147,6 +139,37 @@ OPTIONS
 ```
 
 _See code: [src/commands/autopilot/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/export.js)_
+
+## `twilio autopilot:list`
+
+List all autopilot assistant
+
+```
+USAGE
+  $ twilio autopilot:list
+
+OPTIONS
+  -p, --profile=profile    Shorthand identifier for your profile.
+  --properties=properties  [default: sid, uniqueName, friendlyName] The Autopilot Assistant List
+```
+
+_See code: [src/commands/autopilot/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/list.js)_
+
+## `twilio autopilot:update`
+
+Update an assistant
+
+```
+USAGE
+  $ twilio autopilot:update
+
+OPTIONS
+  -p, --profile=profile      Shorthand identifier for your profile.
+  -s, --schema=schema        (required) schema path
+  --unique-name=unique-name  assistant unique name
+```
+
+_See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/update.js)_
 
 ## `twilio autopilot:fields:create`
 
@@ -277,130 +300,6 @@ OPTIONS
 
 _See code: [src/commands/autopilot/fieldvalues/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fieldvalues/upload.js)_
 
-## `twilio autopilot:import [TYPE]`
-
-Import a DialogFlow Agent/Alexa Interaction Model
-
-```
-USAGE
-  $ twilio autopilot:import [TYPE]
-
-ARGUMENTS
-  TYPE  (dialogflow|alexa) [default: dialogflow] Type of import DialogFlow/Alexa
-
-OPTIONS
-  -a, --dfagent=dfagent          Dialogflow Agent Name
-  -b, --dfbackup=dfbackup        Dialogflow Agent Backup Zip File Local Path
-  -m, --model=model              Alexa Interaction Model File Path
-  -p, --profile=profile          Shorthand identifier for your profile.
-
-  -r, --redirectURL=redirectURL  [default: https://inquisitive-stretch-2083.twil.io/generic] Alexa Back-End Hanlder URL
-                                 to send back the response
-
-DESCRIPTION
-  -> twilio autopilot:import dialogflow --dfbackup <dialogflow-backup-zip-file> --dfagent <dialogflow-agent-name>
-  -> twilio autopilot:import alexa --model <alexa-interaction-model-file> [--redirectURL <alexa-back-end-hanlder-url>]
-```
-
-_See code: [src/commands/autopilot/import.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/import.js)_
-
-## `twilio autopilot:init`
-
-Init autopilot bot template
-
-```
-USAGE
-  $ twilio autopilot:init
-
-OPTIONS
-  -n, --bot-name=bot-name        create new bot project with bot name
-  -p, --profile=profile          Shorthand identifier for your profile.
-  -u, --account-sid=account-sid  A specific account SID to be used for deployment. Uses fields in .env otherwise
-  --auth-token=auth-token        Use a specific auth token for deployment. Uses fields from .env otherwise
-```
-
-_See code: [src/commands/autopilot/init.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/init.js)_
-
-## `twilio autopilot:list`
-
-List all autopilot assistant
-
-```
-USAGE
-  $ twilio autopilot:list
-
-OPTIONS
-  -p, --profile=profile    Shorthand identifier for your profile.
-  --properties=properties  [default: sid, uniqueName, friendlyName] The Autopilot Assistant List
-```
-
-_See code: [src/commands/autopilot/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/list.js)_
-
-## `twilio autopilot:modelbuilds:create`
-
-Create Model Builds
-
-```
-USAGE
-  $ twilio autopilot:modelbuilds:create
-
-OPTIONS
-  -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
-  -u, --callbackURL=callbackURL      URL to get notified of model build status
-```
-
-_See code: [src/commands/autopilot/modelbuilds/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/modelbuilds/create.js)_
-
-## `twilio autopilot:queries:export`
-
-Export queries of an assistant
-
-```
-USAGE
-  $ twilio autopilot:queries:export
-
-OPTIONS
-  -p, --profile=profile              Shorthand identifier for your profile.
-  -q, --quantity=quantity            (required) number of queries to retrieve
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
-```
-
-_See code: [src/commands/autopilot/queries/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/queries/export.js)_
-
-## `twilio autopilot:samples:upload`
-
-Upload task samples
-
-```
-USAGE
-  $ twilio autopilot:samples:upload
-
-OPTIONS
-  -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
-  --file-name=file-name              (required) a CSV file of samples
-  --task-sid=task-sid                task sid
-```
-
-_See code: [src/commands/autopilot/samples/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/samples/upload.js)_
-
-## `twilio autopilot:simulate`
-
-Simulate an assistant
-
-```
-USAGE
-  $ twilio autopilot:simulate
-
-OPTIONS
-  -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant sid
-  -t, --text=text                    (required) User text input
-```
-
-_See code: [src/commands/autopilot/simulate.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/simulate.js)_
-
 ## `twilio autopilot:tasks:create`
 
 Create a Task of an assistant
@@ -468,21 +367,49 @@ OPTIONS
 
 _See code: [src/commands/autopilot/tasks/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/tasks/update.js)_
 
-## `twilio autopilot:update`
+## `twilio autopilot:samples:upload`
 
-Update an assistant
+Upload task samples
 
 ```
 USAGE
-  $ twilio autopilot:update
+  $ twilio autopilot:samples:upload
 
 OPTIONS
-  -p, --profile=profile      Shorthand identifier for your profile.
-  -s, --schema=schema        (required) schema path
-  --unique-name=unique-name  assistant unique name
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  --file-name=file-name              (required) a CSV file of samples
+  --task-sid=task-sid                task sid
 ```
 
-_See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/update.js)_
+_See code: [src/commands/autopilot/samples/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/samples/upload.js)_
+
+## `twilio autopilot:import [TYPE]`
+
+Import a DialogFlow Agent/Alexa Interaction Model
+
+```
+USAGE
+  $ twilio autopilot:import [TYPE]
+
+ARGUMENTS
+  TYPE  (dialogflow|alexa) [default: dialogflow] Type of import DialogFlow/Alexa
+
+OPTIONS
+  -a, --dfagent=dfagent          Dialogflow Agent Name
+  -b, --dfbackup=dfbackup        Dialogflow Agent Backup Zip File Local Path
+  -m, --model=model              Alexa Interaction Model File Path
+  -p, --profile=profile          Shorthand identifier for your profile.
+
+  -r, --redirectURL=redirectURL  [default: https://inquisitive-stretch-2083.twil.io/generic] Alexa Back-End Hanlder URL
+                                 to send back the response
+
+DESCRIPTION
+  -> twilio autopilot:import dialogflow --dfbackup <dialogflow-backup-zip-file> --dfagent <dialogflow-agent-name>
+  -> twilio autopilot:import alexa --model <alexa-interaction-model-file> [--redirectURL <alexa-back-end-hanlder-url>]
+```
+
+_See code: [src/commands/autopilot/import.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/import.js)_
 
 ## `twilio autopilot:webhooks:create`
 
@@ -556,6 +483,54 @@ OPTIONS
 ```
 
 _See code: [src/commands/autopilot/webhooks/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/webhooks/update.js)_
+
+## `twilio autopilot:modelbuilds:create`
+
+Create Model Builds
+
+```
+USAGE
+  $ twilio autopilot:modelbuilds:create
+
+OPTIONS
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -u, --callbackURL=callbackURL      URL to get notified of model build status
+```
+
+_See code: [src/commands/autopilot/modelbuilds/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/modelbuilds/create.js)_
+
+## `twilio autopilot:simulate`
+
+Simulate an assistant
+
+```
+USAGE
+  $ twilio autopilot:simulate
+
+OPTIONS
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
+  -t, --text=text                    (required) User text input
+```
+
+_See code: [src/commands/autopilot/simulate.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/simulate.js)_
+
+## `twilio autopilot:queries:export`
+
+Export queries of an assistant
+
+```
+USAGE
+  $ twilio autopilot:queries:export
+
+OPTIONS
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -q, --quantity=quantity            (required) number of queries to retrieve
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+```
+
+_See code: [src/commands/autopilot/queries/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/queries/export.js)_
 
 ## `twilio help [COMMAND]`
 
