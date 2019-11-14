@@ -138,7 +138,11 @@ OPTIONS
   --unique-name=unique-name          assistant unique name
 ```
 
+<<<<<<< HEAD
 _See code: [src/commands/autopilot/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/export.js)_
+=======
+_See code: [src/commands/autopilot/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/export.js)_
+>>>>>>> 293e736ad7c656f69e987bac72b6a595061cc0e3
 
 ## `twilio autopilot:list`
 
@@ -153,7 +157,11 @@ OPTIONS
   --properties=properties  [default: sid, uniqueName, friendlyName] The Autopilot Assistant List
 ```
 
+<<<<<<< HEAD
 _See code: [src/commands/autopilot/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/list.js)_
+=======
+_See code: [src/commands/autopilot/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/list.js)_
+>>>>>>> 293e736ad7c656f69e987bac72b6a595061cc0e3
 
 ## `twilio autopilot:update`
 
@@ -169,7 +177,11 @@ OPTIONS
   --unique-name=unique-name  assistant unique name
 ```
 
+<<<<<<< HEAD
 _See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/update.js)_
+=======
+_See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/update.js)_
+>>>>>>> 293e736ad7c656f69e987bac72b6a595061cc0e3
 
 ## `twilio autopilot:fields:create`
 
@@ -298,7 +310,11 @@ OPTIONS
   --file-name=file-name              (required) a CSV file of field values (one on each row with synonyms in columns)
 ```
 
+<<<<<<< HEAD
 _See code: [src/commands/autopilot/fieldvalues/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/fieldvalues/upload.js)_
+=======
+_See code: [src/commands/autopilot/fieldvalues/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fieldvalues/upload.js)_
+>>>>>>> 293e736ad7c656f69e987bac72b6a595061cc0e3
 
 ## `twilio autopilot:tasks:create`
 
@@ -380,6 +396,7 @@ OPTIONS
   -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
   --file-name=file-name              (required) a CSV file of samples
   --task-sid=task-sid                task sid
+<<<<<<< HEAD
 ```
 
 _See code: [src/commands/autopilot/samples/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/samples/upload.js)_
@@ -410,6 +427,38 @@ DESCRIPTION
 ```
 
 _See code: [src/commands/autopilot/import.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/import.js)_
+=======
+```
+
+_See code: [src/commands/autopilot/samples/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/samples/upload.js)_
+
+## `twilio autopilot:import [TYPE]`
+
+Import a DialogFlow Agent/Alexa Interaction Model
+
+```
+USAGE
+  $ twilio autopilot:import [TYPE]
+
+ARGUMENTS
+  TYPE  (dialogflow|alexa) [default: dialogflow] Type of import DialogFlow/Alexa
+
+OPTIONS
+  -a, --dfagent=dfagent          Dialogflow Agent Name
+  -b, --dfbackup=dfbackup        Dialogflow Agent Backup Zip File Local Path
+  -m, --model=model              Alexa Interaction Model File Path
+  -p, --profile=profile          Shorthand identifier for your profile.
+
+  -r, --redirectURL=redirectURL  [default: https://inquisitive-stretch-2083.twil.io/generic] Alexa Back-End Hanlder URL
+                                 to send back the response
+
+DESCRIPTION
+  -> twilio autopilot:import dialogflow --dfbackup <dialogflow-backup-zip-file> --dfagent <dialogflow-agent-name>
+  -> twilio autopilot:import alexa --model <alexa-interaction-model-file> [--redirectURL <alexa-back-end-hanlder-url>]
+```
+
+_See code: [src/commands/autopilot/import.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/import.js)_
+>>>>>>> 293e736ad7c656f69e987bac72b6a595061cc0e3
 
 ## `twilio autopilot:webhooks:create`
 
@@ -531,6 +580,54 @@ OPTIONS
 ```
 
 _See code: [src/commands/autopilot/queries/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/queries/export.js)_
+
+## `twilio autopilot:modelbuilds:create`
+
+Create Model Builds
+
+```
+USAGE
+  $ twilio autopilot:modelbuilds:create
+
+OPTIONS
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -u, --callbackURL=callbackURL      URL to get notified of model build status
+```
+
+_See code: [src/commands/autopilot/modelbuilds/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/modelbuilds/create.js)_
+
+## `twilio autopilot:simulate`
+
+Simulate an assistant
+
+```
+USAGE
+  $ twilio autopilot:simulate
+
+OPTIONS
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
+  -t, --text=text                    (required) User text input
+```
+
+_See code: [src/commands/autopilot/simulate.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/simulate.js)_
+
+## `twilio autopilot:queries:export`
+
+Export queries of an assistant
+
+```
+USAGE
+  $ twilio autopilot:queries:export
+
+OPTIONS
+  -p, --profile=profile              Shorthand identifier for your profile.
+  -q, --quantity=quantity            (required) number of queries to retrieve
+  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+```
+
+_See code: [src/commands/autopilot/queries/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/queries/export.js)_
 
 ## `twilio help [COMMAND]`
 
