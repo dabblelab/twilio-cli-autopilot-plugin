@@ -106,7 +106,7 @@ OPTIONS
   -s, --schema=schema    (required) [default: templates] schema path
 ```
 
-_See code: [src/commands/autopilot/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/create.js)_
+_See code: [src/commands/autopilot/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/create.js)_
 
 ## `twilio autopilot:delete`
 
@@ -122,7 +122,7 @@ OPTIONS
   --unique-name=unique-name          assistant unique name
 ```
 
-_See code: [src/commands/autopilot/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/delete.js)_
+_See code: [src/commands/autopilot/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/delete.js)_
 
 ## `twilio autopilot:export`
 
@@ -138,7 +138,7 @@ OPTIONS
   --unique-name=unique-name          assistant unique name
 ```
 
-_See code: [src/commands/autopilot/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/export.js)_
+_See code: [src/commands/autopilot/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/export.js)_
 
 ## `twilio autopilot:list`
 
@@ -153,7 +153,7 @@ OPTIONS
   --properties=properties  [default: sid, uniqueName, friendlyName] The Autopilot Assistant List
 ```
 
-_See code: [src/commands/autopilot/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/list.js)_
+_See code: [src/commands/autopilot/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/list.js)_
 
 ## `twilio autopilot:update`
 
@@ -169,7 +169,7 @@ OPTIONS
   --unique-name=unique-name  assistant unique name
 ```
 
-_See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/update.js)_
+_See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/update.js)_
 
 ## `twilio autopilot:fields:create`
 
@@ -192,7 +192,7 @@ OPTIONS
   --unique-name=unique-name          (required) field unique name
 ```
 
-_See code: [src/commands/autopilot/fields/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/fields/create.js)_
+_See code: [src/commands/autopilot/fields/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fields/create.js)_
 
 ## `twilio autopilot:fields:delete`
 
@@ -213,7 +213,7 @@ OPTIONS
   --task-sid=task-sid                task sid
 ```
 
-_See code: [src/commands/autopilot/fields/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/fields/delete.js)_
+_See code: [src/commands/autopilot/fields/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fields/delete.js)_
 
 ## `twilio autopilot:fields:list`
 
@@ -230,7 +230,7 @@ OPTIONS
   --task-sid=task-sid                task sid
 ```
 
-_See code: [src/commands/autopilot/fields/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/fields/list.js)_
+_See code: [src/commands/autopilot/fields/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fields/list.js)_
 
 ## `twilio autopilot:fieldtypes:create`
 
@@ -247,7 +247,7 @@ OPTIONS
   --unique-name=unique-name          (required) unique name for the field type
 ```
 
-_See code: [src/commands/autopilot/fieldtypes/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/fieldtypes/create.js)_
+_See code: [src/commands/autopilot/fieldtypes/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fieldtypes/create.js)_
 
 ## `twilio autopilot:fieldtypes:list`
 
@@ -263,7 +263,7 @@ OPTIONS
   --properties=properties            [default: sid, uniqueName] The Autopilot Assistant FieldType List
 ```
 
-_See code: [src/commands/autopilot/fieldtypes/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/fieldtypes/list.js)_
+_See code: [src/commands/autopilot/fieldtypes/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fieldtypes/list.js)_
 
 ## `twilio autopilot:fieldtypes:update`
 
@@ -281,7 +281,7 @@ OPTIONS
   --unique-name=unique-name          field unique name
 ```
 
-_See code: [src/commands/autopilot/fieldtypes/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/fieldtypes/update.js)_
+_See code: [src/commands/autopilot/fieldtypes/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fieldtypes/update.js)_
 
 ## `twilio autopilot:fieldvalues:upload`
 
@@ -298,7 +298,7 @@ OPTIONS
   --file-name=file-name              (required) a CSV file of field values (one on each row with synonyms in columns)
 ```
 
-_See code: [src/commands/autopilot/fieldvalues/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/fieldvalues/upload.js)_
+_See code: [src/commands/autopilot/fieldvalues/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fieldvalues/upload.js)_
 
 ## `twilio autopilot:tasks:create`
 
@@ -315,7 +315,7 @@ OPTIONS
   --unique-name=unique-name          (required) unique name for task
 ```
 
-_See code: [src/commands/autopilot/tasks/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/tasks/create.js)_
+_See code: [src/commands/autopilot/tasks/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/tasks/create.js)_
 
 ## `twilio autopilot:tasks:delete`
 
@@ -331,7 +331,7 @@ OPTIONS
   --task-sid=task-sid                task sid
 ```
 
-_See code: [src/commands/autopilot/tasks/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/tasks/delete.js)_
+_See code: [src/commands/autopilot/tasks/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/tasks/delete.js)_
 
 ## `twilio autopilot:tasks:list`
 
@@ -347,7 +347,7 @@ OPTIONS
   --properties=properties            [default: sid, uniqueName, friendlyName] The Autopilot Assistant Task List
 ```
 
-_See code: [src/commands/autopilot/tasks/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/tasks/list.js)_
+_See code: [src/commands/autopilot/tasks/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/tasks/list.js)_
 
 ## `twilio autopilot:tasks:update`
 
@@ -365,7 +365,7 @@ OPTIONS
   --unique-name=unique-name          task unique name to update
 ```
 
-_See code: [src/commands/autopilot/tasks/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/tasks/update.js)_
+_See code: [src/commands/autopilot/tasks/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/tasks/update.js)_
 
 ## `twilio autopilot:samples:upload`
 
@@ -382,7 +382,7 @@ OPTIONS
   --task-sid=task-sid                task sid
 ```
 
-_See code: [src/commands/autopilot/samples/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/samples/upload.js)_
+_See code: [src/commands/autopilot/samples/upload.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/samples/upload.js)_
 
 ## `twilio autopilot:import [TYPE]`
 
@@ -409,7 +409,7 @@ DESCRIPTION
   -> twilio autopilot:import alexa --model <alexa-interaction-model-file> [--redirectURL <alexa-back-end-hanlder-url>]
 ```
 
-_See code: [src/commands/autopilot/import.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/import.js)_
+_See code: [src/commands/autopilot/import.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/import.js)_
 
 ## `twilio autopilot:webhooks:create`
 
@@ -428,7 +428,7 @@ OPTIONS
   -w, --webhook-unique-name=webhook-unique-name  (required) unique name for webhook
 ```
 
-_See code: [src/commands/autopilot/webhooks/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/webhooks/create.js)_
+_See code: [src/commands/autopilot/webhooks/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/webhooks/create.js)_
 
 ## `twilio autopilot:webhooks:delete`
 
@@ -444,7 +444,7 @@ OPTIONS
   --webhook-sid=webhook-sid          SID of the webhook to delete
 ```
 
-_See code: [src/commands/autopilot/webhooks/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/webhooks/delete.js)_
+_See code: [src/commands/autopilot/webhooks/delete.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/webhooks/delete.js)_
 
 ## `twilio autopilot:webhooks:list`
 
@@ -462,7 +462,7 @@ OPTIONS
                                      webhookMethod] The Autopilot Assistant Webhooks List
 ```
 
-_See code: [src/commands/autopilot/webhooks/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/webhooks/list.js)_
+_See code: [src/commands/autopilot/webhooks/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/webhooks/list.js)_
 
 ## `twilio autopilot:webhooks:update`
 
@@ -482,7 +482,7 @@ OPTIONS
   --webhook-sid=webhook-sid                      SID of the webhook to update
 ```
 
-_See code: [src/commands/autopilot/webhooks/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/webhooks/update.js)_
+_See code: [src/commands/autopilot/webhooks/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/webhooks/update.js)_
 
 ## `twilio autopilot:modelbuilds:create`
 
@@ -498,7 +498,7 @@ OPTIONS
   -u, --callbackURL=callbackURL      URL to get notified of model build status
 ```
 
-_See code: [src/commands/autopilot/modelbuilds/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/modelbuilds/create.js)_
+_See code: [src/commands/autopilot/modelbuilds/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/modelbuilds/create.js)_
 
 ## `twilio autopilot:simulate`
 
@@ -514,7 +514,7 @@ OPTIONS
   -t, --text=text                    (required) User text input
 ```
 
-_See code: [src/commands/autopilot/simulate.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/simulate.js)_
+_See code: [src/commands/autopilot/simulate.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/simulate.js)_
 
 ## `twilio autopilot:queries:export`
 
@@ -530,7 +530,7 @@ OPTIONS
   -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
 ```
 
-_See code: [src/commands/autopilot/queries/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.19/src/commands/autopilot/queries/export.js)_
+_See code: [src/commands/autopilot/queries/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/queries/export.js)_
 
 ## `twilio help [COMMAND]`
 
