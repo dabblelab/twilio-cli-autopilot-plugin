@@ -53,7 +53,7 @@ _Assistants_
 * [`twilio autopilot:list`](#twilio-autopilotlist)
 * [`twilio autopilot:update`](#twilio-autopilotupdate)
 
-_Fields and Field Types
+_Fields and Field Types_
 
 * [`twilio autopilot:fields:create`](#twilio-autopilotfieldscreate)
 * [`twilio autopilot:fields:delete`](#twilio-autopilotfieldsdelete)
@@ -77,7 +77,7 @@ _Import bots from other platforms_
 
 * [`twilio autopilot:import [TYPE]`](#twilio-autopilotimport-type)
 
-_Webhooks
+_Webhooks_
 
 * [`twilio autopilot:webhooks:create`](#twilio-autopilotwebhookscreate)
 * [`twilio autopilot:webhooks:delete`](#twilio-autopilotwebhooksdelete)
