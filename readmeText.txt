@@ -53,7 +53,7 @@ _Assistants_
 * [`twilio autopilot:list`](#twilio-autopilotlist)
 * [`twilio autopilot:update`](#twilio-autopilotupdate)
 
-_Fields and Field Types
+_Fields and Field Types_
 
 * [`twilio autopilot:fields:create`](#twilio-autopilotfieldscreate)
 * [`twilio autopilot:fields:delete`](#twilio-autopilotfieldsdelete)
@@ -77,7 +77,7 @@ _Import bots from other platforms_
 
 * [`twilio autopilot:import [TYPE]`](#twilio-autopilotimport-type)
 
-_Webhooks
+_Webhooks_
 
 * [`twilio autopilot:webhooks:create`](#twilio-autopilotwebhookscreate)
 * [`twilio autopilot:webhooks:delete`](#twilio-autopilotwebhooksdelete)
@@ -103,7 +103,7 @@ USAGE
 
 OPTIONS
   -p, --profile=profile  Shorthand identifier for your profile.
-  -s, --schema=schema    (required) [default: templates] schema path
+  -s, --schema=schema    (required) [default: templates] path to schema file
 ```
 
 _See code: [src/commands/autopilot/create.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/create.js)_
@@ -150,7 +150,8 @@ USAGE
 
 OPTIONS
   -p, --profile=profile    Shorthand identifier for your profile.
-  --properties=properties  [default: sid, uniqueName, friendlyName] The Autopilot Assistant List
+  --properties=properties  [default: sid, uniqueName, friendlyName] assistant properties to list -  
+                            https://www.twilio.com/docs/autopilot/api/assistant#assistant-properties   
 ```
 
 _See code: [src/commands/autopilot/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/list.js)_
@@ -165,7 +166,7 @@ USAGE
 
 OPTIONS
   -p, --profile=profile      Shorthand identifier for your profile.
-  -s, --schema=schema        (required) schema path
+  -s, --schema=schema        (required) path to schema file to use for the update
   --unique-name=unique-name  assistant unique name
 ```
 
@@ -181,9 +182,9 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
 
-  --field-type-sid=field-type-sid    The Field Type of the new field. Can be: a [Built-in
+  --field-type-sid=field-type-sid    The sid of the new field type. Can be: a [Built-in
                                      FieldType](https://www.twilio.com/docs/assistant/api/built-in-field-types ), the
                                      `unique_name`, or the `sid` of a custom Field Type.
 
@@ -204,11 +205,9 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
 
-  --field-sid=field-sid              The Field Type of the new field. Can be: a [Built-in
-                                     FieldType](https://www.twilio.com/docs/assistant/api/built-in-field-types ), the
-                                     `unique_name`, or the `sid` of a custom Field Type.
+  --field-sid=field-sid              sid of the field to delete
 
   --task-sid=task-sid                task sid
 ```
@@ -225,8 +224,9 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
-  --properties=properties            [default: sid, uniqueName, fieldType] The Autopilot Assistant Task List
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
+  --properties=properties            [default: sid, uniqueName, fieldType] field properties to list - 
+                                      https://www.twilio.com/docs/autopilot/api/task-field#field-properties
   --task-sid=task-sid                task sid
 ```
 
@@ -242,7 +242,7 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant in which to create
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
   --friendly-name=friendly-name      friendly name for field type
   --unique-name=unique-name          (required) unique name for the field type
 ```
@@ -259,8 +259,9 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
-  --properties=properties            [default: sid, uniqueName] The Autopilot Assistant FieldType List
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
+  --properties=properties            [default: sid, uniqueName] field type properties to list -     
+                                      https://www.twilio.com/docs/autopilot/api/field-type#fieldtype-properties
 ```
 
 _See code: [src/commands/autopilot/fieldtypes/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/fieldtypes/list.js)_
@@ -275,7 +276,7 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
   --field-type-sid=field-type-sid    (required) field type sid
   --friendly-name=friendly-name      field type friendly name to update
   --unique-name=unique-name          field unique name
@@ -293,7 +294,7 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
   --field-type-sid=field-type-sid    field type SID
   --file-name=file-name              (required) a CSV file of field values (one on each row with synonyms in columns)
 ```
@@ -310,7 +311,7 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
   --friendly-name=friendly-name      friendly name for task
   --unique-name=unique-name          (required) unique name for task
 ```
@@ -327,7 +328,7 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
   --task-sid=task-sid                task sid
 ```
 
@@ -343,8 +344,9 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
-  --properties=properties            [default: sid, uniqueName, friendlyName] The Autopilot Assistant Task List
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
+  --properties=properties            [default: sid, uniqueName, friendlyName] task properties to list -  
+                                      https://www.twilio.com/docs/autopilot/api/task#task-properties
 ```
 
 _See code: [src/commands/autopilot/tasks/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/tasks/list.js)_
@@ -359,7 +361,7 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
   --friendly-name=friendly-name      task friendly name to update
   --task-sid=task-sid                task sid
   --unique-name=unique-name          task unique name to update
@@ -377,7 +379,7 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
   --file-name=file-name              (required) a CSV file of samples
   --task-sid=task-sid                task sid
 ```
@@ -423,7 +425,7 @@ OPTIONS
   -e, --events=events                            (required) list of space-separated webhook events
   -m, --method=method                            which HTTP method to use
   -p, --profile=profile                          Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid              (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid              (required) assistant sid
   -u, --webhookURL=webhookURL                    (required) the URL to send events to
   -w, --webhook-unique-name=webhook-unique-name  (required) unique name for webhook
 ```
@@ -440,7 +442,7 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
   --webhook-sid=webhook-sid          SID of the webhook to delete
 ```
 
@@ -456,10 +458,12 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
 
   --properties=properties            [default: sid, uniqueName, webhookUrl, events, dateCreated, dateUpdated,
-                                     webhookMethod] The Autopilot Assistant Webhooks List
+                                     webhookMethod] webhook properties to list - 
+                                     https://www.twilio.com/docs/autopilot/api/event-webhooks#webhook-properties
+                                     
 ```
 
 _See code: [src/commands/autopilot/webhooks/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/webhooks/list.js)_
@@ -476,7 +480,7 @@ OPTIONS
   -e, --events=events                            list of space-separated webhook events to update
   -m, --method=method                            which HTTP method to use to update
   -p, --profile=profile                          Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid              (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid              (required) assistant sid
   -u, --webhookURL=webhookURL                    the URL to send events to update
   -w, --webhook-unique-name=webhook-unique-name  unique name for webhook to update
   --webhook-sid=webhook-sid                      SID of the webhook to update
@@ -494,7 +498,7 @@ USAGE
 
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
   -u, --callbackURL=callbackURL      URL to get notified of model build status
 ```
 
@@ -527,7 +531,7 @@ USAGE
 OPTIONS
   -p, --profile=profile              Shorthand identifier for your profile.
   -q, --quantity=quantity            (required) number of queries to retrieve
-  -s, --assistant-sid=assistant-sid  (required) assistant that owns the task
+  -s, --assistant-sid=assistant-sid  (required) assistant sid
 ```
 
 _See code: [src/commands/autopilot/queries/export.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/queries/export.js)_

@@ -1,7 +1,7 @@
 exports.options = {
     'assistant-sid' : {
         type: 'string',
-        describe: 'assistant in which to create',
+        describe: 'assistant sid',
         alias : 's',
         requiresArg : true,
         hidden : false
