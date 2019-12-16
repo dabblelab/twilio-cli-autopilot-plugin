@@ -38,7 +38,7 @@ class InitAssistant extends TwilioClientCommand {
 
       spinner.start('Setting Up package.json file');
   
-      await createPackageJSON(fullPath, snakeCase(clonedAssistant))
+      await createPackageJSON(fullPath, camelCase(clonedAssistant).toLowerCase())
       spinner.succeed();
 
       spinner.start(`Installing dependencies`);

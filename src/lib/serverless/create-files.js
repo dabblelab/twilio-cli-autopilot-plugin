@@ -7,30 +7,42 @@ const path = require('path');
 const versions = require('./versions');
 
 function createFile(fullPath, content) {
-  return open(fullPath, 'wx').then(fd => {
-    return write(fd, content);
-  });
+  // return open(fullPath, 'wx').then(fd => {
+  //   return write(fd, content);
+  // });
+  try{
+    return fs.writeFileSync(fullPath, content);
+  }
+  catch(err){
+    throw err;
+  }
 }
 
 function createPackageJSON(pathName, name) {
   const fullPath = path.join(pathName, 'package.json');
-  const packageJSON = JSON.stringify(
-    {
-      name: name,
-      version: '0.0.0',
-      private: true,
-      scripts: {
-        test: 'echo "Error: no test specified" && exit 1',
-        start: 'twilio-run --env'
+  let packageJSON = ``;
+
+  if(fs.existsSync(fullPath)){
+
+    let pkgJSON = require(fullPath);
+    pkgJSON.name = name;
+    packageJSON = JSON.stringify(pkgJSON, null, 2);
+  }else{
+
+    packageJSON = JSON.stringify(
+      {
+        name: name,
+        version: '0.0.0',
+        private: true,
+        scripts: {
+          test: 'echo "Error: no test specified" && exit 1'
+        },
+        engines: { node: versions.node }
       },
-      devDependencies: {
-        'twilio-run': versions.twilioRun
-      },
-      engines: { node: versions.node }
-    },
-    null,
-    2
-  );
+      null,
+      2
+    );
+  }
   return createFile(fullPath, packageJSON);
 }
 

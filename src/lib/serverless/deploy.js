@@ -86,7 +86,7 @@ function handler(flags, externalCliOptions) {
                 spinner.text = evt.message + '\n';
             });
             const result = yield client.deployLocalProject(config);
-            spinner.text = 'Serverless function successfully deployed\n';
+            spinner.text = 'Serverless function successfully deployed';
             spinner.succeed();
             const { serviceSid, buildSid } = result;
             yield utils_1.saveLatestDeploymentData(config.cwd, serviceSid, buildSid, config.accountSid.startsWith('AC')
