@@ -1,6 +1,6 @@
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      {createEnvFile, createPackageJSON} = require('../../lib/serverless/create-files'),
+      {createEnvFile, createPackageJSON, renameFile, updateSchemaFile} = require('../../lib/serverless/create-files'),
       {installDependencies} = require('../../lib/serverless/install-dependencies'),
       ora = require('ora'),
       path = require('path'),
@@ -40,6 +40,12 @@ class InitAssistant extends TwilioClientCommand {
   
       await createPackageJSON(fullPath, camelCase(clonedAssistant).toLowerCase())
       spinner.succeed();
+
+      if(flags.botName){
+
+        const schemaPath = path.join(clonedAssistant, 'model')
+        await updateSchemaFile(`${path.resolve()}/${schemaPath}`, kebabCase(flags.botName));
+      }
 
       spinner.start(`Installing dependencies`);
       await installDependencies(fullPath);

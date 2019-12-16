@@ -53,7 +53,35 @@ AUTH_TOKEN=${authToken}`;
   return createFile(fullPath, content);
 }
 
+function updateSchemaFile(pathName, uniqueName){
+
+  try{
+
+    let fullPath = path.join(pathName, 'schema.json'),
+        schemaJSON = require(fullPath);
+
+    schemaJSON.uniqueName = uniqueName;
+
+    return createFile(fullPath, JSON.stringify(schemaJSON, null, 2))
+  }
+  catch(err){
+    throw err;
+  }
+}
+
+function renameFile(oldPath, newPath){
+
+  try{
+
+    return fs.renameSync(oldPath, newPath);
+  }catch(err){
+    throw err;
+  }
+}
+
 module.exports = {
   createEnvFile,
-  createPackageJSON
+  createPackageJSON,
+  renameFile,
+  updateSchemaFile
 };
