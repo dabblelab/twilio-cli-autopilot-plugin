@@ -1,16 +1,19 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/tasks/delete');
       
 class DeleteAssistantTask extends TwilioClientCommand {
   
-    async runCommand() {
+    async run() {
+        await super.run();
 
         let { flags } = this.parse(DeleteAssistantTask);
+        flags = normalizeFlags(flags);
 
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
 
@@ -49,7 +52,7 @@ class DeleteAssistantTask extends TwilioClientCommand {
             spinner.start('Deleting assistant task...\n');
             const task = await AutopilotCore.tasks.remove(this.twilioClient, assistantSid, tSid);
             spinner.stop();
-            console.log(`Removed task with UniqueName: ${task.uniqueName}`);
+            console.log(`Task "${task.uniqueName}" was deleted`);
         }catch(err){
 
             spinner.stop();
@@ -60,20 +63,11 @@ class DeleteAssistantTask extends TwilioClientCommand {
   
 }
 
-DeleteAssistantTask.description = `Delete a Task of an assistant`;
+DeleteAssistantTask.description = describe;
 
 DeleteAssistantTask.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant that owns the task',
-        required : true
-    }),
-    taskSid : flags.string({
-        description : 'task sid'
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = DeleteAssistantTask;

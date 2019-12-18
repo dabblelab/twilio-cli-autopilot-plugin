@@ -1,16 +1,20 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../utils'),
+      { options, describe } = require('../../lib/options/export');
 
 class ExportAssistants extends TwilioClientCommand {
 
-  async runCommand() {
+  async run() {
+    await super.run();
     let spinner = await ora();
 
     try{
 
       let { flags } = this.parse(ExportAssistants);
+      flags = normalizeFlags(flags);
+
       let assistantSid = flags.uniqueName || flags.assistantSid || '',
           seletedAssistant = assistantSid;
 
@@ -45,7 +49,7 @@ class ExportAssistants extends TwilioClientCommand {
       spinner.start(`Exporting assistant...`);
       const assistant = await AutopilotCore.exportAssistant(seletedAssistant, this.twilioClient);
       spinner.stop();
-      console.log(`\nFile exported in ${assistant.filename}`);
+      console.log(`File exported in "${assistant.filename}"`);
     }catch(err){
 
       spinner.stop();
@@ -54,19 +58,11 @@ class ExportAssistants extends TwilioClientCommand {
   }
 }
 
-ExportAssistants.description = `Export an assistant`;
+ExportAssistants.description = describe;
 
 ExportAssistants.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-      char : 's',
-      description : 'assistant sid'
-    }),
-    uniqueName : flags.string({
-      description : 'assistant uniqueName'
-    })
-  },
-  TwilioClientCommand.flags
+  convertYargsOptionsToOclifFlags(options),
+  { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = ExportAssistants

@@ -1,16 +1,19 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/fieldtypes/list');
       
 class ListAssistantFieldTypes extends TwilioClientCommand {
   
-    async runCommand() {
+    async run() {
+        await super.run();
 
         let { flags } = this.parse(ListAssistantFieldTypes);
+        flags = normalizeFlags(flags);
 
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
 
@@ -31,22 +34,11 @@ class ListAssistantFieldTypes extends TwilioClientCommand {
   
 }
 
-ListAssistantFieldTypes.description = `List all FieldTypes of an assistant`;
+ListAssistantFieldTypes.description = describe;
 
 ListAssistantFieldTypes.flags = Object.assign(
-  {
-    properties: flags.string({
-      default: 'sid, uniqueName',
-      description:
-        'The Autopilot Assistant FieldType List.'
-    }),
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant sid',
-        required : true
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = ListAssistantFieldTypes

@@ -1,17 +1,20 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/webhooks/delete');
       
 class DeleteAssistantWebhook extends TwilioClientCommand {
   
-    async runCommand() {
+    async run() {
+        await super.run();
 
         let { flags } = this.parse(DeleteAssistantWebhook);
+        flags = normalizeFlags(flags);
         
 
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
         
@@ -52,7 +55,7 @@ class DeleteAssistantWebhook extends TwilioClientCommand {
             const webhook = await AutopilotCore.webhooks.remove(this.twilioClient, assistantSid, wSid);
 
             spinner.stop();
-            console.log(`Webhooks "${wSid}" was deleted.`);
+            console.log(`Webhooks "${wSid}" was deleted`);
         }catch(err){
 
             spinner.stop();
@@ -63,20 +66,11 @@ class DeleteAssistantWebhook extends TwilioClientCommand {
   
 }
 
-DeleteAssistantWebhook.description = `Delete Assistant Webhooks`;
+DeleteAssistantWebhook.description = describe;
 
 DeleteAssistantWebhook.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant that owns the task',
-        required : true
-    }),
-    webhookSid : flags.string({
-        description : 'SID of the webhook to delete'
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = DeleteAssistantWebhook;

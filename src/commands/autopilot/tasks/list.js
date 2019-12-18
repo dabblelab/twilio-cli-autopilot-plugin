@@ -1,15 +1,19 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/tasks/list');
       
 class ListAssistantTasks extends TwilioClientCommand {
   
-    async runCommand() {
+    async run() {
+        await super.run();
 
         let { flags } = this.parse(ListAssistantTasks);
+        flags = normalizeFlags(flags);
+
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
         const spinner = ora().start('Getting assistant tasks...\n');
@@ -28,22 +32,11 @@ class ListAssistantTasks extends TwilioClientCommand {
   
 }
 
-ListAssistantTasks.description = `List all tasks of an assistant`;
+ListAssistantTasks.description = describe;
 
 ListAssistantTasks.flags = Object.assign(
-  {
-    properties: flags.string({
-      default: 'sid, uniqueName, friendlyName',
-      description:
-        'The Autopilot Assistant Task List.'
-    }),
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant sid',
-        required : true
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = ListAssistantTasks

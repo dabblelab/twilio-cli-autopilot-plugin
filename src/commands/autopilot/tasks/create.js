@@ -1,21 +1,24 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/tasks/create');
       
 class CreateAssistantTask extends TwilioClientCommand {
   
-    async runCommand() {
+    async run() {
+        await super.run();
 
         let { flags } = this.parse(CreateAssistantTask);
+        flags = normalizeFlags(flags);
 
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
 
         if(!flags.uniqueName){
-            console.log(`The '--uniqueName' is required`);
+            console.log(`The '--unique-name' is required`);
             return;
         }
 
@@ -30,7 +33,7 @@ class CreateAssistantTask extends TwilioClientCommand {
 
             const task = await AutopilotCore.tasks.create(this.twilioClient, assistantSid, params);
             spinner.stop();
-            console.log(`Task with UniqueName: ${task.uniqueName} was created.`);
+            console.log(`Task "${task.uniqueName}" was created`);
         }catch(err){
 
             spinner.stop();
@@ -41,24 +44,11 @@ class CreateAssistantTask extends TwilioClientCommand {
   
 }
 
-CreateAssistantTask.description = `Create a Task of an assistant`;
+CreateAssistantTask.description = describe;
 
 CreateAssistantTask.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant that owns the task',
-        required : true
-    }),
-    uniqueName : flags.string({
-        description : 'unique name for task',
-        required : true
-    }),
-    friendlyName : flags.string({
-        description : 'friendly name'
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = CreateAssistantTask;

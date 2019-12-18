@@ -1,16 +1,19 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/fields/list');
       
 class ListAssistantTaskFields extends TwilioClientCommand {
   
-    async runCommand() {
+    async run() {
+        await super.run();
 
         let { flags } = this.parse(ListAssistantTaskFields);
+        flags = normalizeFlags(flags);
 
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
 
@@ -59,25 +62,11 @@ class ListAssistantTaskFields extends TwilioClientCommand {
   
 }
 
-ListAssistantTaskFields.description = `List all fields of a task`;
+ListAssistantTaskFields.description = describe;
 
 ListAssistantTaskFields.flags = Object.assign(
-  {
-    properties: flags.string({
-      default: 'sid, uniqueName, fieldType',
-      description:
-        'The Autopilot Assistant Task List.'
-    }),
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant that owns the task',
-        required : true
-    }),
-    taskSid : flags.string({
-        description : 'task sid'
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = ListAssistantTaskFields

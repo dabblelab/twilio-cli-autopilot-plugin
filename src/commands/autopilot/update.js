@@ -1,14 +1,17 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora'),
-      path = require('path');
+      path = require('path'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../utils'),
+      { options, describe } = require('../../lib/options/update');
 
 class UpdateAssistant extends TwilioClientCommand {
 
-  async runCommand() {
+  async run() {
+    await super.run();
 
-    let { flags, args } = this.parse(UpdateAssistant);
+    let { flags } = this.parse(UpdateAssistant);
+    flags = normalizeFlags(flags);
 
     if (!flags.hasOwnProperty('schema')) {
       console.log(`The '--schema' argument is required`)
@@ -39,20 +42,11 @@ class UpdateAssistant extends TwilioClientCommand {
   }
 }
 
-UpdateAssistant.description = `Update an assistant`;
+UpdateAssistant.description = describe;
 
 UpdateAssistant.flags = Object.assign(
-  {
-    schema : flags.string({
-      char : 's',
-      description : 'schema path',
-      required : true
-    }),
-    uniqueName : flags.string({
-      description : 'assistant uniqueName'
-    })
-  },
-  TwilioClientCommand.flags
+  convertYargsOptionsToOclifFlags(options),
+  { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = UpdateAssistant

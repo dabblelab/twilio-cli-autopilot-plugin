@@ -1,13 +1,17 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/webhooks/create');
       
 class CreateAssistantWebhook extends TwilioClientCommand {
   
-    async runCommand() {
+    async run() {
+        await super.run();
 
         let { flags } = this.parse(CreateAssistantWebhook);
+        flags = normalizeFlags(flags);
+
         const eventTypes = {
             ondialoguestart : "onDialogueStart", 
             ondialogueend : "onDialogueEnd", 
@@ -18,11 +22,11 @@ class CreateAssistantWebhook extends TwilioClientCommand {
         const {assistantSid, webhookUniqueName, events, webhookURL, method} = flags;
 
         if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistantSid' is required`);
+            console.log(`The '--assistant-sid' is required`);
             return;
         }
         if (!flags.hasOwnProperty('webhookUniqueName')) {
-            console.log(`The '--webhookUniqueName' is required`);
+            console.log(`The '--webhook-unique-name' is required`);
             return;
         }
         if (!flags.hasOwnProperty('events')) {
@@ -67,7 +71,7 @@ class CreateAssistantWebhook extends TwilioClientCommand {
             const webhook = await AutopilotCore.webhooks.create(this.twilioClient, assistantSid, params);
 
             spinner.stop();
-            console.log(`Webhooks "${webhookUniqueName}" was created.`);
+            console.log(`Webhooks "${webhookUniqueName}" was created`);
         }catch(err){
 
             spinner.stop();
@@ -78,36 +82,11 @@ class CreateAssistantWebhook extends TwilioClientCommand {
   
 }
 
-CreateAssistantWebhook.description = `Create Assistant Webhooks`;
+CreateAssistantWebhook.description = describe;
 
 CreateAssistantWebhook.flags = Object.assign(
-  {
-    assistantSid : flags.string({
-        char : 's',
-        description : 'assistant that owns the task',
-        required : true
-    }),
-    webhookUniqueName : flags.string({
-        char : 'w',
-        description : 'unique name for webhook',
-        required : true
-    }),
-    events : flags.string({
-        char : 'e',
-        description : 'list of space-separated webhook events',
-        required : true
-    }),
-    webhookURL : flags.string({
-        char : 'u',
-        description : 'the URL to send events to',
-        required : true
-    }),
-    method : flags.string({
-        char : 'm',
-        description : 'which HTTP method to use'
-    })
-  },
-  TwilioClientCommand.flags
+    convertYargsOptionsToOclifFlags(options),
+    { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = CreateAssistantWebhook;

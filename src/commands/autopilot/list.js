@@ -1,18 +1,23 @@
-const {flags} = require('@oclif/command'),
-      { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
+const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora');
-      
+      ora = require('ora'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../utils'),
+      { options, describe } = require('../../lib/options/list');
+         
 class ListAssistants extends TwilioClientCommand {
-  
-    async runCommand() {
-      
+  async run() {
+    await super.run();
+
       const spinner = ora().start('Getting assistants...\n');
       try{
         
+        let { flags } = this.parse(ListAssistants);
+        flags = normalizeFlags(flags);
+
         const fullData = await AutopilotCore.listAssistant(this.twilioClient);
+
         spinner.stop();
-        this.output(fullData, this.flags.properties);
+        this.output(fullData, flags.properties);
       }catch(err){
 
         spinner.stop()
@@ -22,17 +27,11 @@ class ListAssistants extends TwilioClientCommand {
   
 }
 
-ListAssistants.description = `List all autopilot assistant`;
+ListAssistants.description = describe;
 
 ListAssistants.flags = Object.assign(
-  {
-    properties: flags.string({
-      default: 'sid, uniqueName, friendlyName',
-      description:
-        'The Autopilot Assistant List.'
-    })
-  },
-  TwilioClientCommand.flags
+  convertYargsOptionsToOclifFlags(options),
+  { profile: TwilioClientCommand.flags.profile }
 )
 
 module.exports = ListAssistants

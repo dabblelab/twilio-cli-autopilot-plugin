@@ -1,21 +1,14 @@
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       path = require('path'),
-      {flags} = require('@oclif/command'),
       AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora');
 
-const {
-  handler,
-  cliInfo,
-  describe,
-} = require('../../lib/serverless/deploy');
-const {
-  convertYargsOptionsToOclifFlags,
-  normalizeFlags,
-  createExternalCliOptions,
-} = require('../../utils');
+const { handler } = require('../../lib/serverless/deploy'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags, createExternalCliOptions } = require('../../utils'),
+      updateTaskURL = require('../../lib/serverless/updateTaskURL'),
+      {options, describe} = require('../../lib/options/deploy');
 
-const updateTaskURL = require('../../lib/serverless/updateTaskURL');
+
 class AssistantsDeploy extends TwilioClientCommand {
   constructor(argv, config, secureStorage) {
     super(argv, config, secureStorage);
@@ -23,7 +16,8 @@ class AssistantsDeploy extends TwilioClientCommand {
     this.showHeaders = true;
   }
 
-  async runCommand() {
+  async run() {
+    await super.run();
     let { flags, args } = this.parse(AssistantsDeploy);
     flags = normalizeFlags(flags);
     const spinner = ora();
@@ -55,7 +49,7 @@ class AssistantsDeploy extends TwilioClientCommand {
           await AutopilotCore.createAssistant(fullPath, this.twilioClient);
         }
 
-        spinner.text = 'Model successfully deployed.'
+        spinner.text = 'Model successfully deployed'
         spinner.succeed();
       }
       
@@ -75,15 +69,7 @@ class AssistantsDeploy extends TwilioClientCommand {
 AssistantsDeploy.description = describe;
 
 AssistantsDeploy.flags = Object.assign(
-  convertYargsOptionsToOclifFlags(cliInfo.options),
-  {
-    'target' : flags.string({
-      char : 't',
-      description : `deploy function, model or all of them. Options can only be "all", "function" or "model".`,
-      default : 'all',
-      options : ['all', 'function', 'model']
-    })
-  },
+  convertYargsOptionsToOclifFlags(options),
   { profile: TwilioClientCommand.flags.profile }
 );
 

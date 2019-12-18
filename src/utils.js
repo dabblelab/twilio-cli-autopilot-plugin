@@ -28,6 +28,15 @@ function convertYargsOptionsToOclifFlags(options) {
     if (opt.requiresArg) {
       flag.required = opt.requiresArg;
     }
+    
+    if(opt.multiple)
+      flag.multiple = opt.multiple;
+
+    if(opt.exclusive)
+      flag.exclusive = opt.exclusive;
+
+    if(opt.options)
+      flag.options = opt.options;
 
     result[name] = flags[opt.type](flag);
     return result;
