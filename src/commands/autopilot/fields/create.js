@@ -6,7 +6,8 @@ const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       
 class CreateAssistantTaskField extends TwilioClientCommand {
   
-    async runCommand() {
+    async run() {
+        await super.run();
 
         let { flags } = this.parse(CreateAssistantTaskField);
         flags = normalizeFlags(flags);

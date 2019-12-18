@@ -11,7 +11,8 @@ const { options, describe } = require('../../lib/options/init'),
 
 class InitAssistant extends TwilioClientCommand {
 
-  async runCommand() {
+  async run() {
+    await super.run();
     let spinner = await ora();
 
     try{

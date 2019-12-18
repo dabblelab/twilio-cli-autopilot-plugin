@@ -16,7 +16,8 @@ class AssistantsDeploy extends TwilioClientCommand {
     this.showHeaders = true;
   }
 
-  async runCommand() {
+  async run() {
+    await super.run();
     let { flags, args } = this.parse(AssistantsDeploy);
     flags = normalizeFlags(flags);
     const spinner = ora();

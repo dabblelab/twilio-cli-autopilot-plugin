@@ -7,7 +7,8 @@ const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
 
 class CreateAssistant extends TwilioClientCommand {
 
-  async runCommand() {
+  async run() {
+    await super.run();
     let spinner = await ora();
 
     try{

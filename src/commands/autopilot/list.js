@@ -5,7 +5,8 @@ const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       { options, describe } = require('../../lib/options/list');
          
 class ListAssistants extends TwilioClientCommand {
-    async runCommand() {
+  async run() {
+    await super.run();
 
       const spinner = ora().start('Getting assistants...\n');
       try{

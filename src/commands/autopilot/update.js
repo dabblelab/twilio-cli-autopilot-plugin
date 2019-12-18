@@ -7,7 +7,8 @@ const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
 
 class UpdateAssistant extends TwilioClientCommand {
 
-  async runCommand() {
+  async run() {
+    await super.run();
 
     let { flags } = this.parse(UpdateAssistant);
     flags = normalizeFlags(flags);

@@ -6,7 +6,8 @@ const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       
 class CreateAssistantWebhook extends TwilioClientCommand {
   
-    async runCommand() {
+    async run() {
+        await super.run();
 
         let { flags } = this.parse(CreateAssistantWebhook);
         flags = normalizeFlags(flags);
