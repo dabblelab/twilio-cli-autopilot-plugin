@@ -117,6 +117,8 @@ USAGE
   $ twilio autopilot:delete
 
 OPTIONS
+  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
+  -o=(columns|json|tsv)            [default: columns] Format of command output.
   -p, --profile=profile              Shorthand identifier for your profile.
   -s, --assistant-sid=assistant-sid  (required) assistant sid
   --unique-name=unique-name          assistant unique name
@@ -165,6 +167,8 @@ USAGE
   $ twilio autopilot:update
 
 OPTIONS
+  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
+  -o=(columns|json|tsv)            [default: columns] Format of command output.
   -p, --profile=profile      Shorthand identifier for your profile.
   -s, --schema=schema        (required) path to schema file to use for the update
   --unique-name=unique-name  assistant unique name
@@ -457,6 +461,8 @@ USAGE
   $ twilio autopilot:webhooks:list
 
 OPTIONS
+  -l=(debug|info|warn|error|none)  [default: info] Level of logging messages.
+  -o=(columns|json|tsv)            [default: columns] Format of command output.
   -p, --profile=profile              Shorthand identifier for your profile.
   -s, --assistant-sid=assistant-sid  (required) assistant sid
 
@@ -464,6 +470,7 @@ OPTIONS
                                      webhookMethod] webhook properties to list - 
                                      https://www.twilio.com/docs/autopilot/api/event-webhooks#webhook-properties
                                      
+
 ```
 
 _See code: [src/commands/autopilot/webhooks/list.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-rc.6/src/commands/autopilot/webhooks/list.js)_
