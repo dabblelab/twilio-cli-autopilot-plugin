@@ -1,13 +1,14 @@
+require('module-alias/register');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
-      AutopilotCore = require('@dabblelab/autopilot-core'),
-      {createEnvFile, createPackageJSON, renameFile, updateSchemaFile} = require('../../lib/serverless/create-files'),
-      {installDependencies} = require('../../lib/serverless/install-dependencies'),
+      {createEnvFile, createPackageJSON, renameFile, updateSchemaFile} = require('@lib/serverless/create-files'),
+      {installDependencies} = require('@lib/serverless/install-dependencies'),
       ora = require('ora'),
       path = require('path'),
-      {camelCase, kebabCase, snakeCase} = require('lodash');
+      {camelCase, kebabCase, snakeCase} = require('lodash'),
+      {cloneTemplate} = require("@lib/serverless/clone-template");
 
-const { options, describe } = require('../../lib/options/init'),
-      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../utils');
+const { options, describe } = require('@lib/options/init'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('@root/src/utils');
 
 class InitAssistant extends TwilioClientCommand {
 
@@ -22,9 +23,11 @@ class InitAssistant extends TwilioClientCommand {
 
       flags = normalizeFlags(flags);
 
-      let url = 'https://raw.githubusercontent.com/Mohammad-Khalid/autopilot-templates/master/Templates/templates.json';
+      // let url = 'https://raw.githubusercontent.com/Mohammad-Khalid/twilio-templates/master/templates.json';
         
-      clonedAssistant = await AutopilotCore.cloneTemplate(url, false, 'Templates', kebabCase(flags.botName) || false);
+      // clonedAssistant = await AutopilotCore.cloneTemplate(url, false, 'Templates', kebabCase(flags.botName) || false);
+
+      clonedAssistant = await cloneTemplate(flags, this.inquirer);
 
       const funcPath = path.join(clonedAssistant, 'function');
   

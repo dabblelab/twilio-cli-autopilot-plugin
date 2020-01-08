@@ -1,12 +1,13 @@
+require('module-alias/register');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       path = require('path'),
       AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora');
 
-const { handler } = require('../../lib/serverless/deploy'),
-      { convertYargsOptionsToOclifFlags, normalizeFlags, createExternalCliOptions } = require('../../utils'),
-      updateTaskURL = require('../../lib/serverless/updateTaskURL'),
-      {options, describe} = require('../../lib/options/deploy');
+const { handler } = require('@lib/serverless/deploy'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags, createExternalCliOptions } = require('@root/src/utils'),
+      updateTaskURL = require('@lib/serverless/updateTaskURL'),
+      {options, describe} = require('@lib/options/deploy');
 
 
 class AssistantsDeploy extends TwilioClientCommand {

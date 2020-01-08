@@ -15,6 +15,11 @@ exports.options = {
         alias: 'n',
         describe : 'create new bot project with bot name',
         hidden : false
+    },
+    'url' : {
+        type : 'string',
+        describe : 'the url to the template list or the git repo',
+        hidden : false
     }
 }
 

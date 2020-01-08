@@ -1,9 +1,10 @@
+require('module-alias/register');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora'),
       path = require('path'),
-      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
-      { options, describe } = require('../../../lib/options/fieldvalues/upload');
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('@root/src/utils'),
+      { options, describe } = require('@lib/options/fieldvalues/upload');
 
 class FieldValuesUpload extends TwilioClientCommand {
 
