@@ -2,7 +2,7 @@ const git = require('simple-git/promise'),
       path = require("path"),
       request = require('request-promise'),
       ora = require('ora')
-      urlUtils = require("@lib/url-utils");
+      urlUtils = require("../url-utils");
 
 const cloneTemplate = async(option, inquirer) => {
 

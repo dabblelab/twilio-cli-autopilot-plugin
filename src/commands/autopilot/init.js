@@ -1,14 +1,13 @@
-require('module-alias/register');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
-      {createEnvFile, createPackageJSON, renameFile, updateSchemaFile} = require('@lib/serverless/create-files'),
-      {installDependencies} = require('@lib/serverless/install-dependencies'),
+      {createEnvFile, createPackageJSON, renameFile, updateSchemaFile} = require('../../lib/serverless/create-files'),
+      {installDependencies} = require('../../lib/serverless/install-dependencies'),
       ora = require('ora'),
       path = require('path'),
       {camelCase, kebabCase, snakeCase} = require('lodash'),
-      {cloneTemplate} = require("@lib/serverless/clone-template");
+      {cloneTemplate} = require("../../lib/serverless/clone-template");
 
-const { options, describe } = require('@lib/options/init'),
-      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('@root/src/utils');
+const { options, describe } = require('../../lib/options/init'),
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../utils');
 
 class InitAssistant extends TwilioClientCommand {
 

@@ -1,10 +1,9 @@
-require('module-alias/register');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
       prettyJSONStringify = require('pretty-json-stringify'),
       ora = require('ora'),
-      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('@root/src/utils'),
-      { options, describe } = require('@lib/options/simulate');
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../utils'),
+      { options, describe } = require('../../lib/options/simulate');
 
 class SimulateAssistant extends TwilioClientCommand {
 

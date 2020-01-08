@@ -1,9 +1,8 @@
-require('module-alias/register');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora'),
-      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('@root/src/utils'),
-      { options, describe } = require('@lib/options/fields/list');
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
+      { options, describe } = require('../../../lib/options/fields/list');
       
 class ListAssistantTaskFields extends TwilioClientCommand {
   

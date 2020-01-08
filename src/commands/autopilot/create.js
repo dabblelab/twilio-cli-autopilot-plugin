@@ -1,10 +1,9 @@
-require('module-alias/register');
 const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
       AutopilotCore = require('@dabblelab/autopilot-core'),
       ora = require('ora'),
       path = require('path'),
-      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('@root/src/utils'),
-      { options, describe } = require('@lib/options/create');
+      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../utils'),
+      { options, describe } = require('../../lib/options/create');
 
 class CreateAssistant extends TwilioClientCommand {
 
