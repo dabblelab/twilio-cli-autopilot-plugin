@@ -22,7 +22,7 @@ const cloneTemplate = async(option, inquirer) => {
 function getTemplateMap(templateUrl) {
     let GIT_ENDPOINT = templateUrl;
     let headers = {};
-    headers['User-Agent'] = 'twilio-autopilot-cli/' + require('@root/package.json').version +
+    headers['User-Agent'] = 'twilio-autopilot-cli/' + require('../../../package.json').version +
         ' Node/' + process.version;
     let params = {
         url: GIT_ENDPOINT,
