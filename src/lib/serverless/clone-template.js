@@ -6,7 +6,7 @@ const git = require('simple-git/promise'),
 
 const cloneTemplate = async(option, inquirer) => {
 
-    const templateUrl = (option.url && urlUtils.isValidUrl(option.url)) ? option.url : 'https://raw.githubusercontent.com/Mohammad-Khalid/twilio-templates/master/templates.json';
+    const templateUrl = (option.url && urlUtils.isValidUrl(option.url)) ? option.url : 'https://cdn.dabblelab.com/templates-autopilot.json';
 
     const templateMap = await getTemplateMap(templateUrl),
           templateList = Object.keys(templateMap),
