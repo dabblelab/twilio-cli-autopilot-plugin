@@ -52,6 +52,8 @@ _Assistants_
 * [`twilio autopilot:export`](#twilio-autopilotexport)
 * [`twilio autopilot:list`](#twilio-autopilotlist)
 * [`twilio autopilot:update`](#twilio-autopilotupdate)
+* [`twilio autopilot:init`](#twilio-autopilotinit)
+* [`twilio autopilot:deploy`](#twilio-autopilotdeploy)
 
 _Fields and Field Types_
 
@@ -171,6 +173,44 @@ OPTIONS
 ```
 
 _See code: [src/commands/autopilot/update.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/update.js)_
+
+## `twilio autopilot:init`
+
+Create new bot project based on chosen template
+
+```
+USAGE
+  $ twilio autopilot:init
+
+OPTIONS
+  -n, --bot-name=bot-name        create new bot project with bot name
+  -p, --profile=profile          Shorthand identifier for your profile.
+  -u, --account-sid=account-sid  A specific account SID to be used for deployment. Uses fields in .env otherwise
+  --auth-token=auth-token        Use a specific auth token for deployment. Uses fields from .env otherwise
+  --url=url                      the url to the template list or the git repo
+```
+
+_See code: [src/commands/autopilot/init.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/init.js)_
+
+## `twilio autopilot:deploy`
+
+Deploy bot project
+
+```
+USAGE
+  $ twilio autopilot:deploy
+
+OPTIONS
+  -c, --config=config              [default: .twilio-functions] Location of the config file. Absolute path or relative to                                   current working directory (cwd).
+  -l, --logLevel=logLevel          [default: info] Level of logging messages.
+  -p, --profile=profile            Shorthand identifier for your profile.
+  -t, --target=all|function|model  [default: all] deploy function, model or all of them. Options can only be "all",                                         "function" or "model".
+  -u, --account-sid=account-sid    A specific account SID to be used for deployment. Uses fields in .env otherwise.
+  --auth-token=auth-token          Use a specific auth token for deployment. Uses fields from .env otherwise.
+  --override-existing-project      Deploys Serverless project to existing service if a naming conflict has been found.
+```
+
+_See code: [src/commands/autopilot/deploy.js](https://github.com/tingiris/twilio-cli-autopilot-plugin/blob/v1.0.0-beta.18/src/commands/autopilot/deploy.js)_
 
 ## `twilio autopilot:fields:create`
 
