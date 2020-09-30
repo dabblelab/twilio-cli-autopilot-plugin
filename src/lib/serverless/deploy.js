@@ -58,7 +58,7 @@ function handleError(err, spinner, flags, config) {
 function handler(flags, externalCliOptions) {
     return __awaiter(this, void 0, void 0, function* () {
         logger_1.setLogLevelByName(flags.logLevel);
-        const cwd = path_1.default.resolve(process.cwd(), 'function');
+        const cwd = path_1.default.resolve(flags.cwd || process.cwd(), 'function');
         flags.cwd = cwd;
         const command = utils_2.getFullCommand(flags);
         yield project_structure_1.default(cwd, command, true);
@@ -67,6 +67,7 @@ function handler(flags, externalCliOptions) {
             config = yield deploy_1.getConfigFromFlags(flags, externalCliOptions);
         }
         catch (err) {
+            console.log(err);
             debug(err);
             logError(err.message);
             process.exit(1);
@@ -81,6 +82,7 @@ function handler(flags, externalCliOptions) {
         check_credentials_1.checkConfigForCredentials(config);
         const spinner = logger_1.getOraSpinner('Deploying Function').start();
         try {
+
             const client = new serverless_api_1.TwilioServerlessApiClient(config);
             client.on('status-update', evt => {
                 spinner.text = evt.message + '\n';
@@ -89,7 +91,7 @@ function handler(flags, externalCliOptions) {
             spinner.text = 'Serverless function successfully deployed';
             spinner.succeed();
             const { serviceSid, buildSid } = result;
-            yield utils_1.saveLatestDeploymentData(config.cwd, serviceSid, buildSid, config.accountSid.startsWith('AC')
+            yield utils_1.saveLatestDeploymentData(config.cwd, serviceSid, buildSid, config.accountSid && config.accountSid.startsWith('AC')
                 ? config.accountSid
                 : externalCliOptions && externalCliOptions.accountSid);
 
@@ -98,6 +100,8 @@ function handler(flags, externalCliOptions) {
             };
         }
         catch (err) {
+
+            console.log(err);
             handleError(err, spinner, flags, config);
         }
     });
