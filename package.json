@@ -1,7 +1,7 @@
 {
   "name": "@dabblelab/plugin-autopilot",
   "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Assistant",
-  "version": "1.0.3-beta.1",
+  "version": "1.0.3-beta.2",
   "author": "Steve Tingiris",
   "bugs": "https://github.com/tingiris/twilio-cli-autopilot-plugin/issues",
   "dependencies": {
@@ -9,8 +9,8 @@
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.13.3",
     "@oclif/plugin-help": "^2.2.3",
-    "@twilio-labs/serverless-api": "^3.0.0",
-    "@twilio/cli-core": "^4.4.0",
+    "@twilio-labs/serverless-api": "^4.0.1",
+    "@twilio/cli-core": "^4.3.0",
     "csv-parse": "^4.8.2",
     "extract-zip": "^1.6.7",
     "ora": "^3.4.0",
@@ -19,13 +19,13 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.5",
     "simple-git": "^1.129.0",
-    "twilio-run": "^2.1.1",
+    "twilio-run": "^2.8.0",
     "underscore": "^1.9.1",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
-    "@oclif/test": "^1.2.5",
+    "@oclif/test": "^1.2.7",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-oclif": "^3.1.0",
