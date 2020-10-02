@@ -30,7 +30,7 @@ class InitAssistant extends TwilioClientCommand {
 
       const funcPath = path.join(clonedAssistant, 'function');
   
-      spinner.start('Setting Up .evn file');
+      spinner.start('Setting Up .env file');
       let fullPath = `${path.resolve()}/${funcPath}`
   
       await createEnvFile(fullPath, { 
