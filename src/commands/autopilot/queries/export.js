@@ -22,14 +22,14 @@ class ExportAssistantQueries extends TwilioClientCommand {
             return;
         }
 
-        const spinner = ora().start('Exporting assistant queries...\n');
+        const spinner = ora().start('Exporting bot queries...\n');
         try{
 
             const {assistantSid, quantity} = flags;
 
             await AutopilotCore.exportAssistantQueries(this.twilioClient, assistantSid, quantity);
             spinner.stop();
-            console.log(`File exported in "${assistantSid}"`);
+            console.log(`Bot queries exported to "${assistantSid}"`);
         }catch(err){
 
             spinner.stop();

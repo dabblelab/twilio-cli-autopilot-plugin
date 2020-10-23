@@ -1,7 +1,7 @@
 exports.options = {
     'assistant-sid' : {
         type: 'string',
-        describe: 'assistant sid',
+        describe: 'bot sid',
         alias : 's',
         requiresArg : true,
         hidden : false
@@ -9,9 +9,9 @@ exports.options = {
     'properties' : {
         type: 'string',
         default : 'sid, uniqueName, friendlyName',
-        describe: 'The Autopilot Assistant Task List',
+        describe: 'The Autopilot bot Task List',
         hidden : false
     }
 }
 
-exports.describe = `List all tasks of an assistant`;
+exports.describe = `List all tasks for a bot`;

@@ -21,7 +21,7 @@ class CreateAssistant extends TwilioClientCommand {
           clonedAssistant = '';
 
       if(schema == 'templates'){
-
+        //TODO: the templates.json url should not be hard coded
         let url = 'https://raw.githubusercontent.com/twilio/autopilot-templates/master/Assistants/templates.json';
         
         clonedAssistant = await AutopilotCore.cloneTemplate(url, false);
@@ -29,14 +29,14 @@ class CreateAssistant extends TwilioClientCommand {
         schema = path.join(clonedAssistant, 'schema.json');
   
       }
-      spinner.start('Creating assistant...');
+      spinner.start('Creating bot...');
       let fullPath = `${path.resolve()}/${schema}`
   
       const assistant = await AutopilotCore.createAssistant(fullPath, this.twilioClient);
   
       spinner.stop()   
   
-      console.log(`Assistant "${assistant.uniqueName}" was created`);
+      console.log(`Bot "${assistant.uniqueName}" was created`);
     }catch(err){
 
       spinner.stop()

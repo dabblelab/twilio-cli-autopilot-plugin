@@ -1,16 +1,16 @@
 exports.options = {
     'assistant-sid' : {
         type: 'string',
-        describe: 'assistant sid',
+        describe: 'bot sid',
         alias : 's',
         requiresArg : true,
         hidden : false
     },
     'unique-name' : {
         type: 'string',
-        describe: 'assistant unique name',
+        describe: 'bot unique name',
         hidden : false
     }
 }
 
-exports.describe = `Delete an assistant`;
+exports.describe = `Delete a bot`;

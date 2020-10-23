@@ -1,7 +1,7 @@
 exports.options = {
     'assistant-sid' : {
         type: 'string',
-        describe: 'assistant sid',
+        describe: 'bot sid',
         alias : 's',
         requiresArg : true,
         hidden : false
@@ -19,4 +19,4 @@ exports.options = {
     }
 }
 
-exports.describe = `Create a Task of an assistant`;
+exports.describe = `Create a Task for a bot`;

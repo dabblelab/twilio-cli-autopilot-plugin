@@ -16,7 +16,7 @@ class ListAssistantWebhooks extends TwilioClientCommand {
             console.log(`The '--assistantSid' is required`);
             return;
         }
-        const spinner = ora().start('Getting assistant webhooks...\n');
+        const spinner = ora().start('Getting bot webhooks...\n');
         try{
 
             const {assistantSid} = flags;

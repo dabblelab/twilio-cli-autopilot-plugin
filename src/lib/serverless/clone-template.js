@@ -54,7 +54,7 @@ function getTemplateMap(templateUrl) {
 function getTargetTemplateName(templateList, inputName, inquirer) {
     if (inputName) {
         if (templateList.indexOf(inputName) === -1) {
-            let error = '[Error]: no template associate with the input name';
+            let error = '[Error]: no template associated with the input name';
             throw new Error(error);
         } else {
             return inputName;
@@ -62,7 +62,7 @@ function getTargetTemplateName(templateList, inputName, inquirer) {
     } else {
         let templateChoiceQuestion = {
             type: 'list',
-            message: 'List of templates you can chose',
+            message: 'List of templates you can choose from',
             name: 'templateName',
             choices: templateList.sort()
         };
@@ -77,7 +77,7 @@ function getTargetTemplateName(templateList, inputName, inquirer) {
 
 const gitCloneTemplate = async(cloneTemplate, botName) =>{
 
-    const spinner = ora().start(' Initializing Twilio Autopilot project from the chosen' +
+    const spinner = ora().start(' Initializing Twilio Autopilot project from' +
     ' template...')
     
     let cloneDir = path.resolve(process.cwd(), botName || cloneTemplateFolderName(cloneTemplate.gitUrl));

@@ -42,7 +42,7 @@ exports.options = Object.assign({},
         },
         'target': {
             type: 'string',
-            describe: `deploy function, model or all of them. Options can only be "all", "function" or "model".`,
+            describe: `deploy function, model, or both. Options can be "all", "function", or "model".`,
             alias : 't',
             default : 'all',
             options : ['all', 'function', 'model'],

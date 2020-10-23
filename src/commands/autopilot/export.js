@@ -32,7 +32,7 @@ class ExportAssistants extends TwilioClientCommand {
               {
                 type: 'list',
                 name: 'assistantName',
-                message: 'Choose your assistant: ',
+                message: 'Choose your bot: ',
                 choices: choices
               }
             ]);
@@ -41,15 +41,15 @@ class ExportAssistants extends TwilioClientCommand {
         }
         else{
 
-          console.log('no assistants.');
+          console.log('no bots.');
           return;
         }
       }
 
-      spinner.start(`Exporting assistant...`);
+      spinner.start(`Exporting bot...`);
       const assistant = await AutopilotCore.exportAssistant(seletedAssistant, this.twilioClient);
       spinner.stop();
-      console.log(`File exported in "${assistant.filename}"`);
+      console.log(`Bot schema file exported to "${assistant.filename}"`);
     }catch(err){
 
       spinner.stop();

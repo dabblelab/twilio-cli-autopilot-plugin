@@ -55,7 +55,7 @@ class CreateAssistantWebhook extends TwilioClientCommand {
             return;
         }
 
-        const spinner = ora().start('Creating assistant webhooks...\n');
+        const spinner = ora().start('Creating bot webhooks...\n');
         try{
 
             

@@ -9,4 +9,4 @@ exports.options = {
     }
 }
 
-exports.describe = `Create an assistant`;
+exports.describe = `Create a bot`;

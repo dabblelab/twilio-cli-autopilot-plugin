@@ -1,7 +1,7 @@
 exports.options = {
     'assistant-sid' : {
         type: 'string',
-        describe: 'assistant sid',
+        describe: 'bot sid',
         alias : 's',
         requiresArg : true,
         hidden : false
@@ -13,4 +13,4 @@ exports.options = {
     }
 }
 
-exports.describe = `Delete a Task of an assistant`;
+exports.describe = `Delete a Task for a bot`;

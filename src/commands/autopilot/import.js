@@ -50,7 +50,7 @@ class ImportAssistant extends TwilioClientCommand {
               name = flags.dfagent,
               dfFullPath = `${path.resolve()}/${dfbackup}`;
 
-        spinner.start('Importing assistant...');
+        spinner.start('Importing bot...');
 
         filename = await AutopilotCore.importDialogFlowAgent(dfFullPath, name);
       }
@@ -66,7 +66,7 @@ class ImportAssistant extends TwilioClientCommand {
       }
 
       spinner.stop()
-      console.log(`Assistant "${assistant.uniqueName}" was imported`);
+      console.log(`Bot "${assistant.uniqueName}" was imported`);
     }catch(err){
 
       spinner.stop()

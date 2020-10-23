@@ -22,7 +22,7 @@ class CreateAssistantTask extends TwilioClientCommand {
             return;
         }
 
-        const spinner = ora().start('Creating assistant task...\n');
+        const spinner = ora().start('Creating bot task...\n');
         try{
 
             const {assistantSid, uniqueName, friendlyName} = flags,

@@ -23,7 +23,7 @@ class UpdateAssistant extends TwilioClientCommand {
 
       let schema = flags.schema;
 
-      spinner.start('Updating assistant...');
+      spinner.start('Updating bot...');
       let fullPath = `${path.resolve()}/${schema}`,
           assistantUniqueName = flags.uniqueName || false;
   
@@ -31,7 +31,7 @@ class UpdateAssistant extends TwilioClientCommand {
   
       spinner.stop()   
   
-      console.log(`Assistant "${assistant.uniqueName}" was updated`)
+      console.log(`Bot "${assistant.uniqueName}" was updated`)
 
     }catch(err){
 

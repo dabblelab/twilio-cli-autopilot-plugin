@@ -1,7 +1,7 @@
 exports.options = {
     'assistant-sid' : {
         type: 'string',
-        describe: 'assistant sid',
+        describe: 'bot sid',
         alias : 's',
         requiresArg : true,
         hidden : false

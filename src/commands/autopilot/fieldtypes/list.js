@@ -17,7 +17,7 @@ class ListAssistantFieldTypes extends TwilioClientCommand {
             return;
         }
 
-        const spinner = ora().start('Getting Assistant FieldTypes...\n');
+        const spinner = ora().start('Getting Bot FieldTypes...\n');
         try{
 
             const {assistantSid} = flags;

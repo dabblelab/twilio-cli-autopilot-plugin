@@ -49,7 +49,7 @@ class DeleteAssistantTask extends TwilioClientCommand {
 
             }
 
-            spinner.start('Deleting assistant task...\n');
+            spinner.start('Deleting bot task...\n');
             const task = await AutopilotCore.tasks.remove(this.twilioClient, assistantSid, tSid);
             spinner.stop();
             console.log(`Task "${task.uniqueName}" was deleted`);

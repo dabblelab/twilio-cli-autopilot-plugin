@@ -16,7 +16,7 @@ class ListAssistantTasks extends TwilioClientCommand {
             console.log(`The '--assistant-sid' is required`);
             return;
         }
-        const spinner = ora().start('Getting assistant tasks...\n');
+        const spinner = ora().start('Getting bot tasks...\n');
         try{
 
             const fullData = await AutopilotCore.tasks.list(this.twilioClient, flags.assistantSid);

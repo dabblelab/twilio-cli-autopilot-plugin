@@ -8,9 +8,9 @@ exports.options = {
     },
     'unique-name' : {
         type: 'string',
-        describe: 'assistant unique name',
+        describe: 'bot unique name',
         hidden : false
     }
 }
 
-exports.describe = `Update an assistant`;
+exports.describe = `Update a bot`;

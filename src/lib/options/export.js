@@ -1,15 +1,15 @@
 exports.options = {
     'assistant-sid' : {
         type: 'string',
-        describe: 'assistant sid',
+        describe: 'bot sid',
         alias : 's',
         hidden : false
     },
     'unique-name' : {
         type: 'string',
-        describe: 'assistant unique name',
+        describe: 'bot unique name',
         hidden : false
     }
 }
 
-exports.describe = `Export an assistant`;
+exports.describe = `Export a bot schema`;

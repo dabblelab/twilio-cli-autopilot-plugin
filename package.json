@@ -1,9 +1,9 @@
 {
   "name": "@dabblelab/plugin-autopilot",
-  "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Assistant",
+  "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Bot",
   "version": "1.0.4",
-  "author": "Steve Tingiris",
-  "bugs": "https://github.com/tingiris/twilio-cli-autopilot-plugin/issues",
+  "author": "Dabble Lab",
+  "bugs": "https://github.com/dabblelab/twilio-cli-autopilot-plugin/issues",
   "dependencies": {
     "@dabblelab/autopilot-core": "^1.0.0",
     "@oclif/command": "^1.5.19",
@@ -62,49 +62,49 @@
     ],
     "topics": {
       "autopilot": {
-        "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Assistant"
+        "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Bot"
       },
       "autopilot:create": {
-        "description": "Create an assistant"
+        "description": "Create a bot"
       },
       "autopilot:list": {
-        "description": "List all autopilot assistant"
+        "description": "List all autopilot bots"
       },
       "autopilot:update": {
-        "description": "Update an assistant"
+        "description": "Update a bot"
       },
       "autopilot:delete": {
-        "description": "Delete an assistant"
+        "description": "Delete a bot"
       },
       "autopilot:export": {
-        "description": "Export an assistant"
+        "description": "Export a bot"
       },
       "autopilot:simulate": {
-        "description": "Simulate an assistant"
+        "description": "Simulate a bot"
       },
       "autopilot:import": {
-        "description": "Import a DialogFlow Agent/Alexa Interaction Model"
+        "description": "Import a DialogFlow Agent or an Alexa Interaction Model"
       },
       "autopilot:tasks": {
-        "description": "Create, Update, Delete, and List Twilio Autopilot Assistant Tasks"
+        "description": "Create, Update, Delete, and List Twilio Autopilot Bot Tasks"
       },
       "autopilot:tasks:list": {
-        "description": "List all tasks of an assistant"
+        "description": "List all tasks for a bot"
       },
       "autopilot:tasks:create": {
-        "description": "Create a task of an assistant"
+        "description": "Create a task for a bot"
       },
       "autopilot:tasks:update": {
-        "description": "Update a task of an assistant"
+        "description": "Update a task for a bot"
       },
       "autopilot:tasks:delete": {
-        "description": "Delete a task of an assistant"
+        "description": "Delete a task for a bot"
       },
       "autopilot:samples:upload": {
         "description": "Upload task samples"
       },
       "autopilot:fields": {
-        "description": "Create, Update, Delete, and List Fields of a Task"
+        "description": "Create, Update, Delete, and List Fields for a Task"
       },
       "autopilot:fields:create": {
         "description": "Create task field"
@@ -116,53 +116,53 @@
         "description": "Delete task field"
       },
       "autopilot:fieldtypes": {
-        "description": "Create, Update, and List fieldTypes of an assistant"
+        "description": "Create, Update, and List fieldTypes for a bot"
       },
       "autopilot:fieldtypes:create": {
-        "description": "Create assistant fieldType"
+        "description": "Create bot fieldType"
       },
       "autopilot:fieldtypes:list": {
-        "description": "List Assistant fieldTypes"
+        "description": "List bot fieldTypes"
       },
       "autopilot:fieldtypes:update": {
-        "description": "Update Assistant fieldType"
+        "description": "Update a bot fieldType"
       },
       "autopilot:fieldvalues:upload": {
         "description": "Upload FieldValues"
       },
       "autopilot:queries:export": {
-        "description": "Export Assistant Queries"
+        "description": "Export Bot Queries"
       },
       "autopilot:webhooks": {
-        "description": "Create, Update, List, and Delete webhooks of an assistant"
+        "description": "Create, Update, List, and Delete webhooks for a bot"
       },
       "autopilot:webhooks:list": {
-        "description": "List Assistant Webhooks"
+        "description": "List Bot Webhooks"
       },
       "autopilot:webhooks:create": {
-        "description": "Create Assistant Webhooks"
+        "description": "Create Bot Webhooks"
       },
       "autopilot:webhooks:update": {
-        "description": "Update Assistant Webhooks"
+        "description": "Update Bot Webhooks"
       },
       "autopilot:webhooks:delete": {
-        "description": "Delete Assistant Webhooks"
+        "description": "Delete Bot Webhooks"
       },
       "autopilot:modelbuilds:create": {
         "description": "Create Model Builds"
       },
       "autopilot:deploy": {
-        "description": "deploy function, model or all of them. Options can only be 'all', 'function' or 'model'."
+        "description": "deploy function, model, or both. Options can be 'all', 'function', or 'model'."
       },
       "autopilot:init": {
-        "description": "Initialize autopilot bot template."
+        "description": "Initialize a new bot project from a template."
       }
     }
   },
   "publishConfig": {
     "access": "public"
   },
-  "repository": "tingiris/twilio-cli-autopilot-plugin",
+  "repository": "https://github.com/dabblelab/twilio-cli-autopilot-plugin",
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "eslint --ignore-path .gitignore . && npm audit",
