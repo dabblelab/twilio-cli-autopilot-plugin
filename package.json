@@ -18,7 +18,7 @@
     "pretty-json-stringify": "0.0.2",
     "request": "^2.88.0",
     "request-promise": "^4.2.5",
-    "simple-git": "^1.129.0",
+    "simple-git": "^3.3.0",
     "twilio-run": "^2.8.0",
     "underscore": "^1.12.1",
     "valid-url": "^1.0.9"
