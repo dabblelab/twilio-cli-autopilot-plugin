@@ -9,7 +9,7 @@
     "@oclif/command": "^1.5.19",
     "@oclif/config": "^1.13.3",
     "@oclif/plugin-help": "^2.2.3",
-    "@twilio-labs/serverless-api": "^4.0.1",
+    "@twilio-labs/serverless-api": "^5.4.3",
     "@twilio/cli-core": "^7.0.0",
     "csv-parse": "^4.8.2",
     "extract-zip": "^1.6.7",
@@ -19,7 +19,7 @@
     "request": "^2.88.0",
     "request-promise": "^4.2.5",
     "simple-git": "^1.129.0",
-    "twilio-run": "^2.8.0",
+    "twilio-run": "^3.4.3",
     "underscore": "^1.12.1",
     "valid-url": "^1.0.9"
   },
