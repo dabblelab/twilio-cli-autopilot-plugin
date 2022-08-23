@@ -1,42 +1,44 @@
-const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
-      AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora'),
-      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../../utils'),
-      { options, describe } = require('../../../lib/options/tasks/list');
-      
+const { TwilioClientCommand } = require("@twilio/cli-core").baseCommands,
+  AutopilotCore = require("@dabblelab/autopilot-core"),
+  ora = require("ora"),
+  {
+    convertYargsOptionsToOclifFlags,
+    normalizeFlags,
+  } = require("../../../utils"),
+  { options, describe } = require("../../../lib/options/tasks/list");
+
 class ListAssistantTasks extends TwilioClientCommand {
-  
-    async run() {
-        await super.run();
+  async run() {
+    await super.run();
 
-        let { flags } = this.parse(ListAssistantTasks);
-        flags = normalizeFlags(flags);
+    let { flags } = await this.parse(ListAssistantTasks);
+    flags = normalizeFlags(flags);
 
-        if (!flags.hasOwnProperty('assistantSid')) {
-            console.log(`The '--assistant-sid' is required`);
-            return;
-        }
-        const spinner = ora().start('Getting bot tasks...\n');
-        try{
-
-            const fullData = await AutopilotCore.tasks.list(this.twilioClient, flags.assistantSid);
-            spinner.stop();
-            this.output(fullData, this.flags.properties);
-        }catch(err){
-
-            spinner.stop()
-            
-            console.error(`ERROR: ${err.message}`)
-        }
+    if (!flags.hasOwnProperty("assistantSid")) {
+      console.log(`The '--assistant-sid' is required`);
+      return;
     }
-  
+    const spinner = ora().start("Getting bot tasks...\n");
+    try {
+      const fullData = await AutopilotCore.tasks.list(
+        this.twilioClient,
+        flags.assistantSid
+      );
+      spinner.stop();
+      this.output(fullData, this.flags.properties);
+    } catch (err) {
+      spinner.stop();
+
+      console.error(`ERROR: ${err.message}`);
+    }
+  }
 }
 
 ListAssistantTasks.description = describe;
 
 ListAssistantTasks.flags = Object.assign(
-    convertYargsOptionsToOclifFlags(options),
-    { profile: TwilioClientCommand.flags.profile }
-)
+  convertYargsOptionsToOclifFlags(options),
+  { profile: TwilioClientCommand.flags.profile }
+);
 
-module.exports = ListAssistantTasks
+module.exports = ListAssistantTasks;

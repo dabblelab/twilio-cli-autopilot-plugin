@@ -1,77 +1,78 @@
-const { TwilioClientCommand } = require('@twilio/cli-core').baseCommands,
-      AutopilotCore = require('@dabblelab/autopilot-core'),
-      ora = require('ora'),
-      path = require('path'),
-      { convertYargsOptionsToOclifFlags, normalizeFlags } = require('../../utils'),
-      { options, describe } = require('../../lib/options/import');
+const { TwilioClientCommand } = require("@twilio/cli-core").baseCommands,
+  AutopilotCore = require("@dabblelab/autopilot-core"),
+  ora = require("ora"),
+  path = require("path"),
+  { convertYargsOptionsToOclifFlags, normalizeFlags } = require("../../utils"),
+  { options, describe } = require("../../lib/options/import");
 
 class ImportAssistant extends TwilioClientCommand {
-
   async run() {
     await super.run();
 
     let spinner = ora();
 
-    try{
-
-      let { flags, args } = this.parse(ImportAssistant);
+    try {
+      let { flags, args } = await this.parse(ImportAssistant);
       flags = normalizeFlags(flags);
 
       let filename = ``,
-          assistant = {};
+        assistant = {};
 
-      if(args.type === 'alexa'){
-
-        if (!flags.hasOwnProperty('model')) {
+      if (args.type === "alexa") {
+        if (!flags.hasOwnProperty("model")) {
           console.log(`The '--model' argument is required`);
-          return
+          return;
         }
 
         const model = flags.model,
-              redirectURL = flags.redirectURL,
-              modelFullPath = `${path.resolve()}/${model}`
+          redirectURL = flags.redirectURL,
+          modelFullPath = `${path.resolve()}/${model}`;
 
-        spinner.start('Importing assistant...');
+        spinner.start("Importing assistant...");
 
-        filename = await AutopilotCore.importAlexaModel(modelFullPath, redirectURL);
-      }
-      else{
-
-        if (!flags.hasOwnProperty('dfbackup')) {
-          console.log(`The '--dfbackup' argument is required`)
-          return
+        filename = await AutopilotCore.importAlexaModel(
+          modelFullPath,
+          redirectURL
+        );
+      } else {
+        if (!flags.hasOwnProperty("dfbackup")) {
+          console.log(`The '--dfbackup' argument is required`);
+          return;
         }
-        if (!flags.hasOwnProperty('dfagent')) {
-          console.log(`The '--dfagent' argument is required`)
-          return
+        if (!flags.hasOwnProperty("dfagent")) {
+          console.log(`The '--dfagent' argument is required`);
+          return;
         }
 
         const dfbackup = flags.dfbackup,
-              name = flags.dfagent,
-              dfFullPath = `${path.resolve()}/${dfbackup}`;
+          name = flags.dfagent,
+          dfFullPath = `${path.resolve()}/${dfbackup}`;
 
-        spinner.start('Importing bot...');
+        spinner.start("Importing bot...");
 
         filename = await AutopilotCore.importDialogFlowAgent(dfFullPath, name);
       }
 
-      const fullPath = path.resolve(process.cwd(),filename);
+      const fullPath = path.resolve(process.cwd(), filename);
 
-      if(await AutopilotCore.existAssistant(fullPath, this.twilioClient)){
-
-        assistant = await AutopilotCore.updateAssistant(fullPath, this.twilioClient);
-      }else{
-
-        assistant = await AutopilotCore.createAssistant(fullPath, this.twilioClient);
+      if (await AutopilotCore.existAssistant(fullPath, this.twilioClient)) {
+        assistant = await AutopilotCore.updateAssistant(
+          fullPath,
+          this.twilioClient
+        );
+      } else {
+        assistant = await AutopilotCore.createAssistant(
+          fullPath,
+          this.twilioClient
+        );
       }
 
-      spinner.stop()
+      spinner.stop();
       console.log(`Bot "${assistant.uniqueName}" was imported`);
-    }catch(err){
+    } catch (err) {
+      spinner.stop();
 
-      spinner.stop()
-    
-      console.error(`ERROR: ${err}`)
+      console.error(`ERROR: ${err}`);
     }
   }
 }
@@ -80,17 +81,17 @@ ImportAssistant.description = describe;
 
 ImportAssistant.args = [
   {
-    name: 'type',
+    name: "type",
     required: false,
-    description: 'Type of import DialogFlow/Alexa',
-    default: 'dialogflow',
-    options: ['dialogflow', 'alexa']
+    description: "Type of import DialogFlow/Alexa",
+    default: "dialogflow",
+    options: ["dialogflow", "alexa"],
   },
 ];
 
 ImportAssistant.flags = Object.assign(
   convertYargsOptionsToOclifFlags(options),
   { profile: TwilioClientCommand.flags.profile }
-)
+);
 
-module.exports = ImportAssistant
+module.exports = ImportAssistant;

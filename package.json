@@ -1,7 +1,7 @@
 {
   "name": "@dabblelab/plugin-autopilot",
   "description": "Create, Update, Delete, List, Simulate, Import and Export Twilio Autopilot Bot",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "Dabble Lab",
   "bugs": "https://github.com/dabblelab/twilio-cli-autopilot-plugin/issues",
   "dependencies": {
@@ -10,7 +10,7 @@
     "@oclif/config": "^1.13.3",
     "@oclif/plugin-help": "^2.2.3",
     "@twilio-labs/serverless-api": "^4.0.1",
-    "@twilio/cli-core": "^6.0.0",
+    "@twilio/cli-core": "^7.0.0",
     "csv-parse": "^4.8.2",
     "extract-zip": "^1.6.7",
     "ora": "^3.4.0",
